@@ -1,0 +1,17 @@
+//
+// File created by:  xrun
+// Do not modify this file
+//
+DMEM.v
+defi.vh
+testbench.v
+-access
++rwc
+-logfile
+log/simulation.log
+-errormax
+0
+-top
+register_file
+-work
+log

@@ -1,0 +1,77 @@
+xrun: 23.09-s001: (c) Copyright 1995-2023 Cadence Design Systems, Inc.
+TOOL:	xrun	23.09-s001: Started on Aug 27, 2024 at 12:48:00 +07
+xrun
+	test.sv
+	CPU_EDABK_TOP.v
+	control_hazard.v
+	WB_stage.v
+	MEM_stage.v
+	ALU.v
+	EX_stage.v
+	decoder.v
+	register_file.v
+	ID_stage.v
+	defi.vh
+	-access +rwc
+	-logfile log/simulation.log
+	-errormax 0
+	-top register_file
+	-work log
+file: test.sv
+	module log.enum_fsm:sv
+		errors: 0, warnings: 0
+file: CPU_EDABK_TOP.v
+  ,.ID_sel_to_reg_o(ID_sel_to_reg )
+                  |
+xmvlog: *W,CPMTMI (CPU_EDABK_TOP.v,125|18): Child port 'ID_sel_to_reg_o' is connected by name multiple times in this module instantiation.  This has the effect of connecting the parent signals together.  Type 'xmhelp xmvlog CPMTMI' for more information.
+    ,.EX_rs2_data_o   (EX_rs2_data       )
+                  |
+xmvlog: *W,CPMTMI (CPU_EDABK_TOP.v,172|18): Child port 'EX_rs2_data_o' is connected by name multiple times in this module instantiation.  This has the effect of connecting the parent signals together.  Type 'xmhelp xmvlog CPMTMI' for more information.
+	module log.CPU_EDABK_TOP:v
+		errors: 0, warnings: 2
+file: WB_stage.v
+	module log.WB_stage:v
+		errors: 0, warnings: 0
+file: MEM_stage.v
+	module log.MEM_stage:v
+		errors: 0, warnings: 0
+file: ALU.v
+	module log.ALU:v
+		errors: 0, warnings: 0
+file: EX_stage.v
+	module log.EX_stage:v
+		errors: 0, warnings: 0
+file: decoder.v
+	module log.decoder:v
+		errors: 0, warnings: 0
+file: register_file.v
+	module log.register_file:v
+		errors: 0, warnings: 0
+file: ID_stage.v
+	module log.ID_stage:v
+		errors: 0, warnings: 0
+	Elaborating the design hierarchy:
+	Top level design units:
+		register_file
+	Building instance overlay tables: .................... Done
+	Generating native compiled code:
+		log.register_file:v <0x226ae9c1>
+			streams:   4, words:  7193
+	Building instance specific data structures.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		             Instances  Unique
+		Modules:             1       1
+		Registers:           1       1
+		Scalar wires:        3       -
+		Vectored wires:     10       -
+		Always blocks:       1       1
+		Cont. assignments:   3       3
+		Process Clocks:      1       1
+	Writing initial simulation snapshot: log.register_file:v
+Loading snapshot log.register_file:v .................... Done
+xcelium> source /home/edabk/Cadence/XCELIUM2309/tools/xcelium/files/xmsimrc
+xcelium> run
+xmsim: *W,RNQUIE: Simulation is complete.
+xcelium> exit
+TOOL:	xrun	23.09-s001: Exiting on Aug 27, 2024 at 12:48:03 +07  (total: 00:00:03)

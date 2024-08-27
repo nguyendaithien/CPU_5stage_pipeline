@@ -1,0 +1,14 @@
+/home/usr3/project/RISC_V/tb/testbench.v
+/home/usr3/project/RISC_V/tb/DMEM.v
+/home/usr3/project/RISC_V/rtl/decoder.v
+/home/usr3/project/RISC_V/rtl/CPU_EDABK_TOP.v
+/home/usr3/project/RISC_V/rtl/register_file.v
+/home/usr3/project/RISC_V/rtl/ALU.v
+/home/usr3/project/RISC_V/rtl/IF_stage.v
+/home/usr3/project/RISC_V/rtl/ID_stage.v
+/home/usr3/project/RISC_V/rtl/EX_stage.v
+/home/usr3/project/RISC_V/rtl/MEM_stage.v
+/home/usr3/project/RISC_V/rtl/WB_stage.v
+/home/usr3/project/RISC_V/rtl/defi.vh
+/home/usr3/project/RISC_V/rtl/control_hazard.v
+/home/usr3/project/RISC_V/rtl/defi.vh

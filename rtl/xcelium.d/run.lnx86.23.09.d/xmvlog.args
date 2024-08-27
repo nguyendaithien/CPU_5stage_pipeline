@@ -1,0 +1,33 @@
+//
+// File created by:  xrun
+// Do not modify this file
+//
+-XLMODE
+./xcelium.d/run.lnx86.23.09.d
+-RUNMODE
+test.sv
+CPU_EDABK_TOP.v
+control_hazard.v
+WB_stage.v
+MEM_stage.v
+ALU.v
+EX_stage.v
+decoder.v
+register_file.v
+ID_stage.v
+defi.vh
+-ERRORMAX
+0
+-WORK
+log
+-CDSLIB
+./xcelium.d/run.lnx86.23.09.d/cdsrun.lib
+-HDLVAR
+./xcelium.d/run.lnx86.23.09.d/hdlrun.var
+-no_analogsolver
+-MESSAGES
+-UPDATE
+-XLLIBSTORE
+./xcelium.d/run.lnx86.23.09.d/xllibs
+-ALLOWUNBOUND
+-hastop

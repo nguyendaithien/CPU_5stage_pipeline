@@ -1,0 +1,93 @@
+s1(25Aug2024:09:50:57):  xrun register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work /log 
+s2(25Aug2024:13:46:02):  xrun decoder ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work /log 
+s3(25Aug2024:13:46:21):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work /log 
+s4(25Aug2024:13:46:40):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s5(25Aug2024:13:47:27):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s6(25Aug2024:13:48:47):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s7(25Aug2024:13:49:49):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s8(25Aug2024:13:54:22):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s9(25Aug2024:13:56:14):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s10(25Aug2024:13:56:47):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s11(25Aug2024:13:59:00):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s12(25Aug2024:14:01:46):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s13(25Aug2024:14:02:41):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s14(25Aug2024:14:03:03):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s15(25Aug2024:14:03:17):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s16(25Aug2024:14:04:23):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s17(25Aug2024:14:04:51):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s18(25Aug2024:23:42:08):  xrun ALU.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s19(26Aug2024:00:06:02):  xrun ALU.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s20(26Aug2024:00:09:48):  xrun ALU.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s21(26Aug2024:00:12:51):  xrun ALU.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s22(26Aug2024:00:13:47):  xrun ALU.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s23(26Aug2024:13:08:30):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s24(26Aug2024:13:09:33):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s25(26Aug2024:13:09:47):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s26(26Aug2024:13:11:05):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s27(26Aug2024:13:11:55):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s28(26Aug2024:13:12:42):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s29(26Aug2024:13:13:36):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s30(26Aug2024:13:15:47):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s31(26Aug2024:13:16:36):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s32(26Aug2024:13:17:16):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s33(26Aug2024:13:17:53):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s34(26Aug2024:13:18:36):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s35(26Aug2024:13:18:39):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s36(26Aug2024:13:20:36):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s37(26Aug2024:13:21:24):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s38(26Aug2024:13:21:42):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s39(26Aug2024:13:28:33):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s40(26Aug2024:13:30:57):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s41(26Aug2024:14:06:55):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s42(26Aug2024:14:07:13):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s43(26Aug2024:14:07:44):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s44(26Aug2024:14:08:34):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s45(26Aug2024:14:08:49):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s46(26Aug2024:14:11:03):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s47(26Aug2024:14:11:59):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s48(26Aug2024:14:13:53):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s49(26Aug2024:14:14:23):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s50(26Aug2024:14:16:41):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s51(26Aug2024:14:19:23):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s52(26Aug2024:14:20:44):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s53(26Aug2024:14:22:20):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s54(26Aug2024:14:22:42):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s55(26Aug2024:14:23:35):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s56(26Aug2024:14:46:22):  xrun WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s57(26Aug2024:14:47:19):  xrun WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s58(26Aug2024:14:47:47):  xrun WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s59(26Aug2024:14:49:10):  xrun WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s60(26Aug2024:14:49:27):  xrun WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s61(26Aug2024:14:50:27):  xrun WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s62(26Aug2024:14:50:52):  xrun WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s63(26Aug2024:16:19:27):  xrun control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s64(26Aug2024:16:22:18):  xrun control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s65(26Aug2024:16:26:40):  xrun control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s66(26Aug2024:16:27:42):  xrun control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s67(26Aug2024:16:28:04):  xrun control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s68(26Aug2024:16:28:59):  xrun control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s69(26Aug2024:16:29:23):  xrun control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s70(26Aug2024:16:29:48):  xrun control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s71(26Aug2024:16:32:50):  xrun control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s72(26Aug2024:16:34:21):  xrun control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s73(26Aug2024:16:43:16):  xrun control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s74(27Aug2024:10:30:14):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s75(27Aug2024:10:32:24):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s76(27Aug2024:10:37:38):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s77(27Aug2024:10:40:28):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s78(27Aug2024:10:41:25):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s79(27Aug2024:10:42:35):  xrun control_hazard.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s80(27Aug2024:10:44:28):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s81(27Aug2024:10:51:20):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s82(27Aug2024:10:54:34):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s83(27Aug2024:10:58:27):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s84(27Aug2024:10:59:31):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s85(27Aug2024:11:00:36):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s86(27Aug2024:11:01:49):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s87(27Aug2024:11:04:13):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s88(27Aug2024:11:06:56):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s89(27Aug2024:11:07:39):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s90(27Aug2024:11:08:24):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s91(27Aug2024:11:10:24):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s92(27Aug2024:11:12:33):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s93(27Aug2024:12:48:01):  xrun test.sv CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 

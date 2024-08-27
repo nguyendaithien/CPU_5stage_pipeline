@@ -1,0 +1,11 @@
+//
+// File created by:  xrun
+// Do not modify this file
+
+s1::(27Aug2024:15:36:42):( xrun DMEM.v ../rtl/ALU.v ../rtl/control_hazard.v ../rtl/CPU_EDABK_TOP.v ../rtl/decoder.v ../rtl/EX_stage.v ../rtl/ID_stage.v ../rtl/IF_stage.v ../rtl/MEM_stage.v ../rtl/register_file.v ../rtl/WB_stage.v ../rtl/defi.vh testbench.v -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log )
+s2::(27Aug2024:15:37:58):( xrun DMEM.v ../rtl/ALU.v ../rtl/control_hazard.v ../rtl/CPU_EDABK_TOP.v ../rtl/decoder.v ../rtl/EX_stage.v ../rtl/ID_stage.v ../rtl/IF_stage.v ../rtl/MEM_stage.v ../rtl/register_file.v ../rtl/WB_stage.v defi.vh testbench.v -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log )
+s3::(27Aug2024:15:38:23):( xrun DMEM.v ../rtl/ALU.v ../rtl/control_hazard.v ../rtl/CPU_EDABK_TOP.v ../rtl/decoder.v ../rtl/EX_stage.v ../rtl/ID_stage.v ../rtl/IF_stage.v ../rtl/MEM_stage.v ../rtl/register_file.v ../rtl/WB_stage.v defi.vh testbench.v -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log )
+s4::(27Aug2024:15:38:32):( xrun DMEM.v ../rtl/ALU.v ../rtl/control_hazard.v ../rtl/CPU_EDABK_TOP.v ../rtl/decoder.v ../rtl/EX_stage.v ../rtl/ID_stage.v ../rtl/IF_stage.v ../rtl/MEM_stage.v ../rtl/register_file.v ../rtl/WB_stage.v defi.vh testbench.v -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log )
+s5::(27Aug2024:15:45:16):( xrun DMEM.v ../rtl/ALU.v ../rtl/control_hazard.v ../rtl/CPU_EDABK_TOP.v ../rtl/decoder.v ../rtl/EX_stage.v ../rtl/ID_stage.v ../rtl/IF_stage.v ../rtl/MEM_stage.v ../rtl/register_file.v ../rtl/WB_stage.v defi.vh testbench.v -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log )
+s6::(27Aug2024:15:46:19):( xrun DMEM.v defi.vh testbench.v -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log )
+s7::(27Aug2024:15:46:53):( xrun DMEM.v ../rtl/.*v defi.vh testbench.v -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log )

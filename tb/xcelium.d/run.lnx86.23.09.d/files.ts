@@ -1,0 +1,14 @@
+1724747276 /home/usr3/project/RISC_V/tb/DMEM.v
+1724733637 /home/usr3/project/RISC_V/rtl/ALU.v
+1724731989 /home/usr3/project/RISC_V/rtl/control_hazard.v
+1724745807 /home/usr3/project/RISC_V/rtl/CPU_EDABK_TOP.v
+1724733373 /home/usr3/project/RISC_V/rtl/decoder.v
+1724732445 /home/usr3/project/RISC_V/rtl/EX_stage.v
+1724732635 /home/usr3/project/RISC_V/rtl/ID_stage.v
+1724732768 /home/usr3/project/RISC_V/rtl/IF_stage.v
+1724736961 /home/usr3/project/RISC_V/rtl/MEM_stage.v
+1724733463 /home/usr3/project/RISC_V/rtl/register_file.v
+1724737562 /home/usr3/project/RISC_V/rtl/WB_stage.v
+1724606151 /home/usr3/project/RISC_V/rtl/defi.vh
+1724748312 /home/usr3/project/RISC_V/tb/testbench.v
+1724747876 /home/usr3/project/RISC_V/tb/defi.vh

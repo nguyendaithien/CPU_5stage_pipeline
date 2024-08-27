@@ -1,0 +1,2 @@
+s1(09Jun2024:05:05:10):  xrun register_file.v -access +rwc 
+s2(09Jun2024:05:06:23):  xrun register_file.v -access +rwc -l ../log 
