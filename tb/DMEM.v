@@ -5,7 +5,7 @@ module DMEM #(parameter DATA_WIDTH = 32, ADDR_WIDTH = 8) (
     input wire                  WR,
     input wire [DATA_WIDTH-1:0] data_in,
     output reg [DATA_WIDTH-1:0] data_out,
-    input wire [ADDR_WIDTH-1:0] addr,
+    input wire [31:0] addr,
     input wire [3:0]            byte_en // Byte enable
 );
 

@@ -49,10 +49,11 @@ module IF_stage #( parameter DATA_WIDTH = 32) (
         end
      end
 
-     always @(flush) begin
+     always @(*) begin
        if(flush) begin
           IF_instr_o = 32'd0;
-       end else begin
+       end 
+			 else begin
          IF_instr_o = IMEM_data_i;
        end
      end

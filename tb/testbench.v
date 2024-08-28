@@ -4,27 +4,30 @@ module testbench();
   wire         RD        ;
   wire         WR        ;
   wire  [31:0] A_DMEM    ;
-  wire         A_IMEM    ;
-  reg  [31:0] Instr_in  ;
+  wire  [31:0] A_IMEM    ;
+  reg  [31:0]  Instr_in  ;
   wire  [31:0] D_in      ;
   wire  [31:0] D_out     ;
   wire         DMEM_rst  ;
   wire  [3:0 ] byte_mark ;
-  reg          boot_add  ;
+  reg   [31:0] boot_add  ;
 
- CPU_EDABK_TOP #( .DATA_WIDTH(32)) top (
-   .clk        (clk        )     
-  ,.rst_n      (rst_n      )  
-  ,.RD         (RD         )   
-  ,.WR         (WR         )    
-  ,.A_DMEM     (A_DMEM     )     
-  ,.A_IMEM     (A_IMEM     )        
-  ,.Instr_in   (Instr_in   )       
-  ,.D_in       (D_in       )      
-  ,.D_out      (D_out      )     
-  ,.DMEM_rst   (DMEM_rst   )        
-  ,.byte_mark  (byte_mark  )          
-  ,.boot_add   (boot_add   ) 
+ parameter boot_add_radix = 32'd0;
+ 	
+ 
+  CPU_EDABK_TOP #( .DATA_WIDTH(32)) top (
+   .clk        (clk             )     
+  ,.rst_n      (rst_n           )  
+  ,.RD         (RD              )   
+  ,.WR         (WR              )    
+  ,.A_DMEM     (A_DMEM          )     
+  ,.A_IMEM     (A_IMEM          )        
+  ,.Instr_in   (Instr_in        )       
+  ,.D_in       (D_in            )      
+  ,.D_out      (D_out           )     
+  ,.DMEM_rst   (DMEM_rst        )        
+  ,.byte_mark  (byte_mark       )          
+  ,.boot_add   (boot_add_radix  ) 
  );
 
  DMEM #(.DATA_WIDTH(32)) ram (
@@ -38,22 +41,51 @@ module testbench();
    ,.byte_en   (byte_mark )
 );
    
+ reg enable;
+
+ initial begin
+ 	$dumpfile("cpu.VCD");
+	$dumpvars(0, testbench);
+ end
   reg [31:0] IMEM [99:0 ];
   reg [31:0] DMEM [255:0];
+	reg [31:0] REG_FILE [31:0];
 
   always #5 clk = ~clk;
   always @(A_IMEM) begin
     Instr_in = IMEM[A_IMEM >> 2];
   end
+
+	integer i;
+	initial begin
+    #5
+		for(i = 0; i < 32 ; i = i + 1) begin
+			top.id_stage.reg_file.reg_file[i] = REG_FILE[i];
+		end
+	end
   always @(Instr_in) begin
     $display("instr  %h" , Instr_in);
   end
+integer j;
 
+initial begin
+  #10; // Đợi một thời gian ngắn để đảm bảo rằng các giá trị đã được khởi tạo
+  $display("Values in reg_file:");
+  for (j = 0; j < 32; j = j + 1) begin
+    $display("reg_file[%0d] = %h", j, top.id_stage.reg_file.reg_file[j]);
+  end
+end
   initial begin
     $readmemh("../init/test_1.dat", IMEM);
   end
+ // initial begin
+ //   $readmemh("../init/ram_1.dat", DMEM);
+ // end
+  initial begin
+    $readmemh("../init/reg_file_1.dat", REG_FILE);
+  end
  initial begin 
-   #2 
+   #20 
    Instr_in = 32'd0;
    rst_n = 0;
    clk = 0;
@@ -68,7 +100,7 @@ module testbench();
 
  end
  initial begin
-   #1000  $finish;
+   #10000  $finish;
  end
 
 

@@ -35,6 +35,7 @@ module EX_stage #( parameter DATA_WIDTH = 32) (
   ,EX_zero_o
   ,EX_imm_o
   ,EX_pc_dest
+	,EX_alu_op_i
   
 );
 
@@ -49,17 +50,18 @@ module EX_stage #( parameter DATA_WIDTH = 32) (
    input               EX_WR_mem_i     ;
    input      [1:0 ]   EX_sel_alu1_i   ;
    input      [1:0 ]   EX_sel_alu2_i   ;
-   input      [2:0 ]   EX_mem_op_i     ;
+   input      [3:0 ]   EX_mem_op_i     ;
    input      [31:0]   EX_rs2_data_i   ;
    input      [31:0]   EX_rs1_data_i   ;
    input      [31:0]   WB_data_i       ;
    input      [31:0]   EX_data_i       ;
    input      [31:0]   EX_pc_i         ;
    input               flush           ;
-   input               forwardA        ;
-   input               forwardB        ;
+   input      [1:0 ]   forwardA        ;
+   input      [1:0 ]   forwardB        ;
    input               hazard          ;
    input      [31:0]   EX_imm_i        ;
+	 input      [3:0 ]   EX_alu_op_i     ;
    output reg [31:0]   EX_pc_o         ;
    output reg [4:0 ]   EX_rs1_add_o    ;
    output reg [4:0 ]   EX_rs2_add_o    ;
@@ -68,7 +70,7 @@ module EX_stage #( parameter DATA_WIDTH = 32) (
    output reg          EX_regwrite_o   ;
    output reg          EX_RD_mem_o     ;
    output reg          EX_WR_mem_o     ;
-   output reg [2:0 ]   EX_mem_op_o     ;
+   output reg [3:0 ]   EX_mem_op_o     ;
    output reg [31:0]   EX_alu_result_o ;
    output reg          EX_zero_o       ;
    output reg [31:0]   EX_imm_o        ;
@@ -126,7 +128,7 @@ module EX_stage #( parameter DATA_WIDTH = 32) (
             EX_pc_o             <= EX_pc_i             ;
             EX_alu_result_o     <= alu_result          ;
             EX_zero_o           <= zero                ;
-            EX_pc_dest          <= EX_pc_i + EX_imm_i  ; 
+            EX_pc_dest          <= EX_pc_o + EX_imm_o  ; 
             EX_rs2_data_o       <= EX_rs2_data_i       ;
 
         end

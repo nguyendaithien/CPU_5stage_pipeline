@@ -88,6 +88,7 @@ module decoder #( parameter DATA_WIDTH = 32) (
        jump_o       = 1'd0   ;
        branch_o     = 1'd0   ;
        pc_sel_o     = 1'b0   ;
+			 mem_op_o     = `MEM_LW;
 
        case(opcode)
          `OPCODE_OP: begin

@@ -33,7 +33,7 @@ module MEM_stage #( parameter DATA_WIDTH = 32) (
     input             rst_n             ;
     input      [31:0] DMEM_data_i       ;
     input      [31:0] WB_data_i         ;
-    input      [2:0 ] MEM_mem_op_i      ;
+    input      [3:0 ] MEM_mem_op_i      ;
     input      [31:0] MEM_alu_result_i  ;
     input      [31:0] MEM_rs2_data_i    ;
     input             forward           ;
@@ -47,7 +47,7 @@ module MEM_stage #( parameter DATA_WIDTH = 32) (
     output reg [31:0] MEM_imm_o         ;
     output reg        MEM_regwrite_o    ;
     output reg [31:0] DMEM_add_o        ;
-    output reg [2: 0] DMEM_byte_mark_o  ;
+    output reg [3: 0] DMEM_byte_mark_o  ;
     output reg [31:0] DMEM_data_write_o ;
     output reg [31:0] MEM_data_o        ;
     output reg [31:0] MEM_alu_result_o  ;
@@ -102,7 +102,7 @@ module MEM_stage #( parameter DATA_WIDTH = 32) (
 
     always@* begin
         DMEM_data_write_o   = 32'b0 ;
-        byte_mark           = 4'b0  ;
+        byte_mark           = 4'd0  ;
 
         case(MEM_mem_op_i)
 

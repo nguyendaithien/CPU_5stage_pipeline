@@ -24,7 +24,7 @@ module CPU_EDABK_TOP #( parameter DATA_WIDTH = 32) (
    output wire [31:0] A_DMEM    ;
    output wire [31:0] A_IMEM    ;
    output wire [31:0] D_out     ;
-   output wire [2:0 ] byte_mark ;
+   output wire [3:0 ] byte_mark ;
    output wire        DMEM_rst  ;
 
  
@@ -46,7 +46,7 @@ module CPU_EDABK_TOP #( parameter DATA_WIDTH = 32) (
    wire [31:0] ID_imm            ;
    wire [1:0 ] ID_sel_to_reg     ;
    wire        ID_regwrite       ;
-   wire [3:0 ] mem_op            ;
+   wire [3:0 ] ID_mem_op            ;
    wire        ID_jump           ;
    wire ID_RD                    ;
    wire ID_WR                    ;
@@ -81,6 +81,10 @@ module CPU_EDABK_TOP #( parameter DATA_WIDTH = 32) (
    wire        MEM_RD_mem        ;
    wire        MEM_WR_mem        ;
    wire [31:0] MEM_pc            ;
+	 wire [1:0 ] forward_A         ;
+	 wire [1:0 ] forward_B         ;
+	 wire [31:0] MEM_imm           ;
+	 wire        forward_dmem      ;
 
   IF_stage #( .DATA_WIDTH(32))  if_stage (
      .clk        (clk         )
@@ -99,35 +103,35 @@ module CPU_EDABK_TOP #( parameter DATA_WIDTH = 32) (
 
 
   ID_stage #( .DATA_WIDTH(32)) id_stage (
-   .clk            (clk           ) 
-  ,.rst_n          (rst_n         )
-  ,.stall          (stall         )
-  ,.flush          (IF_ID_flush   )
-  ,.ID_instr_i     (IF_instr      )
-  ,.EX_ALU_result_i(EX_alu_result )
-  ,.EX_rd_add_i    (EX_rd_add     )
-  ,.WB_data_i      (WB_data       )
-  ,.WB_regwrite_i  (WB_regwrite   )
-  ,.WB_rd_add_i    ( WB_rd_add    )
-  ,.ID_pc_i        (IF_pc         )
-  ,.ID_rs1_add_o   (ID_rs1_add    )
-  ,.ID_rs2_add_o   (ID_rs2_add    )
-  ,.ID_rd_add_o    (ID_rd_add     )
-  ,.ID_rs1_data_o  (ID_rs1_data   )
-  ,.ID_rs2_data_o  (ID_rs2_data   )
-  ,.ID_pc_o        (ID_pc         )
-  ,.ID_imm_o       (ID_imm        )
-  ,.ID_alu_op_o    (ID_alu_op     )
-  ,.ID_regwrite_o  (ID_regwrite   )
-  ,.ID_mem_op_o    (ID_mem_op     )
-  ,.ID_jump_o      (ID_jump       )
-  ,.ID_sel_to_reg_o(ID_sel_to_reg )
-  ,.ID_RD_en_o     (ID_RD         )
-  ,.ID_WR_en_o     (ID_WR         )
-  ,.ID_branch_o    (ID_branch     )
-  ,.ID_alu_sel1_o  (ID_alu_sel1   )
-  ,.ID_alu_sel2_o  (ID_alu_sel2   )
-  ,.ID_pc_sel_o    (ID_pc_sel     )
+   .clk            (clk                     ) 
+  ,.rst_n          (rst_n                   )
+  ,.stall          (stall                   )
+  ,.flush          (IF_ID_flush             )
+  ,.ID_instr_i     (IF_instr                )
+  ,.EX_ALU_result_i(EX_alu_result           )
+  ,.EX_rd_add_i    (EX_rd_add               )
+  ,.WB_data_i      (WB_data_write_reg       )
+  ,.WB_regwrite_i  (WB_regwrite             )
+  ,.WB_rd_add_i    (WB_rd_add               )
+  ,.ID_pc_i        (IF_pc                   )
+  ,.ID_rs1_add_o   (ID_rs1_add              )
+  ,.ID_rs2_add_o   (ID_rs2_add              )
+  ,.ID_rd_add_o    (ID_rd_add               )
+  ,.ID_rs1_data_o  (ID_rs1_data             )
+  ,.ID_rs2_data_o  (ID_rs2_data             )
+  ,.ID_pc_o        (ID_pc                   )
+  ,.ID_imm_o       (ID_imm                  )
+  ,.ID_alu_op_o    (ID_alu_op               )
+  ,.ID_regwrite_o  (ID_regwrite             )
+  ,.ID_mem_op_o    (ID_mem_op               )
+  ,.ID_jump_o      (ID_jump                 )
+  ,.ID_sel_to_reg_o(ID_sel_to_reg           )
+  ,.ID_RD_en_o     (ID_RD                   )
+  ,.ID_WR_en_o     (ID_WR                   )
+  ,.ID_branch_o    (ID_branch               )
+  ,.ID_alu_sel1_o  (ID_alu_sel1             )
+  ,.ID_alu_sel2_o  (ID_alu_sel2             )
+  ,.ID_pc_sel_o    (ID_pc_sel               )
 );
 
 
@@ -145,15 +149,16 @@ module CPU_EDABK_TOP #( parameter DATA_WIDTH = 32) (
     ,.EX_mem_op_i     (ID_mem_op         )
     ,.EX_rs2_data_i   (ID_rs2_data       )
     ,.EX_rs1_data_i   (ID_rs1_data       )
-    ,.EX_sel_alu1_i   (EX_alu_sel1       )
-    ,.EX_sel_alu2_i   (EX_alu_sel2       )
+    ,.EX_sel_alu1_i   (ID_alu_sel1       )
+    ,.EX_sel_alu2_i   (ID_alu_sel2       )
     ,.EX_imm_i        (ID_imm            )
+		,.EX_alu_op_i     (ID_alu_op         )
     ,.flush           (EX_flush          )
     ,.forwardA        (forward_A         )
     ,.forwardB        (forward_B         )
     ,.WB_data_i       (WB_data_write_reg )
     ,.EX_data_i       (EX_alu_result     )
-    ,.hazard          (                  )
+    ,.hazard          (hazard            )
     ,.EX_rs2_data_o   (EX_rs2_data       )
     ,.EX_pc_o         (EX_pc             )
     ,.EX_rs1_add_o    (EX_rs1_add        )
@@ -174,7 +179,7 @@ module CPU_EDABK_TOP #( parameter DATA_WIDTH = 32) (
      .clk               (clk               )
     ,.rst_n             (rst_n             )
     ,.WB_data_i         (WB_data_write_reg )
-    ,.forward           (                  )
+    ,.forward           (forward_dmem      )
     ,.MEM_RD_mem_i      (EX_RD             )
     ,.MEM_WR_mem_i      (EX_WR             )
     ,.MEM_mem_op_i      (EX_mem_op         )
@@ -186,10 +191,10 @@ module CPU_EDABK_TOP #( parameter DATA_WIDTH = 32) (
     ,.MEM_imm_i         (EX_imm            )
     ,.MEM_imm_o         (MEM_imm           )
     ,.MEM_pc_o          (MEM_pc            )
-    ,.DMEM_add_o        (M_add             )
+    ,.DMEM_add_o        (A_DMEM            )
     ,.DMEM_byte_mark_o  (DMEM_byte_mark    )
     ,.DMEM_data_write_o (DMEM_data_write   )
-    ,.MEM_data_o        (MEM_data          )
+    ,.MEM_data_o        (D_out             )
     ,.MEM_regwrite_o    (MEM_regwrite      )
     ,.MEM_alu_result_o  (MEM_alu_result    )
     ,.MEM_rd_add_o      (MEM_rd_add        )

@@ -37,7 +37,7 @@ module ID_stage #( parameter DATA_WIDTH = 32) (
     input             flush           ;
     input      [31:0] ID_instr_i      ;
     input      [31:0] EX_ALU_result_i ;
-    input             WB_data_i       ;
+    input      [31:0] WB_data_i       ;
     input             WB_regwrite_i   ;
     input      [4: 0] WB_rd_add_i     ;
     input      [4: 0] EX_rd_add_i     ;
@@ -52,7 +52,7 @@ module ID_stage #( parameter DATA_WIDTH = 32) (
     output reg [31:0] ID_imm_o        ;
     output reg [3:0 ] ID_alu_op_o     ;
     output reg [1:0 ] ID_sel_to_reg_o ;
-    output reg [2:0 ] ID_mem_op_o     ;
+    output reg [3:0 ] ID_mem_op_o     ;
     output reg [1:0 ] ID_alu_sel1_o   ;
     output reg [1:0 ] ID_alu_sel2_o   ;
     output reg        ID_regwrite_o   ;
@@ -78,10 +78,10 @@ module ID_stage #( parameter DATA_WIDTH = 32) (
    wire             [1:0 ] alu_sel2    ;
    wire             [3:0 ] alu_op      ;
    wire                    pc_sel      ;
-   wire                    instr       ;
-   wire                    pc          ;
+   wire             [31:0] instr       ;
+   wire             [31:0] pc          ;
    wire                    EX_zero     ;
-   wire                    sel_to_reg  ;
+   wire             [1:0 ] sel_to_reg  ;
    wire                    jump        ;
    wire                    branch      ;
    wire                    EX_jump     ;
@@ -92,14 +92,14 @@ module ID_stage #( parameter DATA_WIDTH = 32) (
    wire             [4:0 ] address_1   ;
    wire             [4:0 ] address_3   ;
    wire             [4:0 ] address_2   ;
-   wire                   reg_write    ;
-   wire             [4:0 ] read_data_1 ;
-   wire             [4:0 ] data_write  ;
-   wire             [4:0 ] read_data_2 ;
-   wire             [4:0 ] read_data_3 ;
+   wire                    reg_write   ;
+   wire             [31:0] read_data_1 ;
+   wire             [31:0] data_write  ;
+   wire             [31:0] read_data_2 ;
+   wire             [31:0] read_data_3 ;
 
    decoder #(.DATA_WIDTH(32)) decode (
-        .instr_i      (instr     ) 
+        .instr_i      (ID_instr_i) 
        ,.pc_i         (pc        )
        ,.rd_add_o     (rd_add    )
        ,.rs1_add_o    (rs1_add   )
@@ -136,20 +136,35 @@ module ID_stage #( parameter DATA_WIDTH = 32) (
     ,.read_data_3(read_data_3   )
     );
 
+    always@(posedge clk) begin
+        if(~rst_n) begin
+            ID_rd_add_o        <= 0;
+            ID_rs1_add_o       <= 0;
+            ID_rs2_add_o       <= 0;
+            ID_imm_o           <= 0;
+        end
+        else begin
+            ID_rd_add_o        <= rd_add ;
+            ID_rs1_add_o       <= rs1_add;
+            ID_rs2_add_o       <= rs2_add;
+            ID_imm_o           <= imm    ;
+        end
+    end
 always@(posedge clk) begin
         if((~rst_n) | (flush)) begin
             ID_pc_o             <= 32'd0 ;
             ID_alu_sel1_o       <= 2'd0  ;
             ID_alu_sel2_o       <= 2'd0  ;
             ID_alu_op_o         <= 4'd0  ;
-            ID_branch_o         <= 1'd0  ;
-            ID_branch_o         <= 1'd0  ;
-            ID_WR_en_o          <= 1'd0  ;
-            ID_RD_en_o          <= 1'd0  ;
-            ID_regwrite_o       <= 1'd0  ;
+            ID_branch_o         <= 1'b0  ;
+            ID_branch_o         <= 1'b0  ;
+            ID_WR_en_o          <= 1'b0  ;
+            ID_RD_en_o          <= 1'b0  ;
+            ID_regwrite_o       <= 1'b0  ;
             ID_sel_to_reg_o     <= 2'd0  ;
-            ID_jump_o           <= 1'd0  ;
-            ID_mem_op_o         <= 1'd0  ;
+            ID_jump_o           <= 1'b0  ;
+            ID_mem_op_o         <= 4'd0  ;
+						ID_pc_sel_o         <= 1'b0  ;
         end
         else begin
             if(stall) begin
@@ -161,10 +176,11 @@ always@(posedge clk) begin
                 ID_branch_o     <= ID_branch_o     ;
                 ID_sel_to_reg_o <= ID_sel_to_reg_o ;
                 ID_mem_op_o     <= ID_mem_op_o     ;
-                ID_jump_o       <= 1'd0            ;
-                ID_RD_en_o      <= 1'd0            ;
-                ID_WR_en_o      <= 1'd0            ;
-                ID_regwrite_o   <= 1'd0            ;
+                ID_jump_o       <= 1'b0            ;
+                ID_RD_en_o      <= 1'b0            ;
+                ID_WR_en_o      <= 1'b0            ;
+                ID_regwrite_o   <= 1'b0            ;
+					    	ID_pc_sel_o     <= 1'b0            ;
             end
             else begin
                 ID_pc_o         <= ID_pc_i    ;
@@ -178,6 +194,7 @@ always@(posedge clk) begin
                 ID_sel_to_reg_o <= sel_to_reg ;
                 ID_jump_o       <= jump       ;
                 ID_mem_op_o     <= mem_op     ;
+						    ID_pc_sel_o     <= pc_sel     ;
             end
         end  
     end
@@ -197,8 +214,8 @@ always@(posedge clk) begin
     assign match_2 = (WB_rd_add_i == ID_rs2_add_o) & |ID_rs2_add_o;
 
     always@(*) begin
-        ID_rs1_data_o = (match_1 && WB_regwrite_i) ? WB_data_i : rs1_data;
-        ID_rs2_data_o = (match_2 && WB_regwrite_i) ? WB_data_i : rs2_data;
+        ID_rs1_data_o = (match_1 && WB_regwrite_i) ? WB_data_i : read_data_1;
+        ID_rs2_data_o = (match_2 && WB_regwrite_i) ? WB_data_i : read_data_2;
     end
     
 endmodule
