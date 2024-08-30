@@ -27,10 +27,6 @@ module CPU_EDABK_TOP #( parameter DATA_WIDTH = 32) (
    output wire [3:0 ] byte_mark ;
    output wire        DMEM_rst  ;
 
-	 assign RD = MEM_RD_mem;
-	 assign WR = MEM_WR_mem;
-	 assign byte_mark = DMEM_byte_mark;
-
  
    wire [4:0 ] WB_rd_add         ;
    wire [31:0] WB_data_write_reg ;
@@ -73,14 +69,11 @@ module CPU_EDABK_TOP #( parameter DATA_WIDTH = 32) (
    wire [31:0] EX_imm            ;
    wire [31:0] EX_pc_dest        ;
    wire [31:0] EX_rs2_data       ;
-	 wire EX_branch;
-	 wire EX_jump  ;
    // output of MEM stage
    wire [31:0] MEM_add           ;
    wire [3:0 ] DMEM_byte_mark    ;
    wire [31:0] DMEM_data_write   ;
    wire [31:0] MEM_data          ;
-	 wire [31:0] DMEM_data_o       ;
    wire        MEM_regwrite      ;
    wire [31:0] MEM_alu_result    ;
    wire [4:0 ] MEM_rd_add        ;
@@ -93,18 +86,16 @@ module CPU_EDABK_TOP #( parameter DATA_WIDTH = 32) (
 	 wire [31:0] MEM_imm           ;
 	 wire        forward_dmem      ;
 
-	 wire pc_sel = ((EX_branch | EX_zero) | EX_jump);
-
   IF_stage #( .DATA_WIDTH(32))  if_stage (
      .clk        (clk         )
     ,.rst_n      (rst_n       )
-    ,.IF_instr_i (Instr_in    )
+    ,.IF_instr_i (            )
     ,.boot_add   (boot_add    )
     ,.flush      (IF_ID_flush )
     ,.pc_dest    (EX_pc_dest  )
     ,.IMEM_data_i(Instr_in    )
     ,.stall      (stall       )
-    ,.pc_sel     (pc_sel      )
+    ,.pc_sel     (ID_pc_sel   )
     ,.IF_pc_o    (IF_pc       )
     ,.IF_instr_o (IF_instr    )
     ,.IMEM_add_o (A_IMEM      )
@@ -117,9 +108,6 @@ module CPU_EDABK_TOP #( parameter DATA_WIDTH = 32) (
   ,.stall          (stall                   )
   ,.flush          (IF_ID_flush             )
   ,.ID_instr_i     (IF_instr                )
-	,.EX_zero_i      (EX_zero                 )
-	,.EX_branch_i    (EX_branch               )
-	,.EX_jump_i      (EX_jump                 )
   ,.EX_ALU_result_i(EX_alu_result           )
   ,.EX_rd_add_i    (EX_rd_add               )
   ,.WB_data_i      (WB_data_write_reg       )
@@ -148,7 +136,7 @@ module CPU_EDABK_TOP #( parameter DATA_WIDTH = 32) (
 
 
   EX_stage #( .DATA_WIDTH(32)) ex_stage (
-     .clk             (clk              )                               
+     .clk             (clk               )                               
     ,.rst_n           (rst_n             )
     ,.EX_pc_i         (ID_pc             )
     ,.EX_rs1_add_i    (ID_rs1_add        )
@@ -156,8 +144,6 @@ module CPU_EDABK_TOP #( parameter DATA_WIDTH = 32) (
     ,.EX_rd_add_i     (ID_rd_add         )
     ,.EX_sel_to_reg_i (ID_sel_to_reg     )
     ,.EX_regwrite_i   (ID_regwrite       )
-		,.EX_branch_i     (ID_branch         )
-		,.EX_jump_i       (ID_jump           )
     ,.EX_RD_mem_i     (ID_RD             )
     ,.EX_WR_mem_i     (ID_WR             )
     ,.EX_mem_op_i     (ID_mem_op         )
@@ -187,8 +173,6 @@ module CPU_EDABK_TOP #( parameter DATA_WIDTH = 32) (
     ,.EX_zero_o       (EX_zero           )
     ,.EX_imm_o        (EX_imm            )
     ,.EX_pc_dest      (EX_pc_dest        )
-	  ,.EX_branch_o     (EX_branch         )
-	  ,.EX_jump_o       (EX_jump           )
 );
 
    MEM_stage #( .DATA_WIDTH(32)) mem_stage (
@@ -209,8 +193,8 @@ module CPU_EDABK_TOP #( parameter DATA_WIDTH = 32) (
     ,.MEM_pc_o          (MEM_pc            )
     ,.DMEM_add_o        (A_DMEM            )
     ,.DMEM_byte_mark_o  (DMEM_byte_mark    )
-    ,.DMEM_data_write_o (D_out             )
-    ,.MEM_data_o        (DMEM_data_o       )
+    ,.DMEM_data_write_o (DMEM_data_write   )
+    ,.MEM_data_o        (D_out             )
     ,.MEM_regwrite_o    (MEM_regwrite      )
     ,.MEM_alu_result_o  (MEM_alu_result    )
     ,.MEM_rd_add_o      (MEM_rd_add        )
@@ -226,7 +210,7 @@ module CPU_EDABK_TOP #( parameter DATA_WIDTH = 32) (
    .clk                   (clk               )
   ,.rst_n                 (rst_n             )
   ,.WB_rd_add_i           (MEM_rd_add        )
-  ,.DMEM_data_i           (DMEM_data_o       )
+  ,.DMEM_data_i           (MEM_data          )
   ,.WB_alu_result_i       (MEM_alu_result    )
   ,.WB_sel_to_reg_i       (MEM_sel_to_reg    )
   ,.WB_regwrite_i         (MEM_regwrite      )

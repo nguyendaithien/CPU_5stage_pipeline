@@ -16,10 +16,13 @@ module EX_stage #( parameter DATA_WIDTH = 32) (
   ,EX_sel_alu1_i
   ,EX_sel_alu2_i
   ,EX_imm_i
+	,EX_branch_i
+	,EX_jump_i
   ,flush
   ,forwardA
   ,forwardB
   ,WB_data_i
+	,EX_alu_op_i
   ,EX_data_i
   ,hazard
   ,EX_pc_o
@@ -35,7 +38,8 @@ module EX_stage #( parameter DATA_WIDTH = 32) (
   ,EX_zero_o
   ,EX_imm_o
   ,EX_pc_dest
-	,EX_alu_op_i
+	,EX_branch_o
+	,EX_jump_o
   
 );
 
@@ -62,6 +66,12 @@ module EX_stage #( parameter DATA_WIDTH = 32) (
    input               hazard          ;
    input      [31:0]   EX_imm_i        ;
 	 input      [3:0 ]   EX_alu_op_i     ;
+
+   input EX_branch_i;
+   input EX_jump_i;
+   output reg EX_branch_o;
+   output reg EX_jump_o;
+  
    output reg [31:0]   EX_pc_o         ;
    output reg [4:0 ]   EX_rs1_add_o    ;
    output reg [4:0 ]   EX_rs2_add_o    ;
@@ -74,7 +84,7 @@ module EX_stage #( parameter DATA_WIDTH = 32) (
    output reg [31:0]   EX_alu_result_o ;
    output reg          EX_zero_o       ;
    output reg [31:0]   EX_imm_o        ;
-   output reg [31:0]   EX_pc_dest      ;
+   output wire [31:0]   EX_pc_dest      ;
    output reg [31:0]   EX_rs2_data_o   ;
   
 
@@ -87,8 +97,8 @@ module EX_stage #( parameter DATA_WIDTH = 32) (
    reg [31:0] op_b_alu;
 
 
-   assign sel_to_alu_A = (hazard) ?  EX_sel_alu1_i : forwardA; 
-   assign sel_to_alu_B = (hazard) ?  EX_sel_alu2_i : forwardB; 
+   assign sel_to_alu_A = (hazard) ?  forwardA : EX_sel_alu1_i  ; 
+   assign sel_to_alu_B = (hazard) ?  forwardB : EX_sel_alu2_i  ; 
 
    ALU #(.DATA_WIDTH(32)) alu (
   	.alu_ctrl_i   (EX_alu_op_i)
@@ -100,7 +110,7 @@ module EX_stage #( parameter DATA_WIDTH = 32) (
 
 
     always@(posedge clk) begin
-        if((rst_n == 1'b0) || (flush)) begin 
+        if((~rst_n) || (flush)) begin 
             EX_RD_mem_o      <= 1'b0                             ;
             EX_WR_mem_o      <= 1'b0                             ;
             EX_mem_op_o      <= 3'd0                             ;
@@ -109,12 +119,13 @@ module EX_stage #( parameter DATA_WIDTH = 32) (
             EX_regwrite_o    <= 1'd0                             ;
             EX_rs2_add_o     <= 5'd0                             ;
             EX_rs1_add_o     <= 5'd0                             ;
-            EX_pc_o          <= (flush) ? EX_pc_o : 32'd0        ;
+            EX_pc_o          <= 32'd0        ;
             EX_alu_result_o  <= 32'd0                            ;
             EX_imm_o         <= 32'd0                            ;
             EX_zero_o        <= 1'b0                             ;
-            EX_pc_dest       <= 32'd0                            ; 
             EX_rs2_data_o    <= 32'd0                            ;
+						EX_branch_o      <= 1'b0;
+						EX_jump_o        <= 1'b0;
   
         end
         else begin
@@ -128,11 +139,14 @@ module EX_stage #( parameter DATA_WIDTH = 32) (
             EX_pc_o             <= EX_pc_i             ;
             EX_alu_result_o     <= alu_result          ;
             EX_zero_o           <= zero                ;
-            EX_pc_dest          <= EX_pc_o + EX_imm_o  ; 
             EX_rs2_data_o       <= EX_rs2_data_i       ;
-
+						EX_branch_o         <= EX_branch_i  ;
+						EX_jump_o           <= EX_jump_i  ;
+						EX_imm_o            <= EX_imm_i   ;
         end
     end
+
+           assign EX_pc_dest = EX_pc_o + EX_imm_o  ; 
 
     always @* begin
         case(sel_to_alu_A) 

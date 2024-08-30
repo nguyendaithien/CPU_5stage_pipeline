@@ -9,12 +9,13 @@ module DMEM #(parameter DATA_WIDTH = 32, ADDR_WIDTH = 8) (
     input wire [3:0]            byte_en // Byte enable
 );
 
-    reg [DATA_WIDTH-1:0] mem [255:0]; // RAM storage
+    reg [31:0] mem [255:0]; // RAM storage
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
             data_out <= 32'b0;
-        end else if (WR) begin
+        end 
+	      else if (WR) begin
             case (byte_en)
                 4'b1111: begin
                     mem[addr >> 2] <= data_in;

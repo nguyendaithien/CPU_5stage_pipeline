@@ -2,7 +2,7 @@
 module MEM_stage #( parameter DATA_WIDTH = 32) (
    clk
   ,rst_n
-  ,WB_data_i
+  ,WB_data_i  // WB 
   ,forward
   ,MEM_RD_mem_i
   ,MEM_WR_mem_i
@@ -16,8 +16,8 @@ module MEM_stage #( parameter DATA_WIDTH = 32) (
   ,MEM_imm_o
   ,DMEM_add_o
   ,DMEM_byte_mark_o
-  ,DMEM_data_write_o
-  ,MEM_data_o // data read from memory
+  ,DMEM_data_write_o // data write to MEM
+  ,MEM_data_o // data read from memory and send to WB
   ,MEM_regwrite_o
   ,MEM_alu_result_o
   ,MEM_rd_add_o
@@ -64,7 +64,7 @@ module MEM_stage #( parameter DATA_WIDTH = 32) (
     reg [3:0 ] mem_op      ;
 
    always@(posedge clk) begin
-           if(rst_n == 1'b0) begin
+           if(~rst_n) begin
                MEM_sel_to_reg_o      <= 2'd0 ;
                MEM_alu_result_o      <= 32'd0;
                MEM_regwrite_o        <= 1'd0 ;
@@ -73,6 +73,7 @@ module MEM_stage #( parameter DATA_WIDTH = 32) (
                MEM_WR_mem_o          <= 1'd0 ;
                MEM_pc_o              <= 32'd0;
                MEM_imm_o             <= 32'd0;
+							 byte_mark             <= 4'd0 ;
            end
            else begin
                MEM_sel_to_reg_o      <= MEM_sel_to_reg_i ;

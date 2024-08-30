@@ -80,7 +80,7 @@ module CONTROL_HAZARD #( parameter DATA_WIDTH = 32) (
         end
         else begin
           forward_B_o = 2'b00;         
-          hazard = 1'b1;
+          hazard = 1'b0;
         end
     end
 
@@ -120,6 +120,7 @@ module CONTROL_HAZARD #( parameter DATA_WIDTH = 32) (
     end
 
     assign IF_ID_flush_o = (IF_ID_flush1 || IF_ID_flush2);
+//    assign IF_ID_flush_o = (IF_ID_flush1);
       
 
     always@* begin
@@ -132,8 +133,9 @@ module CONTROL_HAZARD #( parameter DATA_WIDTH = 32) (
     end
     
     always@(posedge clk) begin
-      if(rst_n == 1'b0) begin
+      if(!rst_n) begin
           IF_ID_flush2 <= 1'b0;
+					hazard       <= 1'b0;
       end
       else begin                 
           IF_ID_flush2 <= IF_ID_flush1;
@@ -144,6 +146,7 @@ module CONTROL_HAZARD #( parameter DATA_WIDTH = 32) (
     always@* begin
       EX_flush_o = (zero) ? 1'b1 : 1'b0 ;
     end
+
 endmodule
 
    

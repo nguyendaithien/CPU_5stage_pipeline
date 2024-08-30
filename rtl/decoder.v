@@ -1,12 +1,9 @@
 `include "defi.vh"
 module decoder #( parameter DATA_WIDTH = 32) (
    instr_i      ,
-   pc_i         ,
    rd_add_o     ,
    rs1_add_o    ,
    rs2_add_o    ,
-   rs1_data_o   ,
-   rs2_data_o   ,
    imm_o        ,
    reg_write_o  ,
    alu_sel1_o   ,
@@ -24,7 +21,6 @@ module decoder #( parameter DATA_WIDTH = 32) (
    alu_sel2_o
  );
    input              [ 31:0]  instr_i      ;
-   input              [ 31:0]  pc_i         ;
    input                       EX_zero_i    ;
    input                       EX_jump_i    ;
    input                       EX_branch_i  ;
@@ -35,8 +31,6 @@ module decoder #( parameter DATA_WIDTH = 32) (
    output reg         [ 4:0 ]  rd_add_o     ;
    output reg         [ 4:0 ]  rs1_add_o    ;
    output reg         [ 4:0 ]  rs2_add_o    ;
-   output reg         [ 31:0]  rs1_data_o   ;
-   output reg         [ 31:0]  rs2_data_o   ;
    output reg         [ 31:0]  imm_o        ;
    output reg         [ 1:0 ]  alu_sel1_o   ;
    output reg         [ 1:0 ]  alu_sel2_o   ;
@@ -49,7 +43,7 @@ module decoder #( parameter DATA_WIDTH = 32) (
 
    reg [6:0] opcode;
    reg [4:0] rd;
-   reg [3:0] FUNCT3;
+   reg [2:0] FUNCT3;
    reg [3:0] funct7;
 
    reg [31:0] IMM_I;
@@ -71,7 +65,7 @@ module decoder #( parameter DATA_WIDTH = 32) (
 
 
     always @(EX_zero_i or EX_jump_i or EX_branch_i) begin
-         pc_sel_o = (EX_zero_i & EX_jump_i & EX_branch_i);
+         pc_sel_o = ((EX_zero_i &  EX_branch_i) | EX_jump_i);
     end
     always @(*) begin
        rd_add_o       =  instr_i[11:7]    ; 
@@ -89,6 +83,7 @@ module decoder #( parameter DATA_WIDTH = 32) (
        branch_o     = 1'd0   ;
        pc_sel_o     = 1'b0   ;
 			 mem_op_o     = `MEM_LW;
+           reg_write_o  = 1'b0 ;
 
        case(opcode)
          `OPCODE_OP: begin
@@ -113,30 +108,43 @@ module decoder #( parameter DATA_WIDTH = 32) (
           branch_o            = 1'b1      ;
           imm_o               = IMM_B     ;
           rd_add_o            = 5'd0      ;
+           reg_write_o  = 1'b0 ;
           case(FUNCT3)
           `FUNCT3_BEQ: begin
-          branch_o            = 1'b0      ;
-          alu_op_o            = `ALU_BEQ  ;
+           branch_o            = 1'b0      ;
+           alu_op_o            = `ALU_BEQ  ;
+           alu_sel1_o   = 2'b11;
+           alu_sel2_o   = 2'b10;
           end
           `FUNCT3_BNE: begin
           branch_o            = 1'b1      ;
           alu_op_o            = `ALU_BNE  ;
+           alu_sel1_o   = 2'b11;
+           alu_sel2_o   = 2'b10;
           end
           `FUNCT3_BLT: begin
           branch_o            = 1'b0      ;
           alu_op_o            = `ALU_BLT  ;
+           alu_sel1_o   = 2'b11;
+           alu_sel2_o   = 2'b10;
           end
           `FUNCT3_BGE: begin
           branch_o            =1'b 1      ;
           alu_op_o            = `ALU_BGE  ;
+           alu_sel1_o   = 2'b11;
+           alu_sel2_o   = 2'b10;
           end
           `FUNCT3_BLTU: begin
           branch_o            = 1'b0      ;
           alu_op_o            = `ALU_BLTU ;
+           alu_sel1_o   = 2'b11;
+           alu_sel2_o   = 2'b10;
           end
           `FUNCT3_BGEU: begin
           branch_o            = 1'b1      ;
           alu_op_o            = `ALU_BGEU ;
+           alu_sel1_o   = 2'b11;
+           alu_sel2_o   = 2'b10;
           end
           default: begin
           branch_o            =1'b0       ;

@@ -32,11 +32,20 @@ module IF_stage #( parameter DATA_WIDTH = 32) (
             IMEM_add_o <= 32'd0;
             IF_pc_o    <= 32'd0;
         end
-        else begin
+				else begin
             IMEM_add_o <= pc_next;
             IF_pc_o    <=  (stall)? IF_pc_o : IMEM_add_o;
-        end
+				end		
      end
+
+		 always @(posedge clk or posedge flush) begin
+		 	if(flush) begin
+            IF_instr_o <= 32'd0;
+			end
+			else begin
+            IF_instr_o <= IMEM_data_i;
+			end
+		end
     always @(*) begin
         if(stall) begin
             pc_next = IMEM_add_o - 32'd4;
@@ -49,12 +58,4 @@ module IF_stage #( parameter DATA_WIDTH = 32) (
         end
      end
 
-     always @(*) begin
-       if(flush) begin
-          IF_instr_o = 32'd0;
-       end 
-			 else begin
-         IF_instr_o = IMEM_data_i;
-       end
-     end
 endmodule
