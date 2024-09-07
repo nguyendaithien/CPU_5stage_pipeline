@@ -39,7 +39,7 @@ module WB_stage #( parameter DATA_WIDTH = 32) (
             2'b01: WB_data_write_reg_o = WB_alu_result_i ;
             2'b10: WB_data_write_reg_o = DMEM_data_i     ;
          default:
-            WB_data_write_reg_o = (WB_imm_i << 12)       ;
+            WB_data_write_reg_o = WB_imm_i ;
          endcase
     end
 

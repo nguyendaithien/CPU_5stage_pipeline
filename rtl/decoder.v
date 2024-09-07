@@ -153,6 +153,23 @@ module decoder #( parameter DATA_WIDTH = 32) (
           endcase    
         end
 
+			 `OPCODE_OP_IMM: begin
+			 		reg_write_o  = 1'b1;
+          alu_sel1_o   = 2'b11                      ;
+          alu_sel2_o   = 2'b11                      ;
+					imm_o        = IMM_I                      ;
+          sel_to_reg_o = 2'b01                      ;
+				case(FUNCT3)
+           `FUNCT3_ADDI        : alu_op_o = `ALU_ADD                       ;
+					 `FUNCT3_ANDI        : alu_op_o = `ALU_AND                       ;
+           `FUNCT3_ORI         : alu_op_o = `ALU_OR                        ;
+           `FUNCT3_XORI        : alu_op_o = `ALU_XOR                       ;
+           `FUNCT3_SLTI        : alu_op_o = `ALU_SLT                       ;
+           `FUNCT3_SLTIU       : alu_op_o = `ALU_SLTU                      ;
+           `FUNCT3_SRAI_SRLI   : alu_op_o = (funct7) ? `ALU_SRA : `ALU_SRL ;
+           `FUNCT3_SLLI        : alu_op_o = `ALU_SLL                       ;
+				endcase
+			end
 
        `OPCODE_LUI: begin
            reg_write_o  = (instr_i[11:7] == 0) ? 0:1   ;
@@ -197,7 +214,6 @@ module decoder #( parameter DATA_WIDTH = 32) (
            rs2_add_o    = 5'd0                        ;
            sel_to_reg_o = 2'b00                       ;
        end
-       
        
        `OPCODE_LOAD: begin
            reg_write_o  = (instr_i[11:7] == 0) ? 0:1 ;

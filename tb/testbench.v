@@ -44,6 +44,29 @@ module testbench();
  wire [31:0] reg_file_2;
  assign reg_file_2 = top.id_stage.reg_file.reg_file[2];
  reg enable;
+ wire [31:0] instr;
+ assign instr = top.id_stage.ID_instr_i;
+ wire [31:0] X_10;
+ wire [31:0] X_5;
+ wire [31:0] X_4;
+ assign X_10 = top.id_stage.reg_file.reg_file[10];
+ assign X_5 = top.id_stage.reg_file.reg_file[5];
+ assign X_4 = top.id_stage.reg_file.reg_file[4];
+
+ always @(instr) begin
+ 	if((instr[6:0] == 7'b1100011) & (instr[14:12] == 3'b001)) begin
+	  $display("this is branch instruction %h", instr  );
+	  $display("this is branch instruction IMM =  %d", top.id_stage.imm );
+
+  end else 
+ 	if((instr[6:0] == 7'b0010011) & (instr[14:12] == 3'b000)) begin
+	  $display("this is  ADDI  instruction %h", instr  );
+#5
+	  $display("this is ADDI instruction IMM =  %d", top.id_stage.imm );
+ end
+ end
+
+		
 
  initial begin
  	$dumpfile("cpu.VCD");

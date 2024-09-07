@@ -136,6 +136,7 @@ module EX_stage #( parameter DATA_WIDTH = 32) (
             EX_regwrite_o       <= EX_regwrite_i       ;
             EX_rd_add_o         <= EX_rd_add_i         ;
             EX_rs2_add_o        <= EX_rs2_add_i        ;
+            EX_rs1_add_o        <= EX_rs1_add_i        ;
             EX_pc_o             <= EX_pc_i             ;
             EX_alu_result_o     <= alu_result          ;
             EX_zero_o           <= zero                ;

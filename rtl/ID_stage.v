@@ -129,7 +129,7 @@ module ID_stage #( parameter DATA_WIDTH = 32) (
      .clk        (clk           )
     ,.address_1  (rs1_add       )
     ,.address_2  (rs2_add       )
-		,.address_3  (rd_add        )
+		,.address_3  (WB_rd_add_i   )
     ,.data_write (WB_data_i     )
     ,.reg_write  (WB_regwrite_i )
     ,.rst_n      (rst_n         )
