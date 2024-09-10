@@ -111,37 +111,31 @@ module decoder #( parameter DATA_WIDTH = 32) (
            reg_write_o  = 1'b0 ;
           case(FUNCT3)
           `FUNCT3_BEQ: begin
-           branch_o            = 1'b0      ;
            alu_op_o            = `ALU_BEQ  ;
            alu_sel1_o   = 2'b11;
            alu_sel2_o   = 2'b10;
           end
           `FUNCT3_BNE: begin
-          branch_o            = 1'b1      ;
           alu_op_o            = `ALU_BNE  ;
            alu_sel1_o   = 2'b11;
            alu_sel2_o   = 2'b10;
           end
           `FUNCT3_BLT: begin
-          branch_o            = 1'b0      ;
           alu_op_o            = `ALU_BLT  ;
            alu_sel1_o   = 2'b11;
            alu_sel2_o   = 2'b10;
           end
           `FUNCT3_BGE: begin
-          branch_o            =1'b 1      ;
           alu_op_o            = `ALU_BGE  ;
            alu_sel1_o   = 2'b11;
            alu_sel2_o   = 2'b10;
           end
           `FUNCT3_BLTU: begin
-          branch_o            = 1'b0      ;
           alu_op_o            = `ALU_BLTU ;
            alu_sel1_o   = 2'b11;
            alu_sel2_o   = 2'b10;
           end
           `FUNCT3_BGEU: begin
-          branch_o            = 1'b1      ;
           alu_op_o            = `ALU_BGEU ;
            alu_sel1_o   = 2'b11;
            alu_sel2_o   = 2'b10;
@@ -191,7 +185,7 @@ module decoder #( parameter DATA_WIDTH = 32) (
            alu_op_o     = `ALU_ADD                     ;
            rs1_add_o    = 5'd0                         ;
            rs2_add_o    = 5'd0                         ;
-           sel_to_reg_o = 2'b11                        ;
+           sel_to_reg_o = 2'b01                        ;
        end
        
        `OPCODE_JAL: begin

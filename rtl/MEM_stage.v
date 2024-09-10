@@ -63,7 +63,7 @@ module MEM_stage #( parameter DATA_WIDTH = 32) (
     reg [1:0 ] byte_addr   ;
     reg [3:0 ] mem_op      ;
 
-   always@(posedge clk) begin
+   always@(posedge clk or negedge rst_n) begin
            if(~rst_n) begin
                MEM_sel_to_reg_o      <= 2'd0 ;
                MEM_alu_result_o      <= 32'd0;
@@ -89,10 +89,18 @@ module MEM_stage #( parameter DATA_WIDTH = 32) (
 
 
     always@* begin
-        DMEM_add_o       = {MEM_alu_result_i[31:2], 2'b0}    ;
+     //   DMEM_add_o       = {MEM_alu_result_i[31:2], 2'b0}    ;
         DMEM_rst_o       = ~rst_n                            ;
         DMEM_byte_mark_o = (MEM_WR_mem_i) ? byte_mark : 4'b0 ;
     end
+		always @(posedge clk or negedge rst_n) begin 
+			if(~rst_n) begin
+				DMEM_add_o <= 32'd0;
+			end
+			else begin
+        DMEM_add_o      <= {MEM_alu_result_i[31:2], 2'b0}    ;
+			end
+		end
     
     always@* begin
         if(forward)

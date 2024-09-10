@@ -93,7 +93,7 @@ module CPU_EDABK_TOP #( parameter DATA_WIDTH = 32) (
 	 wire [31:0] MEM_imm           ;
 	 wire        forward_dmem      ;
 
-	 wire pc_sel = ((EX_branch | EX_zero) | EX_jump);
+	 wire pc_sel = ((EX_branch &  EX_zero) | EX_jump);
 
   IF_stage #( .DATA_WIDTH(32))  if_stage (
      .clk        (clk         )
