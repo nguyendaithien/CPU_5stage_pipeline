@@ -27,9 +27,6 @@ module CPU_EDABK_TOP #( parameter DATA_WIDTH = 32) (
    output wire [3:0 ] byte_mark ;
    output wire        DMEM_rst  ;
 
-	 assign RD = MEM_RD_mem;
-	 assign WR = MEM_WR_mem;
-	 assign byte_mark = DMEM_byte_mark;
 
  
    wire [4:0 ] WB_rd_add         ;
@@ -92,6 +89,11 @@ module CPU_EDABK_TOP #( parameter DATA_WIDTH = 32) (
 	 wire [1:0 ] forward_B         ;
 	 wire [31:0] MEM_imm           ;
 	 wire        forward_dmem      ;
+
+
+	 assign RD = MEM_RD_mem;
+	 assign WR = MEM_WR_mem;
+	 assign byte_mark = DMEM_byte_mark;
 
 	 wire pc_sel = ((EX_branch &  EX_zero) | EX_jump);
 

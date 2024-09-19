@@ -26,8 +26,21 @@ module IF_stage #( parameter DATA_WIDTH = 32) (
     output reg [31:0] IMEM_add_o  ;
 
     reg [DATA_WIDTH-1:0] pc_next;
+		wire [31:0] Instr;
 
-    always @(posedge clk) begin
+ compressed_decoder com_decode (
+   .clk_i            (clk             )
+  ,.rst_ni           (rst_n           )
+  ,.valid_i          (                )
+  ,.instr_i          (IMEM_data_i     )
+  ,.instr_o          (Instr           )
+  ,.is_compressed_o  (                )
+  ,.illegal_instr_o  (illegal_instr_o )
+	);
+
+
+
+    always @(posedge clk or negedge rst_n) begin
         if(!rst_n) begin
             IMEM_add_o <= 32'd0;
             IF_pc_o    <= 32'd0;
@@ -43,7 +56,7 @@ module IF_stage #( parameter DATA_WIDTH = 32) (
             IF_instr_o <= 32'd0;
 			end
 			else begin
-            IF_instr_o <= IMEM_data_i;
+            IF_instr_o <= Instr;
 			end
 		end
     always @(*) begin
