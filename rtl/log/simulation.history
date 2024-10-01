@@ -91,3 +91,7 @@ s90(27Aug2024:11:08:24):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_s
 s91(27Aug2024:11:10:24):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
 s92(27Aug2024:11:12:33):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
 s93(27Aug2024:12:48:01):  xrun test.sv CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s94(09Sep2024:18:27:23):  xrun decoder.v 
+s95(09Sep2024:18:59:14):  xrun decoder.v 
+s96(09Sep2024:19:00:02):  xrun decoder.v 
+s97(09Sep2024:19:01:28):  xrun test.sv CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 

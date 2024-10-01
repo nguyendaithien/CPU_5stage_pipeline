@@ -1,0 +1,43 @@
+xrun: 23.09-s001: (c) Copyright 1995-2023 Cadence Design Systems, Inc.
+TOOL:	xrun	23.09-s001: Started on Sep 30, 2024 at 16:31:52 +07
+xrun
+	-sv
+	csr_register.sv
+	pkg.sv
+	csr.sv
+	-log log_1.txt
+Recompiling... reason: file './csr_register.sv' is newer than expected.
+	expected: Mon Sep 30 16:04:28 2024
+	actual:   Mon Sep 30 16:31:49 2024
+file: csr_register.sv
+	module worklib.cs_registers:sv
+		errors: 0, warnings: 0
+		Caching library 'worklib' ....... Done
+	Elaborating the design hierarchy:
+	Top level design units:
+		pkg
+		cs_registers
+	Building instance overlay tables: .................... Done
+	Generating native compiled code:
+		worklib.cs_registers:sv <0x216689c6>
+			streams:  30, words: 21101
+	Building instance specific data structures.
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		               Instances  Unique
+		Modules:              12       2
+		Verilog packages:      1       1
+		Registers:           115      86
+		Scalar wires:         39       -
+		Vectored wires:       61       -
+		Always blocks:        15       6
+		Cont. assignments:    19      25
+		Pseudo assignments:   16       -
+		Process Clocks:       12       1
+	Writing initial simulation snapshot: worklib.cs_registers:sv
+Loading snapshot worklib.cs_registers:sv .................... Done
+xcelium> source /home/edabk/Cadence/XCELIUM2309/tools/xcelium/files/xmsimrc
+xcelium> run
+xmsim: *W,RNQUIE: Simulation is complete.
+xcelium> exit
+TOOL:	xrun	23.09-s001: Exiting on Sep 30, 2024 at 16:31:54 +07  (total: 00:00:02)

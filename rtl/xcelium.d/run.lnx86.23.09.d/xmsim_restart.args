@@ -2,13 +2,11 @@
 // File created by:  xrun
 // Do not modify this file
 //
--ERRORMAX
-0
 -MESSAGES
 +EMGRLOG
-log/simulation.log
+xrun.log
 -XLSTIME
-1724737680
+1727761402
 -XLKEEP
 -XLMODE
 ./xcelium.d/run.lnx86.23.09.d
@@ -22,4 +20,4 @@ xrun
 -XLVERSION
 "TOOL:	xrun	23.09-s001"
 -XLNAME
-./xcelium.d/run.lnx86.23.09.d/edabk.server1_6a0a500a-63bd-4f2e-a770-1ab263fbf226
+./xcelium.d/run.lnx86.23.09.d/edabk.server1_cdd94b4a-b47b-45d9-a560-c99e7257e806

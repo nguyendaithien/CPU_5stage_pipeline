@@ -2,15 +2,8 @@
 // File created by:  xrun
 // Do not modify this file
 //
--ACCESS
-+rwc
--ERRORMAX
-0
--WORK
-log
 -no_analogsolver
 -MESSAGES
-register_file
 -XLMODE
 ./xcelium.d/run.lnx86.23.09.d
 -RUNMODE
@@ -18,5 +11,6 @@ register_file
 ./xcelium.d/run.lnx86.23.09.d/cds.lib
 -HDLVAR
 ./xcelium.d/run.lnx86.23.09.d/hdl.var
--IRUNHASTOP
+-WORK
+worklib
 -HASXLMODE

@@ -1,0 +1,300 @@
+s1(25Aug2024:09:50:57):  xrun register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work /log 
+s2(25Aug2024:13:46:02):  xrun decoder ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work /log 
+s3(25Aug2024:13:46:21):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work /log 
+s4(25Aug2024:13:46:40):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s5(25Aug2024:13:47:27):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s6(25Aug2024:13:48:47):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s7(25Aug2024:13:49:49):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s8(25Aug2024:13:54:22):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s9(25Aug2024:13:56:14):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s10(25Aug2024:13:56:47):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s11(25Aug2024:13:59:00):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s12(25Aug2024:14:01:46):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s13(25Aug2024:14:02:41):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s14(25Aug2024:14:03:03):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s15(25Aug2024:14:03:17):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s16(25Aug2024:14:04:23):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s17(25Aug2024:14:04:51):  xrun decoder.v ID_stage.v register_file.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s18(25Aug2024:23:42:08):  xrun ALU.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s19(26Aug2024:00:06:02):  xrun ALU.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s20(26Aug2024:00:09:48):  xrun ALU.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s21(26Aug2024:00:12:51):  xrun ALU.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s22(26Aug2024:00:13:47):  xrun ALU.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s23(26Aug2024:13:08:30):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s24(26Aug2024:13:09:33):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s25(26Aug2024:13:09:47):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s26(26Aug2024:13:11:05):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s27(26Aug2024:13:11:55):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s28(26Aug2024:13:12:42):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s29(26Aug2024:13:13:36):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s30(26Aug2024:13:15:47):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s31(26Aug2024:13:16:36):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s32(26Aug2024:13:17:16):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s33(26Aug2024:13:17:53):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s34(26Aug2024:13:18:36):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s35(26Aug2024:13:18:39):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s36(26Aug2024:13:20:36):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s37(26Aug2024:13:21:24):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s38(26Aug2024:13:21:42):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s39(26Aug2024:13:28:33):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s40(26Aug2024:13:30:57):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s41(26Aug2024:14:06:55):  xrun ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s42(26Aug2024:14:07:13):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s43(26Aug2024:14:07:44):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s44(26Aug2024:14:08:34):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s45(26Aug2024:14:08:49):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s46(26Aug2024:14:11:03):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s47(26Aug2024:14:11:59):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s48(26Aug2024:14:13:53):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s49(26Aug2024:14:14:23):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s50(26Aug2024:14:16:41):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s51(26Aug2024:14:19:23):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s52(26Aug2024:14:20:44):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s53(26Aug2024:14:22:20):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s54(26Aug2024:14:22:42):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s55(26Aug2024:14:23:35):  xrun MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s56(26Aug2024:14:46:22):  xrun WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s57(26Aug2024:14:47:19):  xrun WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s58(26Aug2024:14:47:47):  xrun WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s59(26Aug2024:14:49:10):  xrun WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s60(26Aug2024:14:49:27):  xrun WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s61(26Aug2024:14:50:27):  xrun WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s62(26Aug2024:14:50:52):  xrun WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s63(26Aug2024:16:19:27):  xrun control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s64(26Aug2024:16:22:18):  xrun control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s65(26Aug2024:16:26:40):  xrun control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s66(26Aug2024:16:27:42):  xrun control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s67(26Aug2024:16:28:04):  xrun control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s68(26Aug2024:16:28:59):  xrun control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s69(26Aug2024:16:29:23):  xrun control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s70(26Aug2024:16:29:48):  xrun control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s71(26Aug2024:16:32:50):  xrun control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s72(26Aug2024:16:34:21):  xrun control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s73(26Aug2024:16:43:16):  xrun control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s74(27Aug2024:10:30:14):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s75(27Aug2024:10:32:24):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s76(27Aug2024:10:37:38):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s77(27Aug2024:10:40:28):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s78(27Aug2024:10:41:25):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s79(27Aug2024:10:42:35):  xrun control_hazard.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s80(27Aug2024:10:44:28):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s81(27Aug2024:10:51:20):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s82(27Aug2024:10:54:34):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s83(27Aug2024:10:58:27):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s84(27Aug2024:10:59:31):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s85(27Aug2024:11:00:36):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s86(27Aug2024:11:01:49):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s87(27Aug2024:11:04:13):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s88(27Aug2024:11:06:56):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s89(27Aug2024:11:07:39):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s90(27Aug2024:11:08:24):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s91(27Aug2024:11:10:24):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s92(27Aug2024:11:12:33):  xrun CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s93(27Aug2024:12:48:01):  xrun test.sv CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s94(09Sep2024:18:27:23):  xrun decoder.v 
+s95(09Sep2024:18:59:14):  xrun decoder.v 
+s96(09Sep2024:19:00:02):  xrun decoder.v 
+s97(09Sep2024:19:01:28):  xrun test.sv CPU_EDABK_TOP.v control_hazard.v WB_stage.v MEM_stage.v ALU.v EX_stage.v decoder.v register_file.v ID_stage.v defi.vh -access +rwc -logfile log/simulation.log -errormax 0 -top register_file -work log 
+s98(26Sep2024:12:45:22):  xrun pkg.sv 
+s99(26Sep2024:12:46:10):  xrun controller.sv 
+s100(26Sep2024:12:47:24):  xrun controller.sv 
+s101(26Sep2024:12:48:44):  xrun controller.sv 
+s102(26Sep2024:12:50:39):  xrun controller.sv 
+s103(26Sep2024:12:51:53):  xrun controller.sv 
+s104(26Sep2024:12:52:26):  xrun controller.sv 
+s105(26Sep2024:12:52:55):  xrun controller.sv 
+s106(26Sep2024:12:53:15):  xrun controller.sv 
+s107(26Sep2024:12:53:54):  xrun controller.sv 
+s108(26Sep2024:12:54:33):  xrun controller.sv 
+s109(26Sep2024:12:59:11):  xrun controller.sv 
+s110(26Sep2024:12:59:48):  xrun controller.sv 
+s111(26Sep2024:13:00:31):  xrun controller.sv 
+s112(26Sep2024:13:01:29):  xrun controller.sv 
+s113(26Sep2024:17:26:26):  xrun controller.sv pkg.sv 
+s114(26Sep2024:17:27:34):  xrun -sv controller.sv pkg.sv 
+s115(26Sep2024:17:29:10):  xrun -sv controller.sv pkg.sv 
+s116(26Sep2024:17:29:40):  xrun -sv controller.sv pkg.sv 
+s117(26Sep2024:17:30:14):  xrun -sv controller.sv pkg.sv 
+s118(26Sep2024:17:33:35):  xrun -sv controller.sv pkg.sv 
+s119(26Sep2024:17:35:11):  xrun -sv controller.sv pkg.sv 
+s120(26Sep2024:17:35:41):  xrun -sv controller.sv pkg.sv 
+s121(26Sep2024:17:36:53):  xrun -sv controller.sv pkg.sv 
+s122(26Sep2024:17:37:43):  xrun -sv controller.sv pkg.sv 
+s123(26Sep2024:17:39:28):  xrun -sv controller.sv pkg.sv 
+s124(26Sep2024:17:40:14):  xrun -sv controller.sv pkg.sv 
+s125(26Sep2024:17:43:43):  xrun -sv controller.sv pkg.sv 
+s126(26Sep2024:17:45:17):  xrun -sv controller.sv pkg.sv 
+s127(26Sep2024:17:46:01):  xrun -sv controller.sv pkg.sv 
+s128(26Sep2024:17:46:48):  xrun -sv controller.sv pkg.sv 
+s129(26Sep2024:17:48:45):  xrun -sv controller.sv pkg.sv 
+s130(26Sep2024:17:52:30):  xrun -sv controller.sv pkg.sv 
+s131(26Sep2024:17:54:02):  xrun -sv controller.sv pkg.sv 
+s132(26Sep2024:17:55:04):  xrun -sv controller.sv pkg.sv 
+s133(26Sep2024:17:55:48):  xrun -sv controller.sv pkg.sv 
+s134(26Sep2024:17:57:03):  xrun -sv controller.sv pkg.sv 
+s135(26Sep2024:17:58:07):  xrun -sv controller.sv pkg.sv 
+s136(26Sep2024:17:59:07):  xrun -sv controller.sv pkg.sv 
+s137(26Sep2024:17:59:33):  xrun -sv controller.sv pkg.sv 
+s138(26Sep2024:18:01:07):  xrun -sv controller.sv pkg.sv 
+s139(26Sep2024:18:02:01):  xrun -sv controller.sv pkg.sv 
+s140(26Sep2024:18:02:24):  xrun -sv controller.sv pkg.sv 
+s141(26Sep2024:18:05:09):  xrun -sv controller.sv pkg.sv 
+s142(26Sep2024:18:07:40):  xrun -sv controller.sv pkg.sv 
+s143(26Sep2024:18:08:49):  xrun -sv controller.sv pkg.sv 
+s144(26Sep2024:18:09:05):  xrun -sv controller.sv pkg.sv 
+s145(26Sep2024:18:09:24):  xrun -sv controller.sv pkg.sv 
+s146(26Sep2024:23:21:07):  xrun -sv controller.sv pkg.sv 
+s147(26Sep2024:23:22:31):  xrun -sv controller.sv pkg.sv 
+s148(26Sep2024:23:56:30):  xrun -sv controller.sv pkg.sv 
+s149(26Sep2024:23:57:20):  xrun -sv controller.sv pkg.sv 
+s150(26Sep2024:23:57:44):  xrun -sv controller.sv pkg.sv 
+s151(27Sep2024:00:31:02):  xrun -sv controller.sv pkg.sv 
+s152(27Sep2024:10:29:19):  xrun -sv controller.sv pkg.sv 
+s153(27Sep2024:10:32:31):  xrun -sv controller.sv pkg.sv 
+s154(27Sep2024:10:33:54):  xrun -sv controller.sv pkg.sv 
+s155(27Sep2024:10:39:07):  xrun -sv controller.sv pkg.sv 
+s156(27Sep2024:10:49:20):  xrun -sv controller.sv pkg.sv 
+s157(27Sep2024:10:49:56):  xrun -sv controller.sv pkg.sv 
+s158(27Sep2024:10:50:26):  xrun -sv controller.sv pkg.sv 
+s159(27Sep2024:10:58:53):  xrun -sv controller.sv pkg.sv 
+s160(27Sep2024:10:59:51):  xrun -sv controller.sv pkg.sv 
+s161(27Sep2024:11:05:13):  xrun -sv SLEEP_UNIT.sv 
+s162(27Sep2024:11:06:24):  xrun -sv SLEEP_UNIT.sv 
+s163(27Sep2024:11:08:36):  xrun -sv controller.sv pkg.sv 
+s164(27Sep2024:11:19:27):  xrun -sv controller.sv pkg.sv 
+s165(27Sep2024:11:19:36):  xrun control_hazard.v 
+s166(27Sep2024:15:17:20):  xrun -sv controller.sv pkg.sv 
+s167(27Sep2024:15:19:12):  xrun -sv controller.sv pkg.sv 
+s168(27Sep2024:15:19:28):  xrun -sv controller.sv pkg.sv 
+s169(27Sep2024:16:42:32):  xrun -sv controller.sv pkg.sv 
+s170(27Sep2024:16:45:00):  xrun decoder.v defi.vh 
+s171(27Sep2024:16:45:27):  xrun decoder.v defi.vh 
+s172(27Sep2024:16:46:20):  xrun -sv decoder.sv defi.vh 
+s173(27Sep2024:16:47:16):  xrun -sv decoder.sv defi.vh 
+s174(27Sep2024:16:48:39):  xrun -sv decoder.sv defi.vh 
+s175(27Sep2024:16:49:55):  xrun -sv decoder.sv defi.vh 
+s176(27Sep2024:16:50:43):  xrun -sv decoder.sv defi.vh 
+s177(27Sep2024:16:51:22):  xrun -sv decoder.sv defi.vh 
+s178(27Sep2024:16:52:01):  xrun -sv decoder.sv defi.vh 
+s179(27Sep2024:16:52:46):  xrun -sv decoder.sv defi.vh 
+s180(27Sep2024:16:53:46):  xrun -sv decoder.sv defi.vh 
+s181(27Sep2024:16:55:31):  xrun -sv decoder.sv defi.vh 
+s182(27Sep2024:16:56:58):  xrun -sv decoder.sv defi.vh 
+s183(27Sep2024:16:58:29):  xrun -sv decoder.sv defi.vh 
+s184(27Sep2024:16:59:47):  xrun -sv decoder.sv defi.vh 
+s185(27Sep2024:17:00:53):  xrun -sv decoder.sv defi.vh 
+s186(27Sep2024:17:01:47):  xrun -sv decoder.sv defi.vh 
+s187(27Sep2024:17:33:23):  xrun -sv controller.sv ALU.v 
+s188(27Sep2024:17:33:32):  xrun -sv controller.sv ID_stage.v 
+s189(27Sep2024:17:43:51):  xrun -sv ID_stage.sv pkg.sv 
+s190(27Sep2024:17:44:11):  xrun -sv ID_stage.sv pkg.sv 
+s191(27Sep2024:17:45:02):  xrun -sv ID_stage.sv pkg.sv 
+s192(27Sep2024:17:46:39):  xrun -sv ID_stage.sv pkg.sv 
+s193(27Sep2024:17:47:53):  xrun -sv ID_stage.sv pkg.sv 
+s194(27Sep2024:17:48:37):  xrun -sv ID_stage.sv pkg.sv 
+s195(27Sep2024:17:49:40):  xrun -sv ID_stage.sv pkg.sv 
+s196(27Sep2024:17:55:05):  xrun -sv ID_stage.sv pkg.sv 
+s197(27Sep2024:17:55:34):  xrun -sv decoder.sv pkg.sv defi.vh 
+s198(27Sep2024:17:56:16):  xrun -sv ID_stage.sv pkg.sv 
+s199(27Sep2024:17:56:24):  xrun -sv ID_stage.sv pkg.sv decoder.sv 
+s200(27Sep2024:17:57:20):  xrun -sv ID_stage.sv pkg.sv decoder.sv 
+s201(27Sep2024:17:57:56):  xrun -sv ID_stage.sv pkg.sv decoder.sv 
+s202(27Sep2024:17:58:13):  xrun -sv ID_stage.sv pkg.sv decoder.sv register_file.v 
+s203(27Sep2024:18:07:36):  xrun -sv ID_stage.sv pkg.sv decoder.sv register_file.v 
+s204(27Sep2024:18:07:51):  xrun -sv ID_stage.sv pkg.sv decoder.sv register_file.v 
+s205(28Sep2024:13:54:30):  xrun controller.sv 
+s206(28Sep2024:13:54:39):  xrun ID_stage.sv 
+s207(28Sep2024:13:55:32):  xrun ID_stage.sv 
+s208(28Sep2024:13:55:41):  xrun -sv ID_stage. 
+s209(28Sep2024:13:55:43):  xrun -sv ID_stage.sv 
+s210(28Sep2024:13:55:49):  xrun -sv ID_stage.v 
+s211(28Sep2024:14:24:56):  xrun -sv ID_stage.sv 
+s212(28Sep2024:14:26:36):  xrun -sv ID_stage.sv 
+s213(28Sep2024:14:32:03):  xrun -sv ID_stage.sv 
+s214(28Sep2024:14:33:12):  xrun -sv ID_stage.sv 
+s215(28Sep2024:14:33:51):  xrun -sv ID_stage.sv 
+s216(28Sep2024:14:34:24):  xrun -sv ID_stage.sv 
+s217(28Sep2024:14:35:00):  xrun -sv decoder.sv 
+s218(28Sep2024:14:36:31):  xrun -sv decoder.sv 
+s219(28Sep2024:14:53:40):  xrun -sv IF_stage.v COMPRESSED_DECODER.v 
+s220(28Sep2024:14:54:38):  xrun -sv IF_stage.v COMPRESSED_DECODER.v 
+s221(28Sep2024:14:56:16):  xrun -sv IF_stage.v COMPRESSED_DECODER.v 
+s222(28Sep2024:14:57:23):  xrun -sv IF_stage.v COMPRESSED_DECODER.v 
+s223(28Sep2024:14:59:03):  xrun -sv controller.sv pkg.sv 
+s224(28Sep2024:16:14:37):  xrun -sv csr.sv pkg.sv 
+s225(30Sep2024:14:07:43):  xrun -sv csr_register.sv pkg.sv csr.sv 
+s226(30Sep2024:14:07:58):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s227(30Sep2024:14:13:57):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s228(30Sep2024:14:15:40):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s229(30Sep2024:14:16:00):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s230(30Sep2024:14:16:23):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s231(30Sep2024:14:16:34):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s232(30Sep2024:14:19:03):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s233(30Sep2024:14:20:12):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s234(30Sep2024:14:20:27):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s235(30Sep2024:14:20:39):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s236(30Sep2024:14:21:08):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s237(30Sep2024:14:22:19):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s238(30Sep2024:14:23:06):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s239(30Sep2024:14:23:24):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s240(30Sep2024:14:23:57):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s241(30Sep2024:14:24:20):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s242(30Sep2024:14:24:32):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s243(30Sep2024:14:26:36):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s244(30Sep2024:14:27:11):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s245(30Sep2024:14:34:19):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s246(30Sep2024:14:35:46):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s247(30Sep2024:14:40:18):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s248(30Sep2024:14:40:54):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s249(30Sep2024:14:41:32):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s250(30Sep2024:14:42:12):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s251(30Sep2024:14:42:29):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s252(30Sep2024:14:46:17):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s253(30Sep2024:14:54:27):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s254(30Sep2024:14:54:54):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s255(30Sep2024:14:55:16):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s256(30Sep2024:15:19:01):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s257(30Sep2024:15:19:47):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s258(30Sep2024:15:19:59):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s259(30Sep2024:15:20:33):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s260(30Sep2024:15:22:09):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s261(30Sep2024:15:22:24):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s262(30Sep2024:15:23:09):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s263(30Sep2024:15:24:09):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s264(30Sep2024:15:25:11):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s265(30Sep2024:15:25:39):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s266(30Sep2024:15:26:35):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s267(30Sep2024:15:26:51):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s268(30Sep2024:15:27:07):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s269(30Sep2024:15:30:06):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s270(30Sep2024:15:30:19):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s271(30Sep2024:15:31:14):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s272(30Sep2024:15:32:03):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s273(30Sep2024:15:32:29):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s274(30Sep2024:15:32:46):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s275(30Sep2024:15:33:04):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s276(30Sep2024:15:33:20):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s277(30Sep2024:15:34:18):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s278(30Sep2024:15:35:02):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s279(30Sep2024:15:35:34):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s280(30Sep2024:15:36:20):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s281(30Sep2024:15:36:58):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s282(30Sep2024:15:37:12):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s283(30Sep2024:15:37:46):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s284(30Sep2024:15:38:06):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s285(30Sep2024:15:38:46):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s286(30Sep2024:15:39:25):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s287(30Sep2024:15:41:07):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s288(30Sep2024:15:42:01):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s289(30Sep2024:15:42:53):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s290(30Sep2024:15:43:24):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s291(30Sep2024:15:44:27):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s292(30Sep2024:15:45:03):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s293(30Sep2024:15:46:32):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s294(30Sep2024:15:48:06):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s295(30Sep2024:15:49:34):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s296(30Sep2024:16:02:48):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s297(30Sep2024:16:03:11):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s298(30Sep2024:16:04:30):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s299(30Sep2024:16:28:25):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 
+s300(30Sep2024:16:31:52):  xrun -sv csr_register.sv pkg.sv csr.sv -log log_1.txt 

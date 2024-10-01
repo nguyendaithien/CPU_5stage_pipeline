@@ -1,0 +1,12 @@
+xrun: 23.09-s001: (c) Copyright 1995-2023 Cadence Design Systems, Inc.
+TOOL:	xrun	23.09-s001: Started on Oct 01, 2024 at 12:43:22 +07
+xrun
+	-sv
+	controller.sv
+	pkg.sv
+Loading snapshot worklib.controller:sv .................... Done
+xcelium> source /home/edabk/Cadence/XCELIUM2309/tools/xcelium/files/xmsimrc
+xcelium> run
+xmsim: *W,RNQUIE: Simulation is complete.
+xcelium> exit
+TOOL:	xrun	23.09-s001: Exiting on Oct 01, 2024 at 12:43:24 +07  (total: 00:00:02)

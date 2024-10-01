@@ -87,4 +87,4 @@ define VIEW_MAP ( $VIEW_MAP \
 , .SVMS => SVMS \
 )
 define ELAB_SNAPSHOT
-define SNAPSHOT log.register_file:v
+define SNAPSHOT worklib.controller:sv
