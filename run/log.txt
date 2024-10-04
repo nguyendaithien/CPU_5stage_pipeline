@@ -1,0 +1,83 @@
+xrun: 23.09-s001: (c) Copyright 1995-2023 Cadence Design Systems, Inc.
+TOOL:	xrun	23.09-s001: Started on Oct 03, 2024 at 21:24:59 +07
+xrun
+	-sv
+	-f list_file.f
+		/home/usr3/project/CPU_5stage_pipeline/tb/testbench.sv
+		/home/usr3/project/CPU_5stage_pipeline/tb/pkg_1.sv
+		/home/usr3/project/CPU_5stage_pipeline/tb/DMEM.sv
+		/home/usr3/project/CPU_5stage_pipeline/rtl/decoder.sv
+		/home/usr3/project/CPU_5stage_pipeline/rtl/CPU_EDABK_TOP.sv
+		/home/usr3/project/CPU_5stage_pipeline/rtl/register_file.sv
+		/home/usr3/project/CPU_5stage_pipeline/rtl/ALU.sv
+		/home/usr3/project/CPU_5stage_pipeline/rtl/IF_stage.sv
+		/home/usr3/project/CPU_5stage_pipeline/rtl/ID_stage.sv
+		/home/usr3/project/CPU_5stage_pipeline/rtl/EX_stage.sv
+		/home/usr3/project/CPU_5stage_pipeline/rtl/MEM_stage.sv
+		/home/usr3/project/CPU_5stage_pipeline/rtl/WB_stage.sv
+		/home/usr3/project/CPU_5stage_pipeline/rtl/control_hazard.sv
+		/home/usr3/project/CPU_5stage_pipeline/rtl/defi.vh
+		/home/usr3/project/CPU_5stage_pipeline/rtl/pkg.sv
+		/home/usr3/project/CPU_5stage_pipeline/rtl/csr_register.sv
+		/home/usr3/project/CPU_5stage_pipeline/rtl/controller.sv
+		/home/usr3/project/CPU_5stage_pipeline/rtl/SLEEP_UNIT.sv
+		/home/usr3/project/CPU_5stage_pipeline/rtl/COMPRESSED_DECODER.sv
+		/home/usr3/project/CPU_5stage_pipeline/rtl/csr.sv
+		/home/usr3/project/CPU_5stage_pipeline/tb/test_case.sv
+	-access +rwc
+	-log log.txt
+Loading snapshot worklib.testbench:sv .................... Done
+xcelium> source /home/edabk/Cadence/XCELIUM2309/tools/xcelium/files/xmsimrc
+xcelium> run
+ ISSSSSS ADD INSTRUCTION
+ NOT ISSSSSS ADDDD INSTRUCTION
+this is  ADDI  instruction 00010413
+this is ADDI instruction IMM =           0
+ MEM_1  08522223
+ A_MEM_1  00000004
+instr  08522223
+mem  0000000c
+mem  0000000e
+mem  00000008
+mem  00000004
+mem  0000000c
+ ISSSSSS ADD INSTRUCTION
+ NOT ISSSSSS ADDDD INSTRUCTION
+ ISSSSSS ADD INSTRUCTION
+ NOT ISSSSSS ADDDD INSTRUCTION
+this is  ADDI  instruction 02028313
+this is ADDI instruction IMM =          32
+ ISSSSSS ADD INSTRUCTION
+ NOT ISSSSSS ADDDD INSTRUCTION
+ ISSSSSS ADD INSTRUCTION
+ NOT ISSSSSS ADDDD INSTRUCTION
+this is branch instruction 00631663
+this is branch instruction IMM =          12
+ ISSSSSS ADD INSTRUCTION
+ NOT ISSSSSS ADDDD INSTRUCTION
+ ISSSSSS ADD INSTRUCTION
+ NOT ISSSSSS ADDDD INSTRUCTION
+ ISSSSSS ADD INSTRUCTION
+ NOT ISSSSSS ADDDD INSTRUCTION
+ ISSSSSS ADD INSTRUCTION
+ NOT ISSSSSS ADDDD INSTRUCTION
+ ISSSSSS ADD INSTRUCTION
+ NOT ISSSSSS ADDDD INSTRUCTION
+this is  ADDI  instruction 02028313
+this is ADDI instruction IMM =          32
+ ISSSSSS ADD INSTRUCTION
+ NOT ISSSSSS ADDDD INSTRUCTION
+ ISSSSSS ADD INSTRUCTION
+ NOT ISSSSSS ADDDD INSTRUCTION
+this is branch instruction 00631663
+this is branch instruction IMM =          12
+ ISSSSSS ADD INSTRUCTION
+ NOT ISSSSSS ADDDD INSTRUCTION
+ ISSSSSS ADD INSTRUCTION
+ NOT ISSSSSS ADDDD INSTRUCTION
+ ISSSSSS ADD INSTRUCTION
+ NOT ISSSSSS ADDDD INSTRUCTION
+Simulation complete via $finish(1) at time 10 US + 0
+../tb/testbench.sv:307    #10000  $finish;
+xcelium> exit
+TOOL:	xrun	23.09-s001: Exiting on Oct 03, 2024 at 21:25:00 +07  (total: 00:00:01)

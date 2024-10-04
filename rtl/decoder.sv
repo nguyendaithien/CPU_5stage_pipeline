@@ -110,6 +110,7 @@ module decoder #( parameter DATA_WIDTH = 32) (
        wfi_insn_o     = 1'b0       ;            
        csr_op         = CSR_OP_READ;
        data_type_o    = 2'b00      ;
+       rf_wdata_sel_o = RF_WD_EX;  
 
 
        case(opcode)
@@ -118,6 +119,7 @@ module decoder #( parameter DATA_WIDTH = 32) (
            sel_to_reg_o = 2'b01;
            alu_sel1_o   = 2'b11;
            alu_sel2_o   = 2'b10;
+           rf_wdata_sel_o = RF_WD_EX;  
            case(FUNCT3)
             `FUNCT3_ADD_SUB : alu_op_o  = (funct7) ? `ALU_SUB : `ALU_ADD ;
             `FUNCT3_SLL     : alu_op_o  = `ALU_SLL                       ;
@@ -180,6 +182,7 @@ module decoder #( parameter DATA_WIDTH = 32) (
           alu_sel2_o   = 2'b11                      ;
 					imm_o        = IMM_I                      ;
           sel_to_reg_o = 2'b01                      ;
+          rf_wdata_sel_o = RF_WD_EX;  
 				case(FUNCT3)
            `FUNCT3_ADDI        : alu_op_o = `ALU_ADD                       ;
 					 `FUNCT3_ANDI        : alu_op_o = `ALU_AND                       ;
@@ -201,6 +204,7 @@ module decoder #( parameter DATA_WIDTH = 32) (
            rs1_add_o    = 5'd0                         ;
            rs2_add_o    = 5'd0                         ;
            sel_to_reg_o = 2'b11                        ;
+           rf_wdata_sel_o = RF_WD_EX;  
        end
        
        
@@ -213,6 +217,7 @@ module decoder #( parameter DATA_WIDTH = 32) (
            rs1_add_o    = 5'd0                         ;
            rs2_add_o    = 5'd0                         ;
            sel_to_reg_o = 2'b01                        ;
+           rf_wdata_sel_o = RF_WD_EX;  
        end
        
        `OPCODE_JAL: begin
@@ -224,6 +229,7 @@ module decoder #( parameter DATA_WIDTH = 32) (
            rs1_add_o    = 5'd0                       ;
            rs2_add_o    = 5'd0                       ;
            sel_to_reg_o = 2'b00                      ;
+           rf_wdata_sel_o = RF_WD_EX;  
        end
        
        `OPCODE_JALR: begin
@@ -234,6 +240,7 @@ module decoder #( parameter DATA_WIDTH = 32) (
           imm_o        = IMM_I                       ; // Branch gen
           rs2_add_o    = 5'd0                        ;
           sel_to_reg_o = 2'b00                       ;
+          rf_wdata_sel_o = RF_WD_EX;  
           if(instr_i[14:12] != 3'b0) begin
             illegal_insn_o = 1'b1;
           end
@@ -248,6 +255,7 @@ module decoder #( parameter DATA_WIDTH = 32) (
            reg_write_o  = 1'b1                       ;
            rs2_add_o    = 5'd0                       ;
            sel_to_reg_o = 2'b10                      ;
+           rf_wdata_sel_o = RF_WD_EX;  
            case(FUNCT3)
                `FUNCT3_LW :  mem_op_o  = `MEM_LW  ;
                `FUNCT3_LB :  mem_op_o  = `MEM_LB  ;
@@ -262,6 +270,7 @@ module decoder #( parameter DATA_WIDTH = 32) (
            alu_sel2_o  = 2'b11;
            imm_o       = IMM_S;
            mem_wr_en_o = 1'b1 ;
+           rf_wdata_sel_o = RF_WD_EX;  
          unique case (instr_i[13:12])
           2'b00:   data_type_o    = 2'b10; // sb
           2'b01:   data_type_o    = 2'b01; // sh
@@ -277,7 +286,7 @@ module decoder #( parameter DATA_WIDTH = 32) (
                `FUNCT3_SW: mem_op_o = `MEM_SW;
            endcase
        end
-        `OPCODE_SYSTEM: begin
+        OPCODE_SYSTEM: begin
                if (instr_i[14:12] == 3'b000) begin // non CSR related SYSTEM instructions
                  unique case (instr_i[31:20])
                    12'h000:  // ECALL // environment (system) call

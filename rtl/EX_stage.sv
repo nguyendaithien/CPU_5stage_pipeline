@@ -1,91 +1,52 @@
 module EX_stage #( parameter DATA_WIDTH = 32) (
-   clk
-  ,rst_n
-  ,EX_pc_i
-  ,EX_rs1_add_i
-  ,EX_rs2_add_i
-  ,EX_rs2_data_o
-  ,EX_rd_add_i
-  ,EX_sel_to_reg_i
-  ,EX_regwrite_i
-  ,EX_RD_mem_i
-  ,EX_WR_mem_i
-  ,EX_mem_op_i
-  ,EX_rs2_data_i
-  ,EX_rs1_data_i
-  ,EX_sel_alu1_i
-  ,EX_sel_alu2_i
-  ,EX_imm_i
-	,EX_branch_i
-	,EX_jump_i
-  ,flush
-  ,forwardA
-  ,forwardB
-  ,WB_data_i
-	,EX_alu_op_i
-  ,EX_data_i
-  ,hazard
-  ,EX_pc_o
-  ,EX_rs1_add_o
-  ,EX_rs2_add_o
-  ,EX_rd_add_o
-  ,EX_sel_to_reg_o
-  ,EX_regwrite_o
-  ,EX_RD_mem_o
-  ,EX_WR_mem_o
-  ,EX_mem_op_o
-  ,EX_alu_result_o
-  ,EX_zero_o
-  ,EX_imm_o
-  ,EX_pc_dest
-	,EX_branch_o
-	,EX_jump_o
+   input               clk             ,
+   input               rst_n           ,
+   input      [4:0 ]   EX_rs1_add_i    ,
+   input      [4:0 ]   EX_rs2_add_i    ,
+   input      [4:0 ]   EX_rd_add_i     ,
+   input      [1:0 ]   EX_sel_to_reg_i ,
+   input               EX_regwrite_i   ,
+   input               EX_RD_mem_i     ,
+   input               EX_WR_mem_i     ,
+   input      [1:0 ]   EX_sel_alu1_i   ,
+   input      [1:0 ]   EX_sel_alu2_i   ,
+   input      [3:0 ]   EX_mem_op_i     ,
+   input      [31:0]   EX_rs2_data_i   ,
+   input      [31:0]   EX_rs1_data_i   ,
+   input      [31:0]   WB_data_i       ,
+   input      [31:0]   EX_data_i       ,
+   input      [31:0]   EX_pc_i         ,
+   input               flush           ,
+   input      [1:0 ]   forwardA        ,
+   input      [1:0 ]   forwardB        ,
+   input               hazard          ,
+   input      [31:0]   EX_imm_i        ,
+	 input      [3:0 ]   EX_alu_op_i     ,
+   input      pkg::rf_wd_sel_e EX_rf_wdata_sel_i,  
+
+   input EX_branch_i      ,
+   input EX_jump_i        ,
+   output reg EX_branch_o ,
+   output reg EX_jump_o   ,
   
+   output reg [31:0]   EX_pc_o         ,
+   output reg [4:0 ]   EX_rs1_add_o    ,
+   output reg [4:0 ]   EX_rs2_add_o    ,
+   output reg [4:0 ]   EX_rd_add_o     ,
+   output reg [1:0 ]   EX_sel_to_reg_o ,
+   output reg          EX_regwrite_o   ,
+   output reg          EX_RD_mem_o     ,
+   output reg          EX_WR_mem_o     ,
+   output reg [3:0 ]   EX_mem_op_o     ,
+   output reg [31:0]   EX_alu_result_o ,
+   output reg          EX_zero_o       ,
+   output reg [31:0]   EX_imm_o        ,
+   output wire [31:0]  EX_pc_dest     ,
+   output reg [31:0]   EX_rs2_data_o  , 
+   output  pkg::rf_wd_sel_e EX_rf_wdata_sel_o  
 );
+import pkg::*;
 
-   input               clk             ;
-   input               rst_n           ;
-   input      [4:0 ]   EX_rs1_add_i    ;
-   input      [4:0 ]   EX_rs2_add_i    ;
-   input      [4:0 ]   EX_rd_add_i     ;
-   input      [1:0 ]   EX_sel_to_reg_i ;
-   input               EX_regwrite_i   ;
-   input               EX_RD_mem_i     ;
-   input               EX_WR_mem_i     ;
-   input      [1:0 ]   EX_sel_alu1_i   ;
-   input      [1:0 ]   EX_sel_alu2_i   ;
-   input      [3:0 ]   EX_mem_op_i     ;
-   input      [31:0]   EX_rs2_data_i   ;
-   input      [31:0]   EX_rs1_data_i   ;
-   input      [31:0]   WB_data_i       ;
-   input      [31:0]   EX_data_i       ;
-   input      [31:0]   EX_pc_i         ;
-   input               flush           ;
-   input      [1:0 ]   forwardA        ;
-   input      [1:0 ]   forwardB        ;
-   input               hazard          ;
-   input      [31:0]   EX_imm_i        ;
-	 input      [3:0 ]   EX_alu_op_i     ;
-
-   input EX_branch_i;
-   input EX_jump_i;
-   output reg EX_branch_o;
-   output reg EX_jump_o;
-  
-   output reg [31:0]   EX_pc_o         ;
-   output reg [4:0 ]   EX_rs1_add_o    ;
-   output reg [4:0 ]   EX_rs2_add_o    ;
-   output reg [4:0 ]   EX_rd_add_o     ;
-   output reg [1:0 ]   EX_sel_to_reg_o ;
-   output reg          EX_regwrite_o   ;
-   output reg          EX_RD_mem_o     ;
-   output reg          EX_WR_mem_o     ;
-   output reg [3:0 ]   EX_mem_op_o     ;
-   output reg [31:0]   EX_alu_result_o ;
-   output reg          EX_zero_o       ;
-   output reg [31:0]   EX_imm_o        ;
-   output wire [31:0]   EX_pc_dest      ;
-   output reg [31:0]   EX_rs2_data_o   ;
   
 
    wire [1:0 ] sel_to_alu_A ;
@@ -111,39 +72,40 @@ module EX_stage #( parameter DATA_WIDTH = 32) (
 
     always@(posedge clk) begin
         if((~rst_n) || (flush)) begin 
-            EX_RD_mem_o      <= 1'b0                             ;
-            EX_WR_mem_o      <= 1'b0                             ;
-            EX_mem_op_o      <= 3'd0                             ;
-            EX_sel_to_reg_o  <= 2'd0                             ;
-            EX_rd_add_o      <= 5'd0                             ;
-            EX_regwrite_o    <= 1'd0                             ;
-            EX_rs2_add_o     <= 5'd0                             ;
-            EX_rs1_add_o     <= 5'd0                             ;
-            EX_pc_o          <= 32'd0        ;
-            EX_alu_result_o  <= 32'd0                            ;
-            EX_imm_o         <= 32'd0                            ;
-            EX_zero_o        <= 1'b0                             ;
-            EX_rs2_data_o    <= 32'd0                            ;
-						EX_branch_o      <= 1'b0;
-						EX_jump_o        <= 1'b0;
-  
+          EX_RD_mem_o       <= 1'b0     ;
+          EX_WR_mem_o       <= 1'b0     ;
+          EX_mem_op_o       <= 3'd0     ;
+          EX_sel_to_reg_o   <= 2'd0     ;
+          EX_rd_add_o       <= 5'd0     ;
+          EX_regwrite_o     <= 1'd0     ;
+          EX_rs2_add_o      <= 5'd0     ;
+          EX_rs1_add_o      <= 5'd0     ;
+          EX_pc_o           <= 32'd0    ;
+          EX_alu_result_o   <= 32'd0    ;
+          EX_imm_o          <= 32'd0    ;
+          EX_zero_o         <= 1'b0     ;
+          EX_rs2_data_o     <= 32'd0    ;
+          EX_branch_o       <= 1'b0     ;
+          EX_jump_o         <= 1'b0     ;
+          EX_rf_wdata_sel_o <= RF_WD_EX ;
         end
         else begin
-            EX_RD_mem_o         <= EX_RD_mem_i         ;
-            EX_WR_mem_o         <= EX_WR_mem_i         ;
-            EX_mem_op_o         <= EX_mem_op_i         ;
-            EX_sel_to_reg_o     <= EX_sel_to_reg_i     ;
-            EX_regwrite_o       <= EX_regwrite_i       ;
-            EX_rd_add_o         <= EX_rd_add_i         ;
-            EX_rs2_add_o        <= EX_rs2_add_i        ;
-            EX_rs1_add_o        <= EX_rs1_add_i        ;
-            EX_pc_o             <= EX_pc_i             ;
-            EX_alu_result_o     <= alu_result          ;
-            EX_zero_o           <= zero                ;
-            EX_rs2_data_o       <= EX_rs2_data_i       ;
-						EX_branch_o         <= EX_branch_i  ;
-						EX_jump_o           <= EX_jump_i  ;
-						EX_imm_o            <= EX_imm_i   ;
+          EX_RD_mem_o         <= EX_RD_mem_i       ;
+          EX_WR_mem_o         <= EX_WR_mem_i       ;
+          EX_mem_op_o         <= EX_mem_op_i       ;
+          EX_sel_to_reg_o     <= EX_sel_to_reg_i   ;
+          EX_regwrite_o       <= EX_regwrite_i     ;
+          EX_rd_add_o         <= EX_rd_add_i       ;
+          EX_rs2_add_o        <= EX_rs2_add_i      ;
+          EX_rs1_add_o        <= EX_rs1_add_i      ;
+          EX_pc_o             <= EX_pc_i           ;
+          EX_alu_result_o     <= alu_result        ;
+          EX_zero_o           <= zero              ;
+          EX_rs2_data_o       <= EX_rs2_data_i     ;
+          EX_branch_o         <= EX_branch_i       ;
+          EX_jump_o           <= EX_jump_i         ;
+          EX_imm_o            <= EX_imm_i          ;
+          EX_rf_wdata_sel_o   <= EX_rf_wdata_sel_i ;
         end
     end
 

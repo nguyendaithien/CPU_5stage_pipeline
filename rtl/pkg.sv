@@ -5,10 +5,15 @@ package pkg;
   ////////////////
 
 
-  parameter PC_EXC_ADDR  32'h00000000;
-  parameter PC_DRET_ADDR 32'h00004000;
-  parameter PC_ERET_ADDR 32'h00008000;
-  parameter PC_BP_ADDR   32'h000B0000;
+  parameter PC_EXC_ADDR  = 32'h00000000;
+  parameter PC_DRET_ADDR = 32'h00004000;
+  parameter PC_ERET_ADDR = 32'h00008000;
+  parameter PC_BP_ADDR   = 32'h000B0000;
+
+  parameter EXC_PC_EXC_ADDR       = 32'h00000000;
+  parameter EXC_PC_IRQ_ADDR       = 32'h00004000;
+  parameter EXC_PC_DBD_ADDR       = 32'h00008000;
+  parameter EXC_PC_DBD_EXC_ADDR   = 32'h000B0000;
 
   typedef struct packed {
     logic [31:0] current_pc;
@@ -305,6 +310,7 @@ package pkg;
     PC_EXC,
     PC_ERET,
     PC_DRET,
+    PC_NEXT,
     PC_BP
   } pc_sel_e;
 

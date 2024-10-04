@@ -1,5 +1,4 @@
-xrun: 23.09-s001: (c) Copyright 1995-2023 Cadence Design Systems, Inc.
-TOOL:	xrun	23.09-s001: Started on Sep 09, 2024 at 19:01:28 +07
+TOOL:	xrun	23.09-s001: Started on Oct 02, 2024 at 12:52:08 +07
 xrun
 	test.sv
 	CPU_EDABK_TOP.v
@@ -17,45 +16,13 @@ xrun
 	-errormax 0
 	-top register_file
 	-work log
-file: test.sv
-	module log.enum_fsm:sv
-		errors: 0, warnings: 0
-file: CPU_EDABK_TOP.v
-	 assign RD = MEM_RD_mem;
-	                      |
-xmvlog: *E,UNDIDN (CPU_EDABK_TOP.v,30|23): 'MEM_RD_mem': undeclared identifier [12.5(IEEE)].
-	 assign WR = MEM_WR_mem;
-	                      |
-xmvlog: *E,UNDIDN (CPU_EDABK_TOP.v,31|23): 'MEM_WR_mem': undeclared identifier [12.5(IEEE)].
-	 assign byte_mark = DMEM_byte_mark;
-	                                 |
-xmvlog: *E,UNDIDN (CPU_EDABK_TOP.v,32|34): 'DMEM_byte_mark': undeclared identifier [12.5(IEEE)].
-	module log.CPU_EDABK_TOP:v
-		errors: 3, warnings: 0
-file: control_hazard.v
-	module log.CONTROL_HAZARD:v
-		errors: 0, warnings: 0
-file: WB_stage.v
-	module log.WB_stage:v
-		errors: 0, warnings: 0
-file: MEM_stage.v
-	module log.MEM_stage:v
-		errors: 0, warnings: 0
-file: ALU.v
-	module log.ALU:v
-		errors: 0, warnings: 0
-file: EX_stage.v
-	module log.EX_stage:v
-		errors: 0, warnings: 0
-file: decoder.v
-	module log.decoder:v
-		errors: 0, warnings: 0
-file: register_file.v
-	module log.register_file:v
-		errors: 0, warnings: 0
-file: ID_stage.v
-	module log.ID_stage:v
-		errors: 0, warnings: 0
-file: defi.vh
-xrun: *E,VLGERR: An error occurred during parsing.  Review the log file for errors with the code *E and fix those identified problems to proceed.  Exiting with code (status 1).
-TOOL:	xrun	23.09-s001: Exiting on Sep 09, 2024 at 19:01:28 +07  (total: 00:00:00)
+xrun: *E,FILEMIS: Cannot find the provided file CPU_EDABK_TOP.v.
+xrun: *E,FILEMIS: Cannot find the provided file control_hazard.v.
+xrun: *E,FILEMIS: Cannot find the provided file WB_stage.v.
+xrun: *E,FILEMIS: Cannot find the provided file MEM_stage.v.
+xrun: *E,FILEMIS: Cannot find the provided file ALU.v.
+xrun: *E,FILEMIS: Cannot find the provided file EX_stage.v.
+xrun: *E,FILEMIS: Cannot find the provided file decoder.v.
+xrun: *E,FILEMIS: Cannot find the provided file register_file.v.
+xrun: *E,FILEMIS: Cannot find the provided file ID_stage.v.
+TOOL:	xrun	23.09-s001: Exiting on Oct 02, 2024 at 12:52:08 +07  (total: 00:00:00)

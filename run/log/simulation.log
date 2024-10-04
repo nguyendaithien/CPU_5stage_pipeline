@@ -1,5 +1,5 @@
 xrun: 23.09-s001: (c) Copyright 1995-2023 Cadence Design Systems, Inc.
-TOOL:	xrun	23.09-s001: Started on Aug 27, 2024 at 21:53:33 +07
+TOOL:	xrun	23.09-s001: Started on Sep 08, 2024 at 15:25:48 +07
 xrun
 	-f list_file.f
 		/home/usr3/project/RISC_V/tb/testbench.v
@@ -19,137 +19,14 @@ xrun
 	-access +rwc
 	-logfile log/simulation.log
 	-gui
-Recompiling... reason: file '../rtl/IF_stage.v' is newer than expected.
-	expected: Tue Aug 27 21:42:24 2024
-	actual:   Tue Aug 27 21:47:56 2024
-		Caching library 'worklib' ....... Done
-	Elaborating the design hierarchy:
-  ID_stage #( .DATA_WIDTH(32)) id_stage (
-                                      |
-xmelab: *W,CUVWSP (../rtl/CPU_EDABK_TOP.v,101|38): 1 output port was not connected:
-xmelab: (../rtl/ID_stage.v,25): ID_sel_to_reg_o
-
-	Top level design units:
-		testbench
-  ,.A_IMEM     (A_IMEM     )        
-                     |
-xmelab: *W,CUVMPW (../tb/testbench.v,21|21): port sizes differ in port connection(1/32) for the instance(testbench) .
-  ,.byte_mark  (byte_mark  )          
-                        |
-xmelab: *W,CUVMPW (../tb/testbench.v,26|24): port sizes differ in port connection(4/3) for the instance(testbench) .
-  ,.boot_add   (boot_add   ) 
-                       |
-xmelab: *W,CUVMPW (../tb/testbench.v,27|23): port sizes differ in port connection(1/32) for the instance(testbench) .
-  ,.ID_mem_op_o    (ID_mem_op     )
-                            |
-xmelab: *W,CUVMPW (../rtl/CPU_EDABK_TOP.v,122|28): port sizes differ in port connection(1/3) for the instance(testbench.top) .
-        .instr_i      (instr     ) 
-                           |
-xmelab: *W,CUVMPW (../rtl/ID_stage.v,102|27): port sizes differ in port connection(1/32) for the instance(testbench.top.id_stage) .
-       ,.pc_i         (pc        )
-                        |
-xmelab: *W,CUVMPW (../rtl/ID_stage.v,103|24): port sizes differ in port connection(1/32) for the instance(testbench.top.id_stage) .
-       ,.sel_to_reg_o (sel_to_reg)
-                                |
-xmelab: *W,CUVMPW (../rtl/ID_stage.v,116|32): port sizes differ in port connection(1/2) for the instance(testbench.top.id_stage) .
-    ,.data_write (WB_data_i     )
-                          |
-xmelab: *W,CUVMPW (../rtl/ID_stage.v,131|26): port sizes differ in port connection(1/32) for the instance(testbench.top.id_stage) .
-    ,.read_data_1(read_data_1   )
-                            |
-xmelab: *W,CUVMPW (../rtl/ID_stage.v,134|28): port sizes differ in port connection(5/32) for the instance(testbench.top.id_stage) .
-    ,.read_data_2(read_data_2   )
-                            |
-xmelab: *W,CUVMPW (../rtl/ID_stage.v,135|28): port sizes differ in port connection(5/32) for the instance(testbench.top.id_stage) .
-    ,.read_data_3(read_data_3   )
-                            |
-xmelab: *W,CUVMPW (../rtl/ID_stage.v,136|28): port sizes differ in port connection(5/32) for the instance(testbench.top.id_stage) .
-    ,.EX_mem_op_i     (ID_mem_op         )
-                               |
-xmelab: *W,CUVMPW (../rtl/CPU_EDABK_TOP.v,145|31): port sizes differ in port connection(1/3) for the instance(testbench.top) .
-    ,.EX_sel_alu1_i   (EX_alu_sel1       )
-                                 |
-xmelab: *W,CUVMPW (../rtl/CPU_EDABK_TOP.v,148|33): port sizes differ in port connection(1/2) for the instance(testbench.top) .
-    ,.EX_sel_alu2_i   (EX_alu_sel2       )
-                                 |
-xmelab: *W,CUVMPW (../rtl/CPU_EDABK_TOP.v,149|33): port sizes differ in port connection(1/2) for the instance(testbench.top) .
-    ,.EX_mem_op_o     (EX_mem_op         )
-                               |
-xmelab: *W,CUVMPW (../rtl/CPU_EDABK_TOP.v,166|31): port sizes differ in port connection(4/3) for the instance(testbench.top) .
-  	.alu_ctrl_i   (EX_alu_op_i)
-  	                         |
-xmelab: *W,CUVMPW (../rtl/EX_stage.v,92|28): port sizes differ in port connection(1/4) for the instance(testbench.top.ex_stage) .
-    ,.MEM_mem_op_i      (EX_mem_op         )
-                                 |
-xmelab: *W,CUVMPW (../rtl/CPU_EDABK_TOP.v,180|33): port sizes differ in port connection(4/3) for the instance(testbench.top) .
-    ,.MEM_imm_o         (MEM_imm           )
-                               |
-xmelab: *W,CUVMPW (../rtl/CPU_EDABK_TOP.v,187|31): port sizes differ in port connection(1/32) for the instance(testbench.top) .
-    ,.DMEM_add_o        (M_add             )
-                             |
-xmelab: *W,CUVMPW (../rtl/CPU_EDABK_TOP.v,189|29): port sizes differ in port connection(1/32) for the instance(testbench.top) .
-    ,.DMEM_byte_mark_o  (DMEM_byte_mark    )
-                                      |
-xmelab: *W,CUVMPW (../rtl/CPU_EDABK_TOP.v,190|38): port sizes differ in port connection(4/3) for the instance(testbench.top) .
-  ,.WB_imm_i              (MEM_imm           )
-                                 |
-xmelab: *W,CUVMPW (../rtl/CPU_EDABK_TOP.v,213|33): port sizes differ in port connection(1/32) for the instance(testbench.top) .
-  ,.forward_A_o    (forward_A    )
-                            |
-xmelab: *W,CUVMPW (../rtl/CPU_EDABK_TOP.v,227|28): port sizes differ in port connection(1/2) for the instance(testbench.top) .
-  ,.forward_B_o    (forward_B    )
-                            |
-xmelab: *W,CUVMPW (../rtl/CPU_EDABK_TOP.v,228|28): port sizes differ in port connection(1/2) for the instance(testbench.top) .
-   ,.addr      (A_DMEM    )
-                     |
-xmelab: *W,CUVMPW (../tb/testbench.v,37|21): port sizes differ in port connection(32/8) for the instance(testbench) .
-	Building instance overlay tables: .................... Done
-	Building instance specific data structures.
-  ,.WB_data_i      (WB_data       )
-                          |
-xmelab: *W,CSINFI (../rtl/CPU_EDABK_TOP.v,109|26): implicit wire has no fanin (testbench.top.WB_data).
-    ,.EX_sel_alu2_i   (EX_alu_sel2       )
-                                 |
-xmelab: *W,CSINFI (../rtl/CPU_EDABK_TOP.v,149|33): implicit wire has no fanin (testbench.top.EX_alu_sel2).
-    ,.EX_sel_alu1_i   (EX_alu_sel1       )
-                                 |
-xmelab: *W,CSINFI (../rtl/CPU_EDABK_TOP.v,148|33): implicit wire has no fanin (testbench.top.EX_alu_sel1).
-  	.alu_ctrl_i   (EX_alu_op_i)
-  	                         |
-xmelab: *W,CSINFI (../rtl/EX_stage.v,92|28): implicit wire has no fanin (testbench.top.ex_stage.EX_alu_op_i).
-	Loading native compiled code:     .................... Done
-	Design hierarchy summary:
-		               Instances  Unique
-		Modules:              12      12
-		Registers:           107     107
-		Scalar wires:        213       -
-		Expanded wires:      207      12
-		Vectored wires:       62       -
-		Always blocks:        35      35
-		Initial blocks:        3       3
-		Cont. assignments:     8       8
-		Pseudo assignments:    6       -
-		Process Clocks:       11       5
-	Writing initial simulation snapshot: worklib.testbench:v
 xmsim: *W,NOMTDGUI: Multi-Threaded Dumping is disabled for interactive debug mode.
 
--------------------------------------
-Relinquished control to SimVision...
-xcelium> 
-xcelium> source /home/edabk/Cadence/XCELIUM2309/tools/xcelium/files/xmsimrc
-xcelium> database -open waves -into waves.shm -default
-Created default SHM database waves
-xcelium> probe -create -shm testbench.top.if_stage.IF_instr_i testbench.top.if_stage.IF_instr_o testbench.top.if_stage.IF_pc_o testbench.top.if_stage.IMEM_add_o testbench.top.if_stage.IMEM_data_i testbench.top.if_stage.boot_add testbench.top.if_stage.clk testbench.top.if_stage.flush testbench.top.if_stage.pc_dest testbench.top.if_stage.pc_next testbench.top.if_stage.pc_sel testbench.top.if_stage.rst_n testbench.top.if_stage.stall
-Created probe 1
-xcelium> run
-instr  00000000
-instr  00418133
-instr  00418133
-instr in  0 00418133
-instr in  1 00628233
-instr  00418133
-Simulation complete via $finish(1) at time 1 US + 0
-../tb/testbench.v:71    #1000  $finish;
-xcelium> ^C
-xcelium> exit
-TOOL:	xrun	23.09-s001: Exiting on Aug 27, 2024 at 21:57:20 +07  (total: 00:03:47)
+Trying to check out license...
+	Xcelium_Limited_Single_Core 23.00 - Failed
+	Xcelium_Single_Core 23.00 - Failed
+	Xcelium_Safety_Sim 23.00 - Failed
+	Xcelium_Safety 23.00 - Failed
+	Xcelium_Multi_Core 23.00 - Failed
+	Xcelium_For_Partners 23.00 - Failed
+xmsim: *F,NOLICN: Unable to checkout license for the simulation. 'lic_error LMF-03015'.
+TOOL:	xrun	23.09-s001: Exiting on Sep 08, 2024 at 15:26:25 +07  (total: 00:00:37)

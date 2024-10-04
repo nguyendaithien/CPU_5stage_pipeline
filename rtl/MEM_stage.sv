@@ -1,62 +1,40 @@
 `include "defi.vh"
 module MEM_stage #( parameter DATA_WIDTH = 32) (
-   clk
-  ,rst_n
-  ,WB_data_i  // WB 
-  ,forward
-  ,MEM_RD_mem_i
-  ,MEM_WR_mem_i
-  ,MEM_mem_op_i
-  ,MEM_regwrite_i
-  ,MEM_alu_result_i
-  ,MEM_rs2_data_i
-  ,MEM_pc_i
-  ,MEM_rd_add_i
-  ,MEM_imm_i
-  ,MEM_imm_o
-  ,DMEM_add_o
-  ,DMEM_byte_mark_o
-  ,DMEM_data_write_o // data write to MEM
-  ,MEM_data_o // data read from memory and send to WB
-  ,MEM_regwrite_o
-  ,MEM_alu_result_o
-  ,MEM_rd_add_o
-  ,MEM_sel_to_reg_o
-  ,MEM_sel_to_reg_i
-  ,MEM_RD_mem_o
-  ,MEM_WR_mem_o
-  ,DMEM_data_i
-  ,DMEM_rst_o
-  ,MEM_pc_o
+    input             clk               ,
+    input             rst_n             ,
+    input      [31:0] DMEM_data_i       ,
+    input      [31:0] WB_data_i         ,
+    input      [3:0 ] MEM_mem_op_i      ,
+    input      [31:0] MEM_alu_result_i  ,
+    input      [31:0] MEM_rs2_data_i    ,
+    input             forward           ,
+    input             MEM_RD_mem_i      ,
+    input             MEM_WR_mem_i      ,
+    input      [4:0]  MEM_rd_add_i      ,
+    input             MEM_regwrite_i    ,
+    input      [1:0 ] MEM_sel_to_reg_i  ,
+    input      [31:0] MEM_pc_i          ,
+    input      [31:0] MEM_imm_i         ,
+    input      pkg::rf_wd_sel_e MEM_rf_wdata_sel_i,  
+    output reg [31:0] MEM_imm_o         ,
+    output reg        MEM_regwrite_o    ,
+    output reg [31:0] DMEM_add_o        ,
+    output reg [3: 0] DMEM_byte_mark_o  ,
+    output reg [31:0] DMEM_data_write_o ,
+    output reg [31:0] MEM_data_o        ,
+    output reg [31:0] MEM_alu_result_o  ,
+    output reg [4:0 ] MEM_rd_add_o      ,
+    output reg [1:0 ] MEM_sel_to_reg_o  ,
+    output reg        MEM_RD_mem_o      ,
+    output reg        MEM_WR_mem_o      ,
+    output reg        DMEM_rst_o        ,
+    output  pkg::rf_wd_sel_e MEM_rf_wdata_sel_o , 
+    output reg [31:0] MEM_pc_o,          
+    output logic load_err_o,
+    output logic store_err_o,
+    output logic [31:0] last_add_o
   );
-    input             clk               ;
-    input             rst_n             ;
-    input      [31:0] DMEM_data_i       ;
-    input      [31:0] WB_data_i         ;
-    input      [3:0 ] MEM_mem_op_i      ;
-    input      [31:0] MEM_alu_result_i  ;
-    input      [31:0] MEM_rs2_data_i    ;
-    input             forward           ;
-    input             MEM_RD_mem_i      ;
-    input             MEM_WR_mem_i      ;
-    input      [4:0]  MEM_rd_add_i      ;
-    input             MEM_regwrite_i    ;
-    input      [1:0 ] MEM_sel_to_reg_i  ;
-    input      [31:0] MEM_pc_i          ;
-    input      [31:0] MEM_imm_i         ;
-    output reg [31:0] MEM_imm_o         ;
-    output reg        MEM_regwrite_o    ;
-    output reg [31:0] DMEM_add_o        ;
-    output reg [3: 0] DMEM_byte_mark_o  ;
-    output reg [31:0] DMEM_data_write_o ;
-    output reg [31:0] MEM_data_o        ;
-    output reg [31:0] MEM_alu_result_o  ;
-    output reg [4:0 ] MEM_rd_add_o      ;
-    output reg [1:0 ] MEM_sel_to_reg_o  ;
-    output reg        MEM_RD_mem_o      ;
-    output reg        MEM_WR_mem_o      ;
-    output reg        DMEM_rst_o        ;
-    output reg [31:0] MEM_pc_o          ;
+  import pkg::*;
 
     reg [3:0 ] byte_mark   ;
     reg [31:0] data_write  ;
@@ -64,28 +42,33 @@ module MEM_stage #( parameter DATA_WIDTH = 32) (
     reg [3:0 ] mem_op      ;
 
    always@(posedge clk or negedge rst_n) begin
-           if(~rst_n) begin
-               MEM_sel_to_reg_o      <= 2'd0 ;
-               MEM_alu_result_o      <= 32'd0;
-               MEM_regwrite_o        <= 1'd0 ;
-               MEM_rd_add_o          <= 5'd0 ;
-               MEM_RD_mem_o          <= 1'd0 ;
-               MEM_WR_mem_o          <= 1'd0 ;
-               MEM_pc_o              <= 32'd0;
-               MEM_imm_o             <= 32'd0;
-							 byte_mark             <= 4'd0 ;
-           end
-           else begin
-               MEM_sel_to_reg_o      <= MEM_sel_to_reg_i ;
-               MEM_alu_result_o      <= MEM_alu_result_i ;
-               MEM_regwrite_o        <= MEM_regwrite_i   ;
-               MEM_rd_add_o          <= MEM_rd_add_i     ;
-               MEM_RD_mem_o          <= MEM_RD_mem_i     ;
-               MEM_WR_mem_o          <= MEM_WR_mem_i     ;
-               MEM_pc_o              <= MEM_pc_i         ;
-               MEM_imm_o             <= MEM_imm_i        ;
-           end
+     if(~rst_n) begin
+       MEM_sel_to_reg_o      <= 2'd0     ;
+       MEM_alu_result_o      <= 32'd0    ;
+       MEM_regwrite_o        <= 1'd0     ;
+       MEM_rd_add_o          <= 5'd0     ;
+       MEM_RD_mem_o          <= 1'd0     ;
+       MEM_WR_mem_o          <= 1'd0     ;
+       MEM_pc_o              <= 32'd0    ;
+       MEM_imm_o             <= 32'd0    ;
+       byte_mark             <= 4'd0     ;
+       MEM_rf_wdata_sel_o    <= RF_WD_EX ;
+       load_err_o            <= 1'b0     ;
+       store_err_o           <= 1'b0     ;
+       last_add_o            <= 32'd0    ;
+     end else begin
+       MEM_sel_to_reg_o      <= MEM_sel_to_reg_i  ;
+       MEM_alu_result_o      <= MEM_alu_result_i  ;
+       MEM_regwrite_o        <= MEM_regwrite_i    ;
+       MEM_rd_add_o          <= MEM_rd_add_i      ;
+       MEM_RD_mem_o          <= MEM_RD_mem_i      ;
+       MEM_WR_mem_o          <= MEM_WR_mem_i      ;
+       MEM_pc_o              <= MEM_pc_i          ;
+       MEM_imm_o             <= MEM_imm_i         ;
+       MEM_rf_wdata_sel_o    <= MEM_rf_wdata_sel_i;
+       last_add_o            <= DMEM_add_o        ;
        end
+     end
 
 
     always@* begin

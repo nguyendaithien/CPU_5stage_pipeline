@@ -11,7 +11,7 @@
     `define OPCODE_JALR        7'b1100111 
     `define OPCODE_LOAD        7'b0000011 
     `define OPCODE_STORE       7'b0100011 
-    `define OPCODE_SYSTEM      7'h73
+    `define OPCODE_SYSTEM      7'b1110011
     
     // EXCEPTIONS
     `define ECALL              32'h00000073

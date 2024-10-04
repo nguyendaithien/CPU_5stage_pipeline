@@ -26,7 +26,6 @@ module controller (
   input logic        csr_mstatus_mie_i       ,
   input logic        irq_pending_i           ,
   input logic        priv_mode_i             ,
-
   input pkg::irqs_t  irqs_i                  ,
 
   input  logic             irq_nm_ext_i        ,
@@ -35,7 +34,6 @@ module controller (
   input  logic             debug_ebreakm_i     ,
   input  logic             trigger_match_i     ,
   output logic             instr_valid_clear_o ,
-  output logic             controller_run_o    ,
   output logic             instr_req_o         ,
   output logic             pc_set_o            , // TOP                                 ;
   output pkg::pc_sel_e     pc_mux_o            , // IF                                  ;
@@ -43,8 +41,7 @@ module controller (
   output pkg::exc_cause_t  exc_cause_o         ,
   output pkg::dbg_cause_e  debug_cause_o       ,
   output logic             nmi_mode_o          ,
-  output logic             csr_mtval_o         ,
-  output logic             csr_mstatus_mie     ,
+   output logic            csr_mtval_o         ,
   output logic             csr_save_o          , // instead of csr_save_if, csr_save_id
   output logic             csr_restore_mret_o  ,
   output logic             csr_restore_dret_o  ,
@@ -54,8 +51,6 @@ module controller (
 // SLEEP UNIT
   output logic core_sleep_o          ,
   //INTERUPT to CSR
-  output logic irq_pending_o         ,
-  output logic irqs_o                ,
   
   // DEBUG to CSR
   output logic debug_mode_o          ,
@@ -83,8 +78,8 @@ module controller (
   logic [3:0] mfip_id              ;
   logic irq_nm                     ;
   logic irq_nm_int                 ;
-  logic irq_nm_int_mtval           ;
-  logic irq_nm_int_cause           ;
+  logic [31:0] irq_nm_int_mtval           ;
+  nmi_int_cause_e irq_nm_int_cause ;
   
   logic  halt_if                                          ;
   logic  ecall_insn, ebrk_insn, instr_fetch_err, wfi_insn ;
@@ -95,7 +90,7 @@ module controller (
   logic  enter_debug_mode                                 ;
   logic  enter_debug_mode_prio_d                          ;
   logic  enter_debug_mode_prio_q                          ;
-  logic  exc_req_d = (ecall_insn | ebrk_insn | illegal_insn_d | instr_fetch_err) & (current_state != FLUSH);
+  logic  exc_req_d = (ecall_insn | ebrk_insn | illegal_insn_d | instr_fetch_err) ;
   logic  exc_req_q                    ;
   logic  dret_insn, mret_insn         ;
   logic  illegal_insn_prio            ;
@@ -123,6 +118,8 @@ module controller (
                                priv_mode_i == PRIV_LVL_U ? debug_ebreaku_i : 1'b0;
   assign debug_cause_d = trigger_match_i    ? DBG_CAUSE_TRIGGER : 
    ebrk_insn_prio & ebreak_into_debug ? DBG_CAUSE_EBREAK : debug_req_i   ? DBG_CAUSE_HALTREQ : do_single_step_d  ? DBG_CAUSE_STEP  :DBG_CAUSE_NONE ;
+
+   assign debug_mode_o = debug_mode_q;
 
 
   always @(posedge clk or negedge rst_n) begin
@@ -185,10 +182,13 @@ module controller (
 
   // Interupt of system = irq external + irq_internal
   //
+  logic [31:0] mem_resp_intg_err_addr_q;
+  logic [31:0] mem_resp_intg_err_addr_d;
   assign exception_o = (load_err_q | store_err_q | store_err_i | load_err_i);
   assign irq_nm = irq_nm_ext_i | irq_nm_int;
   assign irq_nm_int = mem_resp_intg_err_i;
-  logic [31:0] mem_resp_intg_err_addr_q, mem_resp_intg_err_addr_d;
+  assign mem_resp_intg_err_d = mem_resp_intg_err_i ;
+  assign irq_nm_int_mtval = mem_resp_intg_err_addr_q;
 
   always_comb begin
     if(mem_resp_intg_err_i) begin
@@ -218,6 +218,16 @@ module controller (
   logic handle_irq = ~debug_mode_q & ~debug_single_step_i & ~nmi_mode_q & 
  (irq_nm | (irq_pending_i & irq_enabled));
 
+
+
+  always_comb begin 
+    mfip_id = 4'd0;
+    for (int i = 14; i >= 0; i--) begin
+      if (irqs_i.irq_fast[i]) begin
+        mfip_id = i[3:0];
+      end
+    end
+  end
   always_comb begin
     instr_req_o           = 1'b1                 ;
     csr_save_o            = 1'b0                 ;
@@ -238,6 +248,7 @@ module controller (
     nmi_mode_d            = nmi_mode_q           ;
     perf_jump_o           = 1'b0                 ;
     perf_branch_o         = 1'b0                 ;
+    core_sleep_o          = 1'b0                 ;
 
   assign ecall_insn      = ecall_insn_i      & instr_valid_i;
   assign mret_insn       = mret_insn_i       & instr_valid_i;
@@ -247,12 +258,15 @@ module controller (
   //assign csr_pipe_flush  = csr_pipe_flush_i  & instr_valid_i;
   assign instr_fetch_err = instr_fetch_err_i & instr_valid_i;
 
+
   unique case (current_state)
     RESET: begin
-      instr_req_o = 1'b0     ;
-      pc_mux_o    = PC_BOOT  ;
-      pc_set_o    = 1'b1     ;
-      next_state  = BOOT_SET ;
+      instr_req_o  = 1'b0     ;
+      pc_mux_o     = PC_BOOT  ;
+      pc_set_o     = 1'b1     ;
+      next_state   = BOOT_SET ;
+      ctrl_busy_o  = 1'b1     ;
+      debug_mode_d = 1'b0     ;
     end
     BOOT_SET: begin
       instr_req_o = 1'b1       ;
@@ -272,6 +286,7 @@ module controller (
       halt_if      = 1'b1 ;
       flush_o      = 1'b1 ;
       core_sleep_o = 1'b1 ;
+      ctrl_busy_o = 1'b0 ;
       
       if( irq_nm_ext_i || irq_pending_i || debug_req_i || debug_ebreakm_i || debug_single_step_i ) begin
         next_state = PROCESSING;
@@ -281,6 +296,10 @@ module controller (
     end
 
     PROCESSING: begin
+      pc_mux_o     = PC_NEXT  ; 
+      ctrl_busy_o  = 1'b1     ;
+      debug_mode_d = 1'b0     ;
+      pc_set_o     = 1'b1     ;
       if(handle_irq) begin
         next_state = INTERUPT;
         halt_if    = 1'b1    ;
@@ -305,12 +324,13 @@ module controller (
     INTERUPT: begin
       pc_mux_o    = PC_EXC     ;
       exc_pc_mux_o = EXC_PC_IRQ;
+      ctrl_busy_o = 1'b1 ;
       if(handle_irq) begin
         pc_set_o         = 1'b1;
         csr_save_o       = 1'b1;
         csr_save_cause_o = 1'b1;
         if(irq_nm & !nmi_mode_q) begin
-          exc_cause_o = irq_nm_ext_i ? ExcCauseIrqNm : '{irq_ext: 1'b0, irq_int: 1'b1, lower_cause: irq_nm_int_cause};
+          exc_cause_o = irq_nm_ext_i ? ExcCauseIrqNm : '{irq_ext: 1'b0, irq_int: 1'b1, lower_cause: NMI_INT_CAUSE_ECC};
           if(irq_nm_int & !irq_nm_ext_i) begin
             csr_mtval_o = irq_nm_int_mtval;
           end
@@ -334,6 +354,7 @@ module controller (
       flush_o          = 1'b1       ;
       pc_set_o         = 1'b1       ;
       csr_save_cause_o = 1'b1       ;
+      ctrl_busy_o = 1'b1 ;
 
       debug_mode_d          = 1'b1;
       debug_mode_entering_o = 1'b1;
@@ -341,9 +362,10 @@ module controller (
       next_state = PROCESSING;
     end
     FLUSH: begin
-      halt_if    = 1'b1       ;
-      flush_o    = 1'b1       ;
-      next_state = PROCESSING ;
+      halt_if     = 1'b1       ;
+      flush_o     = 1'b1       ;
+      ctrl_busy_o = 1'b1       ;
+      next_state  = PROCESSING ;
       if(exc_req_q || store_err_q || load_err_q) begin
         pc_set_o         = 1'b1                                       ;
         pc_mux_o         = PC_EXC                                     ;

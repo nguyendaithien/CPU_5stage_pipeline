@@ -1,0 +1,84 @@
+xrun: 23.09-s001: (c) Copyright 1995-2023 Cadence Design Systems, Inc.
+TOOL:	xrun	23.09-s001: Started on Oct 01, 2024 at 18:10:26 +07
+xrun
+	-sv
+	ALU.sv
+	COMPRESSED_DECODER.sv
+	control_hazard.sv
+	controller.sv
+	CPU_EDABK_TOP.sv
+	csr_register.sv
+	csr.sv
+	decoder.sv
+	EX_stage.sv
+	ID_stage.sv
+	IF_stage.sv
+	MEM_stage.sv
+	pkg.sv
+	register_file.sv
+	SLEEP_UNIT.sv
+	test.sv
+	WB_stage.sv
+	defi.vh
+	pkg.sv
+	-log log.txt
+Recompiling... reason: file './CPU_EDABK_TOP.sv' is newer than expected.
+	expected: Tue Oct  1 17:57:46 2024
+	actual:   Tue Oct  1 18:10:24 2024
+file: CPU_EDABK_TOP.sv
+	module worklib.CPU_EDABK_TOP:sv
+		errors: 0, warnings: 0
+file: EX_stage.sv
+	module worklib.EX_stage:sv
+		errors: 0, warnings: 0
+file: pkg.sv
+package pkg;
+          |
+xmvlog: *W,RECOME (pkg.sv,1|10): recompiling design unit worklib.pkg:sv.
+	First compiled from line 1 of pkg.sv.
+		Caching library 'worklib' ....... Done
+	Elaborating the design hierarchy:
+  ID_stage #( .DATA_WIDTH(32)) id_stage (
+                                      |
+xmelab: *W,CUVWSI (./CPU_EDABK_TOP.sv,242|38): 1 input port was not connected:
+xmelab: (./ID_stage.sv,17): ID_csr_data_i
+
+  decoder #(.DATA_WIDTH(32)) decode (
+                                  |
+xmelab: *W,CUVWSP (./ID_stage.sv,110|34): 1 output port was not connected:
+xmelab: (./decoder.sv,36): data_type_o
+
+	Top level design units:
+		pkg
+		CPU_EDABK_TOP
+		enum_fsm
+	Building instance overlay tables: .................... Done
+	Generating native compiled code:
+		worklib.EX_stage:sv <0x65581873>
+			streams:   8, words:  4198
+		worklib.CPU_EDABK_TOP:sv <0x5c4545f3>
+			streams:  56, words:  9835
+	Building instance specific data structures.
+  ,.instr_is_compressed_i   (IF_instr_is_compressed)       
+                                                  |
+xmelab: *W,CSINFI (./CPU_EDABK_TOP.sv,448|50): implicit wire has no fanin (CPU_EDABK_TOP.IF_instr_is_compressed).
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		               Instances  Unique
+		Modules:              26      16
+		Verilog packages:      1       1
+		Registers:           497     468
+		Scalar wires:        241       -
+		Vectored wires:      184       -
+		Always blocks:        63      54
+		Initial blocks:        3       3
+		Cont. assignments:    51      60
+		Pseudo assignments:  106       -
+		Process Clocks:       26       5
+	Writing initial simulation snapshot: worklib.CPU_EDABK_TOP:sv
+Loading snapshot worklib.CPU_EDABK_TOP:sv .................... Done
+xcelium> source /home/edabk/Cadence/XCELIUM2309/tools/xcelium/files/xmsimrc
+xcelium> run
+xmsim: *W,RNQUIE: Simulation is complete.
+xcelium> exit
+TOOL:	xrun	23.09-s001: Exiting on Oct 01, 2024 at 18:10:28 +07  (total: 00:00:02)

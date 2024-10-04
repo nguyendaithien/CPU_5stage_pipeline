@@ -3,5 +3,24 @@
 // Do not modify this file
 //
 -sv
+ALU.sv
+COMPRESSED_DECODER.sv
+control_hazard.sv
 controller.sv
+CPU_EDABK_TOP.sv
+csr_register.sv
+csr.sv
+decoder.sv
+EX_stage.sv
+ID_stage.sv
+IF_stage.sv
+MEM_stage.sv
 pkg.sv
+register_file.sv
+SLEEP_UNIT.sv
+test.sv
+WB_stage.sv
+defi.vh
+pkg.sv
+-log
+log.txt

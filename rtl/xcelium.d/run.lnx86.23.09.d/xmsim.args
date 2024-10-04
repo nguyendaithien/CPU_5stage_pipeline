@@ -4,9 +4,9 @@
 //
 -MESSAGES
 +EMGRLOG
-xrun.log
+log.txt
 -XLSTIME
-1727761402
+1727781026
 -XLKEEP
 -XLMODE
 ./xcelium.d/run.lnx86.23.09.d

@@ -14,6 +14,8 @@ module ID_stage #( parameter DATA_WIDTH = 32) (
   input             EX_branch_i          ,
   input             EX_jump_i            ,
   input             ID_instr_c_illegal_i ,
+  input      [31:0] ID_csr_data_i        ,
+  input pkg::rf_wd_sel_e ID_rf_wdata_sel_i    ,
   
   output logic [4:0 ] ID_rs1_add_o      ,
   output logic [4:0 ] ID_rs2_add_o      ,
@@ -82,7 +84,6 @@ module ID_stage #( parameter DATA_WIDTH = 32) (
   logic [4:0 ] address_2   ;
   logic        reg_write   ;
   logic [31:0] read_data_1 ;
-  logic [31:0] data_write  ;
   logic [31:0] read_data_2 ;
   logic [31:0] read_data_3 ;
 
@@ -99,10 +100,13 @@ module ID_stage #( parameter DATA_WIDTH = 32) (
   logic [31:0] imm_j_type     ; 
   logic        csr_access     ; 
   logic        data_req       ; 
+  logic [1: 0] ID_data_type   ;
 
   pkg::rf_wd_sel_e rf_wdata_sel ;
   pkg::csr_op_e csr_op          ;
 
+  logic [31:0] data_write_reg;
+  assign data_write_reg = (ID_rf_wdata_sel_i == RF_WD_EX) ? WB_data_i : ID_csr_data_i ; 
 
   decoder #(.DATA_WIDTH(32)) decode (
        .instr_i           (ID_instr_i          ) 
@@ -140,6 +144,7 @@ module ID_stage #( parameter DATA_WIDTH = 32) (
       ,.csr_op_o          (csr_op              )   
       ,.data_req_o        (data_req            )   
       ,.instr_c_illegal_i (ID_instr_c_illegal_i)   
+      ,.data_type_o       (ID_data_type        )
     );
 
    register_file #(.DATA_WIDTH(32), .NUM_REG(32), .ADD_WIDTH(5)) reg_file(
@@ -147,7 +152,7 @@ module ID_stage #( parameter DATA_WIDTH = 32) (
    ,.address_1  (rs1_add       )
    ,.address_2  (rs2_add       )
  	 ,.address_3  (WB_rd_add_i   )
-   ,.data_write (WB_data_i     )
+   ,.data_write (data_write_reg)
    ,.reg_write  (WB_regwrite_i )
    ,.rst_n      (rst_n         )
    ,.read_data_1(read_data_1   )

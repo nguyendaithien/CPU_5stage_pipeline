@@ -2,10 +2,10 @@
 // File created by:  xrun
 // Do not modify this file
 //
+-sv
 -f
 list_file.f
 -access
 +rwc
--logfile
-log/simulation.log
--gui
+-log
+log.txt

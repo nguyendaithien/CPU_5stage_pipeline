@@ -5,9 +5,10 @@ module compressed_decoder (
   input  logic [31:0] instr_i,
   output logic [31:0] instr_o,
   output logic        is_compressed_o,
-  output logic        illegal_instr_o
+  output logic        illegal_instr_o,
+  output logic [15:0] instr_compressed_o
 );
-  import ibex_pkg::*;
+  import pkg::*;
 
   // valid_i indicates if instr_i is valid and is used for assertions only.
   // The following signal is used to avoid possible lint errors.
@@ -262,5 +263,14 @@ module compressed_decoder (
   end
 
   assign is_compressed_o = (instr_i[1:0] != 2'b11);
+
+  always @(is_compressed_o) begin
+    if(is_compressed_o) begin
+      instr_compressed_o = instr_i[15:0];
+    end
+    else begin
+      instr_compressed_o = 1'b1;
+    end
+  end
 
 endmodule

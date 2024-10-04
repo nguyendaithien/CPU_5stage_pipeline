@@ -39,3 +39,231 @@ s38(27Aug2024:17:17:32):  xrun -f list_file.f -access +rwc -logfile log/simulati
 s39(27Aug2024:17:18:13):  xrun -f list_file.f -access +rwc -logfile log/simulation.log -gui 
 s40(27Aug2024:17:26:07):  irun -f list_file.f 
 s41(27Aug2024:17:26:32):  irun -f list_file.f 
+s42(27Aug2024:17:26:59):  xrun -f list_file.f -access +rwc -logfile log/simulation.log -gui 
+s43(27Aug2024:17:33:38):  xrun -f list_file.f -access +rwc -logfile log/simulation.log -gui 
+s44(27Aug2024:21:27:00):  xrun -f list_file.f -access +rwc -logfile log/simulation.log -gui 
+s45(27Aug2024:21:45:10):  xrun -f list_file.f -access +rwc -logfile log/simulation.log -gui 
+s46(27Aug2024:21:53:33):  xrun -f list_file.f -access +rwc -logfile log/simulation.log -gui 
+s47(28Aug2024:17:17:57):  xrun -f list_file.f -access +rwc -logfile log/simulation.log -gui 
+s48(30Aug2024:22:04:05):  xrun -f list_file.f -access +rwc -logfile log/simulation.log 
+s49(30Aug2024:22:06:17):  xrun -f list_file.f -access +rwc -logfile log/simulation.log 
+s50(08Sep2024:15:20:28):  xrun -f list_file.f -access +rwc -logfile log/simulation.log -gui 
+s51(08Sep2024:15:21:32):  xrun -f list_file.f -access +rwc -logfile log/simulation.log -gui 
+s52(08Sep2024:15:21:45):  xrun -f list_file.f -access +rwc -logfile log/simulation.log -gui 
+s53(08Sep2024:15:22:59):  xrun -f list_file.f -access +rwc -logfile log/simulation.log -gui 
+s54(08Sep2024:15:24:53):  xrun -f list_file.f -access +rwc -logfile log/simulation.log -gui 
+s55(08Sep2024:15:25:48):  xrun -f list_file.f -access +rwc -logfile log/simulation.log -gui 
+s56(08Sep2024:15:26:12):  xrun -f list_file.f -access +rwc -gui 
+s57(08Sep2024:15:27:09):  xrun -f list_file.f -access +rwc 
+s58(08Sep2024:15:28:58):  xrun ../rtl/decoder.v 
+s59(08Sep2024:15:32:49):  xrun ../rtl/register_file.v 
+s60(09Sep2024:16:15:18):  xrun -f list_file.f -access +rwc 
+s61(09Sep2024:17:07:16):  xrun -f list_file.f -access +rwc 
+s62(09Sep2024:18:21:47):  xrun -f list_file.f -access +rwc 
+s63(09Sep2024:18:23:30):  xrun ../rtl/decoder.v 
+s64(09Sep2024:19:01:36):  xrun -f list_file.f -access +rwc 
+s65(09Sep2024:19:37:30):  xrun -f list_file.f -access +rwc 
+s66(09Sep2024:19:40:25):  xrun -f list_file.f -access +rwc 
+s67(09Sep2024:19:41:13):  xrun -f list_file.f -access +rwc 
+s68(09Sep2024:19:59:16):  xrun -f list_file.f -access +rwc 
+s69(10Sep2024:15:21:01):  xrun --version 
+s70(10Sep2024:15:52:32):  xrun --version 
+s71(10Sep2024:22:44:28):  xrun -f list_file.f -access +rwc 
+s72(10Sep2024:22:47:03):  xrun -f list_file.f -access +rwc -gui 
+s73(10Sep2024:23:38:59):  xrun -f list_file.f -access +rwc -gui 
+s74(10Sep2024:23:43:52):  xrun -f list_file.f -access +rwc -gui 
+s75(10Sep2024:23:44:34):  xrun -f list_file.f -access +rwc 
+s76(10Sep2024:23:47:09):  xrun -f list_file.f -access +rwc 
+s77(10Sep2024:23:49:43):  xrun -f list_file.f -access +rwc 
+s78(10Sep2024:23:50:04):  xrun -f list_file.f -access +rwc 
+s79(10Sep2024:23:50:50):  xrun -f list_file.f -access +rwc 
+s80(10Sep2024:23:55:24):  xrun -f list_file.f -access +rwc 
+s81(10Sep2024:23:56:24):  xrun -f list_file.f -access +rwc 
+s82(10Sep2024:23:58:04):  xrun -f list_file.f -access +rwc 
+s83(10Sep2024:23:59:37):  xrun -f list_file.f -access +rwc 
+s84(11Sep2024:00:01:26):  xrun -f list_file.f -access +rwc 
+s85(11Sep2024:00:04:45):  xrun -f list_file.f -access +rwc 
+s86(19Sep2024:15:16:44):  xrun -f list_file.f -access +rwc -gui 
+s87(19Sep2024:15:17:34):  xrun -f list_file.f -access +rwc -gui 
+s88(19Sep2024:15:17:57):  xrun -f list_file.f -access +rwc -gui 
+s89(19Sep2024:15:19:54):  xrun -f list_file.f -access +rwc -gui 
+s90(19Sep2024:15:20:38):  xrun -f list_file.f -access +rwc -gui 
+s91(23Sep2024:21:49:47):  xrun -f list_file.f -access +rwc -gui 
+s92(23Sep2024:21:51:26):  xrun -f list_file.f -access +rwc -gui 
+s93(23Sep2024:21:52:21):  xrun -f list_file.f -access +rwc -gui 
+s94(23Sep2024:21:52:53):  xrun -f list_file.f -access +rwc -gui 
+s95(23Sep2024:21:53:15):  xrun -f list_file.f -access +rwc -gui 
+s96(23Sep2024:21:57:19):  xrun -f list_file.f -access +rwc 
+s97(23Sep2024:23:00:27):  xrun -f list_file.f -access +rwc 
+s98(23Sep2024:23:02:23):  xrun -f list_file.f -access +rwc -gui 
+s99(26Sep2024:11:36:16):  xrun -f list_file.f -access +rwc -gui 
+s100(01Oct2024:18:12:53):  xrun -f list_file.f -access +rwc -gui 
+s101(01Oct2024:18:13:19):  xrun -f list_file.f -access +rwc -gui 
+s102(01Oct2024:18:14:04):  xrun -f list_file.f -access +rwc -gui 
+s103(01Oct2024:18:15:03):  xrun -f list_file.f -access +rwc -gui 
+s104(01Oct2024:18:15:44):  xrun -f list_file.f -access +rwc -gui 
+s105(01Oct2024:18:19:10):  xrun -f list_file.f -access +rwc -gui 
+s106(01Oct2024:21:38:34):  xrun -f list_file.f -access +rwc -gui 
+s107(01Oct2024:21:45:10):  xrun -f list_file.f -access +rwc -gui 
+s108(01Oct2024:21:46:21):  xrun -f list_file.f -access +rwc -gui 
+s109(01Oct2024:21:46:48):  xrun -f list_file.f -access +rwc -gui 
+s110(01Oct2024:21:47:22):  xrun -f list_file.f -access +rwc -gui 
+s111(01Oct2024:21:51:56):  xrun -f list_file.f -access +rwc -gui 
+s112(01Oct2024:22:08:36):  xrun -f list_file.f -access +rwc -gui 
+s113(01Oct2024:22:09:36):  xrun -f list_file.f -access +rwc -gui 
+s114(01Oct2024:22:10:00):  xrun -f list_file.f -access +rwc -gui 
+s115(01Oct2024:22:29:40):  xrun -f list_file.f -access +rwc -gui 
+s116(01Oct2024:23:18:14):  xrun -f list_file.f -access +rwc 
+s117(01Oct2024:23:22:09):  xrun -f list_file.f -access +rwc 
+s118(01Oct2024:23:24:26):  xrun -f list_file.f -access +rwc 
+s119(01Oct2024:23:25:11):  xrun -f list_file.f -access +rwc 
+s120(01Oct2024:23:26:21):  xrun -f list_file.f -access +rwc 
+s121(01Oct2024:23:26:37):  xrun -f list_file.f -access +rwc 
+s122(01Oct2024:23:26:47):  xrun -f list_file.f -access +rwc 
+s123(01Oct2024:23:27:46):  xrun -f list_file.f -access +rwc 
+s124(01Oct2024:23:29:07):  xrun -f list_file.f -access +rwc 
+s125(01Oct2024:23:29:42):  xrun -f list_file.f -access +rwc 
+s126(01Oct2024:23:31:17):  xrun -f list_file.f -access +rwc 
+s127(01Oct2024:23:31:52):  xrun -f list_file.f -access +rwc 
+s128(01Oct2024:23:36:40):  xrun -f list_file.f -access +rwc 
+s129(01Oct2024:23:40:08):  xrun -f list_file.f -access +rwc 
+s130(01Oct2024:23:43:24):  xrun -f list_file.f -access +rwc 
+s131(01Oct2024:23:48:11):  xrun -f list_file.f -access +rwc 
+s132(01Oct2024:23:49:07):  xrun -f list_file.f -access +rwc 
+s133(02Oct2024:09:49:23):  xrun -f list_file.f -access +rwc -gui 
+s134(02Oct2024:10:07:16):  xrun -exit 
+s135(02Oct2024:10:14:20):  xrun -f list_file.f -access +rwc -gui 
+s136(02Oct2024:10:14:37):  xrun -f list_file.f -access +rwc -gui 
+s137(02Oct2024:10:27:05):  xrun -f list_file.f -access +rwc -gui 
+s138(02Oct2024:10:27:16):  xrun -f list_file.f -access +rwc -gui 
+s139(02Oct2024:10:28:51):  xrun -f list_file.f -access +rwc -gui 
+s140(02Oct2024:11:00:48):  xrun -f list_file.f -access +rwc -gui 
+s141(02Oct2024:11:00:58):  xrun -f list_file.f -access +rwc -gui 
+s142(02Oct2024:11:27:22):  xrun -f list_file.f -access +rwc -gui 
+s143(02Oct2024:11:28:30):  xrun -f list_file.f -access +rwc -gui 
+s144(02Oct2024:11:29:32):  xrun -f list_file.f -access +rwc -gui 
+s145(02Oct2024:12:52:28):  xrun -f list_file.f -access +rwc -gui 
+s146(02Oct2024:12:53:14):  xrun -f list_file.f -access +rwc -gui 
+s147(02Oct2024:12:55:06):  xrun -f list_file.f -access +rwc -gui 
+s148(02Oct2024:12:57:15):  xrun -f list_file.f -access +rwc -gui 
+s149(02Oct2024:14:46:15):  xrun -f list_file.f -access +rwc 
+s150(02Oct2024:14:47:28):  xrun -f list_file.f -access +rwc 
+s151(02Oct2024:14:47:44):  xrun -f list_file.f -access +rwc 
+s152(02Oct2024:14:48:01):  xrun -f list_file.f -access +rwc -gui 
+s153(02Oct2024:15:08:05):  xrun -f list_file.f -access +rwc -gui 
+s154(02Oct2024:15:09:53):  xrun -f list_file.f -access +rwc -gui 
+s155(02Oct2024:15:11:23):  xrun -f list_file.f -access +rwc -gui 
+s156(02Oct2024:15:23:12):  xrun -f list_file.f -access +rwc -gui 
+s157(02Oct2024:16:41:29):  xrun -f list_file.f -access +rwc -gui 
+s158(02Oct2024:16:42:55):  xrun -f list_file.f -access +rwc -gui 
+s159(03Oct2024:11:00:10):  xrun -f list_file.f -access +rwc 
+s160(03Oct2024:11:01:10):  xrun -f list_file.f -access +rwc 
+s161(03Oct2024:11:01:40):  xrun -f list_file.f -access +rwc 
+s162(03Oct2024:11:02:47):  xrun -f list_file.f -access +rwc 
+s163(03Oct2024:11:03:14):  xrun -f list_file.f -access +rwc 
+s164(03Oct2024:11:03:50):  xrun -f list_file.f -access +rwc 
+s165(03Oct2024:11:06:50):  xrun -f list_file.f -access +rwc 
+s166(03Oct2024:11:12:25):  xrun -f list_file.f -access +rwc 
+s167(03Oct2024:11:13:58):  xrun -f list_file.f -access +rwc 
+s168(03Oct2024:11:15:58):  xrun -f list_file.f -access +rwc 
+s169(03Oct2024:11:16:42):  xrun -f list_file.f -access +rwc 
+s170(03Oct2024:11:18:49):  xrun -f list_file.f -access +rwc 
+s171(03Oct2024:11:19:34):  xrun -f list_file.f -access +rwc 
+s172(03Oct2024:11:20:01):  xrun -f list_file.f -access +rwc 
+s173(03Oct2024:11:24:59):  xrun -sv -f list_file.f -access +rwc 
+s174(03Oct2024:11:26:09):  xrun -sv -f list_file.f -access +rwc 
+s175(03Oct2024:12:17:07):  xrun -sv -f list_file.f -access +rwc 
+s176(03Oct2024:12:17:35):  xrun -sv -f list_file.f -access +rwc 
+s177(03Oct2024:12:29:02):  xrun -sv -f list_file.f -access +rwc 
+s178(03Oct2024:12:29:52):  xrun -sv -f list_file.f -access +rwc 
+s179(03Oct2024:12:30:07):  xrun -sv -f list_file.f -access +rwc 
+s180(03Oct2024:14:58:55):  xrun -sv -f list_file.f -access +rwc 
+s181(03Oct2024:15:01:16):  xrun -sv -f list_file.f -access +rwc 
+s182(03Oct2024:15:01:26):  xrun -sv -f list_file.f -access +rwc 
+s183(03Oct2024:15:02:33):  xrun -sv -f list_file.f -access +rwc 
+s184(03Oct2024:15:03:03):  xrun -sv -f list_file.f -access +rwc 
+s185(03Oct2024:15:03:32):  xrun -sv -f list_file.f -access +rwc 
+s186(03Oct2024:15:09:12):  xrun -sv -f list_file.f -access +rwc 
+s187(03Oct2024:15:10:16):  xrun -sv -f list_file.f -access +rwc 
+s188(03Oct2024:15:13:04):  xrun -sv -f list_file.f -access +rwc 
+s189(03Oct2024:15:14:17):  xrun -sv -f list_file.f -access +rwc 
+s190(03Oct2024:15:16:15):  xrun -sv -f list_file.f -access +rwc 
+s191(03Oct2024:15:18:05):  xrun -sv -f list_file.f -access +rwc 
+s192(03Oct2024:15:19:42):  xrun -sv -f list_file.f -access +rwc 
+s193(03Oct2024:15:20:33):  xrun -sv -f list_file.f -access +rwc 
+s194(03Oct2024:15:38:54):  xrun -sv -f list_file.f -access +rwc 
+s195(03Oct2024:15:39:22):  xrun -sv -f list_file.f -access +rwc 
+s196(03Oct2024:15:41:12):  xrun -sv -f list_file.f -access +rwc 
+s197(03Oct2024:15:42:28):  xrun -sv -f list_file.f -access +rwc 
+s198(03Oct2024:16:00:55):  xrun -sv -f list_file.f -access +rwc 
+s199(03Oct2024:16:04:13):  xrun -sv -f list_file.f -access +rwc 
+s200(03Oct2024:16:04:35):  xrun -sv -f list_file.f -access +rwc 
+s201(03Oct2024:16:04:53):  xrun -sv -f list_file.f -access +rwc 
+s202(03Oct2024:16:05:13):  xrun -sv -f list_file.f -access +rwc 
+s203(03Oct2024:16:05:48):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s204(03Oct2024:16:08:31):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s205(03Oct2024:16:09:11):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s206(03Oct2024:16:09:50):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s207(03Oct2024:16:12:35):  xrun -f list_file.f -access +rwc -gui 
+s208(03Oct2024:16:13:07):  xrun -sv -f list_file.f -access +rwc -gui 
+s209(03Oct2024:16:48:12):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s210(03Oct2024:16:52:53):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s211(03Oct2024:16:55:22):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s212(03Oct2024:16:55:30):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s213(03Oct2024:16:55:48):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s214(03Oct2024:16:56:55):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s215(03Oct2024:16:59:27):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s216(03Oct2024:17:00:05):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s217(03Oct2024:17:00:20):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s218(03Oct2024:17:01:30):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s219(03Oct2024:17:03:59):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s220(03Oct2024:17:04:01):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s221(03Oct2024:17:04:30):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s222(03Oct2024:17:15:34):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s223(03Oct2024:17:16:05):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s224(03Oct2024:17:18:59):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s225(03Oct2024:17:22:23):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s226(03Oct2024:17:23:08):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s227(03Oct2024:17:23:38):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s228(03Oct2024:17:24:06):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s229(03Oct2024:17:28:37):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s230(03Oct2024:17:29:24):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s231(03Oct2024:17:31:42):  xrun -sv -f list_file.f -access +rwc -gui 
+s232(03Oct2024:17:43:38):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s233(03Oct2024:17:49:47):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s234(03Oct2024:17:54:00):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s235(03Oct2024:17:55:00):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s236(03Oct2024:17:55:32):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s237(03Oct2024:17:55:59):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s238(03Oct2024:17:56:13):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s239(03Oct2024:17:57:53):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s240(03Oct2024:17:58:16):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s241(03Oct2024:17:59:37):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s242(03Oct2024:18:02:26):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s243(03Oct2024:18:03:00):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s244(03Oct2024:18:03:25):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s245(03Oct2024:18:03:46):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s246(03Oct2024:18:04:07):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s247(03Oct2024:18:05:03):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s248(03Oct2024:18:07:32):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s249(03Oct2024:18:08:45):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s250(03Oct2024:18:08:56):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s251(03Oct2024:18:09:09):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s252(03Oct2024:18:10:02):  xrun -sv -f list_file.f -access +rwc -gui 
+s253(03Oct2024:18:29:03):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s254(03Oct2024:18:31:24):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s255(03Oct2024:18:31:40):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s256(03Oct2024:18:32:45):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s257(03Oct2024:18:33:06):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s258(03Oct2024:18:33:20):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s259(03Oct2024:18:33:28):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s260(03Oct2024:20:21:42):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s261(03Oct2024:20:22:36):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s262(03Oct2024:20:25:07):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s263(03Oct2024:20:25:19):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s264(03Oct2024:20:26:19):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s265(03Oct2024:20:26:37):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s266(03Oct2024:20:27:04):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s267(03Oct2024:20:27:30):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s268(03Oct2024:20:28:44):  xrun -sv -f list_file.f -access +rwc -log log.txt 
+s269(03Oct2024:21:24:10):  xrun -sv -f list_file.f -access +rwc -gui 
