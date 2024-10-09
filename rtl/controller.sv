@@ -41,7 +41,7 @@ module controller (
   output pkg::exc_cause_t  exc_cause_o         ,
   output pkg::dbg_cause_e  debug_cause_o       ,
   output logic             nmi_mode_o          ,
-   output logic            csr_mtval_o         ,
+  output logic             csr_mtval_o         ,
   output logic             csr_save_o          , // instead of csr_save_if, csr_save_id
   output logic             csr_restore_mret_o  ,
   output logic             csr_restore_dret_o  ,
@@ -81,7 +81,6 @@ module controller (
   logic [31:0] irq_nm_int_mtval           ;
   nmi_int_cause_e irq_nm_int_cause ;
   
-  logic  halt_if                                          ;
   logic  ecall_insn, ebrk_insn, instr_fetch_err, wfi_insn ;
   logic illegal_insn_q                                    ;
   logic illegal_insn_d                                    ;
@@ -144,6 +143,15 @@ module controller (
     end
   end
       
+logic test;
+  assign debug_cause_o = debug_cause_q;
+  logic [31:0] mem_resp_intg_err_addr_q;
+  logic [31:0] mem_resp_intg_err_addr_d;
+  assign exception_o = (load_err_q | store_err_q | store_err_i | load_err_i);
+  assign irq_nm = irq_nm_ext_i | irq_nm_int;
+  assign irq_nm_int = mem_resp_intg_err_i;
+  assign mem_resp_intg_err_d = mem_resp_intg_err_i ;
+  assign irq_nm_int_mtval = mem_resp_intg_err_addr_q;
       
   always_comb begin
     instr_fetch_err_prio = 0;
@@ -176,19 +184,6 @@ module controller (
     end
   end
 
-  assign debug_cause_o = debug_cause_q;
-
-
-
-  // Interupt of system = irq external + irq_internal
-  //
-  logic [31:0] mem_resp_intg_err_addr_q;
-  logic [31:0] mem_resp_intg_err_addr_d;
-  assign exception_o = (load_err_q | store_err_q | store_err_i | load_err_i);
-  assign irq_nm = irq_nm_ext_i | irq_nm_int;
-  assign irq_nm_int = mem_resp_intg_err_i;
-  assign mem_resp_intg_err_d = mem_resp_intg_err_i ;
-  assign irq_nm_int_mtval = mem_resp_intg_err_addr_q;
 
   always_comb begin
     if(mem_resp_intg_err_i) begin
@@ -240,7 +235,6 @@ module controller (
     exc_pc_mux_o          = EXC_PC_IRQ           ;
     exc_cause_o           = ExcCauseInsnAddrMisa ;
     next_state            = current_state        ;
-    halt_if               = 1'b0                 ;
     flush_o               = 1'b0                 ;
     debug_csr_save_o      = 1'b0                 ;
     debug_mode_d          = debug_mode_q         ;
@@ -263,7 +257,7 @@ module controller (
     RESET: begin
       instr_req_o  = 1'b0     ;
       pc_mux_o     = PC_BOOT  ;
-      pc_set_o     = 1'b1     ;
+      pc_set_o     = 1'b0     ;
       next_state   = BOOT_SET ;
       ctrl_busy_o  = 1'b1     ;
       debug_mode_d = 1'b0     ;
@@ -271,19 +265,17 @@ module controller (
     BOOT_SET: begin
       instr_req_o = 1'b1       ;
       pc_mux_o    = PC_BOOT    ;
-      pc_set_o    = 1'b1       ;
+      pc_set_o    = 1'b0       ;
       next_state  = PROCESSING ;
     end
     WAIT_SLEEP: begin
       ctrl_busy_o = 1'b0 ;
       instr_req_o = 1'b0 ;
-      halt_if     = 1'b1 ;
       flush_o     = 1'b1 ;
       next_state  = SLEEP;
     end
     SLEEP: begin
       instr_req_o  = 1'b0 ;
-      halt_if      = 1'b1 ;
       flush_o      = 1'b1 ;
       core_sleep_o = 1'b1 ;
       ctrl_busy_o = 1'b0 ;
@@ -302,11 +294,9 @@ module controller (
       pc_set_o     = 1'b1     ;
       if(handle_irq) begin
         next_state = INTERUPT;
-        halt_if    = 1'b1    ;
       end
       if(enter_debug_mode) begin
         next_state = DEBUG;
-        halt_if    = 1'b1 ;
       end
       if(exception_o) begin
         next_state = FLUSH;
@@ -362,7 +352,6 @@ module controller (
       next_state = PROCESSING;
     end
     FLUSH: begin
-      halt_if     = 1'b1       ;
       flush_o     = 1'b1       ;
       ctrl_busy_o = 1'b1       ;
       next_state  = PROCESSING ;

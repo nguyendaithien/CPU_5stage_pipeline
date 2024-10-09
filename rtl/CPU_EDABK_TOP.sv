@@ -223,6 +223,13 @@ module CPU_EDABK_TOP #( parameter DATA_WIDTH = 32) (
   rf_wd_sel_e WB_rf_wdata_sel  ;
 
   logic ID_instr_c_illegal; 
+  
+logic [31:0] ID_imm_i_type   ;  
+logic [31:0] ID_imm_s_type   ;
+logic [31:0] ID_imm_b_type   ;
+logic [31:0] ID_imm_u_type   ;
+logic [31:0] ID_imm_j_type   ;
+
 
   IF_stage #( .DATA_WIDTH(32))  if_stage (
      .clk              (clk          )
@@ -403,6 +410,8 @@ module CPU_EDABK_TOP #( parameter DATA_WIDTH = 32) (
     ,.WB_rd_add_o           (WB_rd_add         )
     ,.WB_data_write_reg_o   (WB_data_write_reg )
     ,.WB_regwrite_o         (WB_regwrite       )
+ 
+
   );
 
 
@@ -576,6 +585,7 @@ module CPU_EDABK_TOP #( parameter DATA_WIDTH = 32) (
     ,.div_wait_i                   (div_wait                   )                    
     );
     
+
 endmodule
 
 

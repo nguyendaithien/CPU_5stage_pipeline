@@ -1,0 +1,582 @@
+
+#
+# Preferences
+#
+preferences set toolbar-Standard-WatchWindow {
+  usual
+  shown 0
+}
+preferences set plugin-enable-svdatabrowser-new 1
+preferences set toolbar-Windows-WatchWindow {
+  usual
+  shown 0
+}
+preferences set plugin-enable-groupscope 0
+preferences set plugin-enable-interleaveandcompare 0
+preferences set plugin-enable-waveformfrequencyplot 0
+preferences set toolbar-SimControl-WatchWindow {
+  usual
+  shown 0
+}
+preferences set toolbar-TimeSearch-WatchWindow {
+  usual
+  shown 0
+}
+#
+# Groups
+#
+catch {group new -name {lui_instr contributors} -overlay 0}
+catch {group new -name {lui_instr contributors (1)} -overlay 0}
+group using {lui_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.lui_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.WB_imm[31:0] \
+    simulator::testbench.top.check.is_lui_instr \
+    simulator::testbench.top.check.ID_imm[31:0] \
+    simulator::testbench.top.check.imm_u[31:0] \
+    simulator::testbench.top.check.WB_regwrite \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.WB_data_write[31:0]
+group using {lui_instr contributors (1)}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.lui_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.WB_imm[31:0] \
+    simulator::testbench.top.check.is_lui_instr \
+    simulator::testbench.top.if_stage.IMEM_data_i[31:0] \
+    simulator::testbench.top.if_stage.IF_instr_o[31:0] \
+    simulator::testbench.top.if_stage.pc_next[31:0] \
+    simulator::testbench.top.id_stage.decode.branch_o \
+    simulator::testbench.top.id_stage.decode.jump_o \
+    simulator::testbench.top.if_stage.IF_instr_i[31:0] \
+    simulator::testbench.top.check.xor_instr \
+    simulator::testbench.top.check.sltu_instr \
+    simulator::testbench.top.check.slt_instr \
+    simulator::testbench.top.check.sll_instr \
+    simulator::testbench.top.check.sub_instr \
+    simulator::testbench.top.check.add_instr \
+    simulator::testbench.top.check.check_add_instr \
+    simulator::testbench.top.check.check_sub_instr \
+    simulator::testbench.top.check.check_sll_instr \
+    simulator::testbench.top.check.check_slt_instr \
+    simulator::testbench.top.wb_stage.WB_pc_i[31:0] \
+    simulator::testbench.top.wb_stage.DATA_WIDTH \
+    simulator::testbench.top.wb_stage.DMEM_data_i[31:0] \
+    simulator::testbench.top.wb_stage.WB_alu_result[31:1] \
+    simulator::testbench.top.wb_stage.WB_alu_result_i[31:0] \
+    simulator::testbench.top.wb_stage.WB_data_write_reg_o[31:0] \
+    simulator::testbench.top.wb_stage.WB_imm[31:0] \
+    simulator::testbench.top.wb_stage.WB_imm_i[31:0] \
+    simulator::testbench.top.mem_stage.DMEM_add_o[31:0] \
+    simulator::testbench.top.ex_stage.alu_result[31:0] \
+    simulator::testbench.top.ex_stage.op_a_alu[31:0] \
+    simulator::testbench.top.ex_stage.op_b_alu[31:0] \
+    simulator::testbench.top.wb_stage.WB_regwrite_o \
+    simulator::testbench.top.mem_stage.MEM_RD_mem_o \
+    simulator::testbench.top.mem_stage.MEM_WR_mem_o \
+    simulator::testbench.top.control_hazard.forward_dmem \
+    simulator::testbench.top.mem_stage.WB_data_i[31:0] \
+    simulator::testbench.top.mem_stage.MEM_rs2_data_i[31:0] \
+    simulator::testbench.top.mem_stage.MEM_alu_result_i[31:0] \
+    simulator::testbench.top.wb_stage.WB_rd_add_i[4:0] \
+    simulator::testbench.top.wb_stage.WB_rd_add_o[4:0] \
+    simulator::testbench.top.wb_stage.WB_regwrite_i \
+    simulator::testbench.top.wb_stage.WB_regwrite_o \
+    simulator::testbench.top.wb_stage.WB_rf_wdata_sel_i \
+    simulator::testbench.top.wb_stage.WB_rf_wdata_sel_o \
+    simulator::testbench.top.wb_stage.WB_sel_to_reg[1:0] \
+    simulator::testbench.top.wb_stage.WB_sel_to_reg_i[1:0] \
+    simulator::testbench.top.wb_stage.clk \
+    simulator::testbench.top.wb_stage.pc[31:0] \
+    simulator::testbench.top.wb_stage.rst_n \
+    simulator::testbench.top.mem_stage.MEM_pc_o[31:0] \
+    simulator::testbench.top.mem_stage.DATA_WIDTH \
+    simulator::testbench.top.mem_stage.DMEM_byte_mark_o[3:0] \
+    simulator::testbench.top.mem_stage.DMEM_data_i[31:0] \
+    simulator::testbench.top.mem_stage.DMEM_data_write_o[31:0] \
+    simulator::testbench.top.mem_stage.DMEM_rst_o \
+    simulator::testbench.top.mem_stage.MEM_RD_mem_i \
+    simulator::testbench.top.mem_stage.MEM_RD_mem_o \
+    simulator::testbench.top.mem_stage.MEM_WR_mem_i \
+    simulator::testbench.top.mem_stage.MEM_WR_mem_o \
+    simulator::testbench.top.mem_stage.MEM_alu_result_i[31:0] \
+    simulator::testbench.top.mem_stage.MEM_alu_result_o[31:0] \
+    simulator::testbench.top.mem_stage.MEM_data_o[31:0] \
+    simulator::testbench.top.mem_stage.MEM_imm_i[31:0] \
+    simulator::testbench.top.mem_stage.MEM_imm_o[31:0] \
+    simulator::testbench.top.mem_stage.MEM_mem_op_i[3:0] \
+    simulator::testbench.top.mem_stage.MEM_pc_i[31:0] \
+    simulator::testbench.top.mem_stage.MEM_rd_add_i[4:0] \
+    simulator::testbench.top.mem_stage.MEM_rd_add_o[4:0] \
+    simulator::testbench.top.mem_stage.MEM_regwrite_i \
+    simulator::testbench.top.mem_stage.MEM_regwrite_o \
+    simulator::testbench.top.mem_stage.MEM_rf_wdata_sel_i \
+    simulator::testbench.top.mem_stage.MEM_rf_wdata_sel_o \
+    simulator::testbench.top.mem_stage.MEM_rs2_data_i[31:0] \
+    simulator::testbench.top.mem_stage.MEM_sel_to_reg_i[1:0] \
+    simulator::testbench.top.mem_stage.MEM_sel_to_reg_o[1:0] \
+    simulator::testbench.top.mem_stage.WB_data_i[31:0] \
+    simulator::testbench.top.mem_stage.byte_addr[1:0] \
+    simulator::testbench.top.mem_stage.byte_mark[3:0] \
+    simulator::testbench.top.mem_stage.clk \
+    simulator::testbench.top.mem_stage.data_write[31:0] \
+    simulator::testbench.top.mem_stage.forward \
+    simulator::testbench.top.mem_stage.last_add_o[31:0] \
+    simulator::testbench.top.id_stage.imm[31:0] \
+    simulator::testbench.top.id_stage.imm_b_type[31:0] \
+    simulator::testbench.top.id_stage.imm_i_type[31:0] \
+    simulator::testbench.top.id_stage.imm_j_type[31:0] \
+    simulator::testbench.top.id_stage.imm_s_type[31:0] \
+    simulator::testbench.top.id_stage.imm_u_type[31:0] \
+    simulator::testbench.top.if_stage.IMEM_data_i[31:0] \
+    simulator::testbench.top.mem_stage.MEM_RD_mem_o \
+    simulator::testbench.top.mem_stage.MEM_WR_mem_o \
+    simulator::testbench.top.id_stage.ID_rs1_data_o[31:0] \
+    simulator::testbench.top.id_stage.ID_rs2_data_o[31:0] \
+    simulator::testbench.top.check.ID_imm[31:0] \
+    simulator::testbench.top.mem_stage.load_err_o \
+    simulator::testbench.top.mem_stage.mem_op[3:0] \
+    simulator::testbench.top.mem_stage.rst_n \
+    simulator::testbench.top.mem_stage.store_err_o \
+    simulator::testbench.top.id_stage.decode.branch_o \
+    simulator::testbench.top.id_stage.decode.jump_o \
+    simulator::testbench.top.check.add_instr \
+    simulator::testbench.top.check.xor_instr \
+    simulator::testbench.top.check.add_instr \
+    simulator::testbench.top.check.sub_instr \
+    simulator::testbench.top.check.sll_instr \
+    simulator::testbench.top.check.slt_instr \
+    simulator::testbench.top.check.sltu_instr \
+    simulator::testbench.top.check.slt_instr \
+    simulator::testbench.top.control_hazard.hazard \
+    simulator::testbench.top.ex_stage.alu_result[31:0] \
+    simulator::testbench.top.check.no_hazard \
+    simulator::testbench.top.id_stage.decode.sel_to_reg_o[1:0] \
+    simulator::testbench.top.id_stage.ID_sel_to_reg_o[1:0] \
+    simulator::testbench.top.id_stage.decode.opcode[6:0] \
+    simulator::testbench.top.if_stage.IF_instr_i[31:0] \
+    simulator::testbench.top.check.imm_u[31:0] \
+    simulator::testbench.top.check.WB_regwrite \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.WB_data_write[31:0]
+
+#
+# Markers
+#
+set time 1795ns
+if {[catch {marker new -name  {Marker 1} -time $time}] != ""} {
+    marker set -using {Marker 1} -time $time -locked 0 
+}
+
+#
+# Mnemonic Maps
+#
+mmap new  -reuse -name {Boolean as Logic} -radix %b -contents {{%c=FALSE -edgepriority 1 -shape low}
+{%c=TRUE -edgepriority 1 -shape high}}
+mmap new  -reuse -name {Example Map} -radix %x -contents {{%b=11???? -bgcolor orange -label REG:%x -linecolor yellow -shape bus}
+{%x=1F -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=2C -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=* -label %x -linecolor gray -shape bus}}
+
+#
+# Design Browser windows
+#
+if {[catch {window new WatchList -name "Design Browser 1" -geometry 1360x665+-1+27}] != ""} {
+    window geometry "Design Browser 1" 1360x665+-1+27
+}
+window target "Design Browser 1" on
+browser using {Design Browser 1}
+browser set -scope  simulator::testbench.top.mem_stage 
+browser set \
+    -signalsort name
+browser yview see  simulator::testbench.top.mem_stage 
+browser timecontrol set -lock 0
+
+#
+# Waveform windows
+#
+if {[catch {window new WaveWindow -name "Waveform 1" -geometry 1360x665+-1+27}] != ""} {
+    window geometry "Waveform 1" 1360x665+-1+27
+}
+window target "Waveform 1" on
+waveform using {Waveform 1}
+waveform sidebar visibility partial
+waveform set \
+    -primarycursor TimeA \
+    -signalnames name \
+    -signalwidth 222 \
+    -units ns \
+    -valuewidth 75
+waveform baseline set -time 0
+
+set id [waveform add -signals  {
+	simulator::testbench.top.check.lui_instr
+	} ]
+
+set groupId0 [waveform add -groups {{lui_instr contributors}}]
+set gpGlist0 [waveform hierarchy contents $groupId0]
+set gpID0 [lindex $gpGlist0 0]
+foreach {name attrs}  {
+    simulator::testbench.top.check.clk {}
+    {simulator::testbench.top.check.WB_imm[31:0]} {}
+    simulator::testbench.top.check.is_lui_instr {}
+    {simulator::testbench.top.check.ID_imm[31:0]} {-radix %d}
+    {simulator::testbench.top.check.imm_u[31:0]} {}
+    simulator::testbench.top.check.WB_regwrite {}
+    {simulator::testbench.top.check.data_write_reg[31:0]} {}
+    {simulator::testbench.top.check.WB_data_write[31:0]} {}
+} childcmds {
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+} {
+    set expected [ join [waveform signals -format fullpath $gpID0] ]
+    if {[string equal $name $expected] || $name == "cdivider"} {
+        if {$attrs != ""} {
+            eval waveform format $gpID0 $attrs
+        }
+        if { $childcmds != ""} {
+            eval $childcmds
+        }
+    }
+    set gpGlist0 [lrange $gpGlist0 1 end]
+    set gpID0 [lindex $gpGlist0 0]
+}
+
+set id [waveform add -signals  {
+	simulator::testbench.top.check.lui_instr
+	} ]
+waveform hierarchy collapse $id
+
+set groupId0 [waveform add -groups {{lui_instr contributors (1)}}]
+set gpGlist0 [waveform hierarchy contents $groupId0]
+set gpID0 [lindex $gpGlist0 0]
+foreach {name attrs}  {
+    simulator::testbench.top.check.clk {}
+    {simulator::testbench.top.check.WB_imm[31:0]} {}
+    simulator::testbench.top.check.is_lui_instr {}
+    {simulator::testbench.top.if_stage.IMEM_data_i[31:0]} {}
+    {simulator::testbench.top.if_stage.IF_instr_o[31:0]} {}
+    {simulator::testbench.top.if_stage.pc_next[31:0]} {-radix %d}
+    simulator::testbench.top.id_stage.decode.branch_o {}
+    simulator::testbench.top.id_stage.decode.jump_o {}
+    {simulator::testbench.top.if_stage.IF_instr_i[31:0]} {}
+    simulator::testbench.top.check.xor_instr {}
+    simulator::testbench.top.check.sltu_instr {}
+    simulator::testbench.top.check.slt_instr {}
+    simulator::testbench.top.check.sll_instr {}
+    simulator::testbench.top.check.sub_instr {}
+    simulator::testbench.top.check.add_instr {}
+    simulator::testbench.top.check.check_add_instr {}
+    simulator::testbench.top.check.check_sub_instr {}
+    simulator::testbench.top.check.check_sll_instr {}
+    simulator::testbench.top.check.check_slt_instr {}
+    {simulator::testbench.top.wb_stage.WB_pc_i[31:0]} {}
+    simulator::testbench.top.wb_stage.DATA_WIDTH {}
+    {simulator::testbench.top.wb_stage.DMEM_data_i[31:0]} {}
+    {simulator::testbench.top.wb_stage.WB_alu_result[31:1]} {}
+    {simulator::testbench.top.wb_stage.WB_alu_result_i[31:0]} {}
+    {simulator::testbench.top.wb_stage.WB_data_write_reg_o[31:0]} {}
+    {simulator::testbench.top.wb_stage.WB_imm[31:0]} {}
+    {simulator::testbench.top.wb_stage.WB_imm_i[31:0]} {}
+    {simulator::testbench.top.mem_stage.DMEM_add_o[31:0]} {-radix %d}
+    {simulator::testbench.top.ex_stage.alu_result[31:0]} {-radix %d}
+    {simulator::testbench.top.ex_stage.op_a_alu[31:0]} {-radix %d}
+    {simulator::testbench.top.ex_stage.op_b_alu[31:0]} {-radix %d}
+    simulator::testbench.top.wb_stage.WB_regwrite_o {}
+    simulator::testbench.top.mem_stage.MEM_RD_mem_o {}
+    simulator::testbench.top.mem_stage.MEM_WR_mem_o {}
+    simulator::testbench.top.control_hazard.forward_dmem {}
+    {simulator::testbench.top.mem_stage.WB_data_i[31:0]} {-radix %d}
+    {simulator::testbench.top.mem_stage.MEM_rs2_data_i[31:0]} {-radix %d}
+    {simulator::testbench.top.mem_stage.MEM_alu_result_i[31:0]} {-radix %d}
+    {simulator::testbench.top.wb_stage.WB_rd_add_i[4:0]} {}
+    {simulator::testbench.top.wb_stage.WB_rd_add_o[4:0]} {-radix %d}
+    simulator::testbench.top.wb_stage.WB_regwrite_i {}
+    simulator::testbench.top.wb_stage.WB_regwrite_o {}
+    simulator::testbench.top.wb_stage.WB_rf_wdata_sel_i {}
+    simulator::testbench.top.wb_stage.WB_rf_wdata_sel_o {}
+    {simulator::testbench.top.wb_stage.WB_sel_to_reg[1:0]} {}
+    {simulator::testbench.top.wb_stage.WB_sel_to_reg_i[1:0]} {}
+    simulator::testbench.top.wb_stage.clk {}
+    {simulator::testbench.top.wb_stage.pc[31:0]} {}
+    simulator::testbench.top.wb_stage.rst_n {}
+    {simulator::testbench.top.mem_stage.MEM_pc_o[31:0]} {}
+    simulator::testbench.top.mem_stage.DATA_WIDTH {}
+    {simulator::testbench.top.mem_stage.DMEM_byte_mark_o[3:0]} {}
+    {simulator::testbench.top.mem_stage.DMEM_data_i[31:0]} {}
+    {simulator::testbench.top.mem_stage.DMEM_data_write_o[31:0]} {}
+    simulator::testbench.top.mem_stage.DMEM_rst_o {}
+    simulator::testbench.top.mem_stage.MEM_RD_mem_i {}
+    simulator::testbench.top.mem_stage.MEM_RD_mem_o {}
+    simulator::testbench.top.mem_stage.MEM_WR_mem_i {}
+    simulator::testbench.top.mem_stage.MEM_WR_mem_o {}
+    {simulator::testbench.top.mem_stage.MEM_alu_result_i[31:0]} {-radix %d}
+    {simulator::testbench.top.mem_stage.MEM_alu_result_o[31:0]} {}
+    {simulator::testbench.top.mem_stage.MEM_data_o[31:0]} {}
+    {simulator::testbench.top.mem_stage.MEM_imm_i[31:0]} {}
+    {simulator::testbench.top.mem_stage.MEM_imm_o[31:0]} {}
+    {simulator::testbench.top.mem_stage.MEM_mem_op_i[3:0]} {}
+    {simulator::testbench.top.mem_stage.MEM_pc_i[31:0]} {}
+    {simulator::testbench.top.mem_stage.MEM_rd_add_i[4:0]} {}
+    {simulator::testbench.top.mem_stage.MEM_rd_add_o[4:0]} {}
+    simulator::testbench.top.mem_stage.MEM_regwrite_i {}
+    simulator::testbench.top.mem_stage.MEM_regwrite_o {}
+    simulator::testbench.top.mem_stage.MEM_rf_wdata_sel_i {}
+    simulator::testbench.top.mem_stage.MEM_rf_wdata_sel_o {}
+    {simulator::testbench.top.mem_stage.MEM_rs2_data_i[31:0]} {}
+    {simulator::testbench.top.mem_stage.MEM_sel_to_reg_i[1:0]} {}
+    {simulator::testbench.top.mem_stage.MEM_sel_to_reg_o[1:0]} {}
+    {simulator::testbench.top.mem_stage.WB_data_i[31:0]} {-radix %d}
+    {simulator::testbench.top.mem_stage.byte_addr[1:0]} {}
+    {simulator::testbench.top.mem_stage.byte_mark[3:0]} {}
+    simulator::testbench.top.mem_stage.clk {}
+    {simulator::testbench.top.mem_stage.data_write[31:0]} {}
+    simulator::testbench.top.mem_stage.forward {}
+    {simulator::testbench.top.mem_stage.last_add_o[31:0]} {}
+    {simulator::testbench.top.id_stage.imm[31:0]} {}
+    {simulator::testbench.top.id_stage.imm_b_type[31:0]} {-radix %d}
+    {simulator::testbench.top.id_stage.imm_i_type[31:0]} {-radix %d}
+    {simulator::testbench.top.id_stage.imm_j_type[31:0]} {-radix %d}
+    {simulator::testbench.top.id_stage.imm_s_type[31:0]} {-radix %d}
+    {simulator::testbench.top.id_stage.imm_u_type[31:0]} {-radix %d}
+    {simulator::testbench.top.if_stage.IMEM_data_i[31:0]} {}
+    simulator::testbench.top.mem_stage.MEM_RD_mem_o {}
+    simulator::testbench.top.mem_stage.MEM_WR_mem_o {}
+    {simulator::testbench.top.id_stage.ID_rs1_data_o[31:0]} {-radix %d}
+    {simulator::testbench.top.id_stage.ID_rs2_data_o[31:0]} {-radix %d}
+    {simulator::testbench.top.check.ID_imm[31:0]} {-radix %d}
+    simulator::testbench.top.mem_stage.load_err_o {}
+    {simulator::testbench.top.mem_stage.mem_op[3:0]} {}
+    simulator::testbench.top.mem_stage.rst_n {}
+    simulator::testbench.top.mem_stage.store_err_o {}
+    simulator::testbench.top.id_stage.decode.branch_o {}
+    simulator::testbench.top.id_stage.decode.jump_o {}
+    simulator::testbench.top.check.add_instr {}
+    simulator::testbench.top.check.xor_instr {}
+    simulator::testbench.top.check.add_instr {}
+    simulator::testbench.top.check.sub_instr {}
+    simulator::testbench.top.check.sll_instr {}
+    simulator::testbench.top.check.slt_instr {}
+    simulator::testbench.top.check.sltu_instr {}
+    simulator::testbench.top.check.slt_instr {}
+    simulator::testbench.top.control_hazard.hazard {}
+    {simulator::testbench.top.ex_stage.alu_result[31:0]} {-radix %d}
+    simulator::testbench.top.check.no_hazard {}
+    {simulator::testbench.top.id_stage.decode.sel_to_reg_o[1:0]} {-radix %b}
+    {simulator::testbench.top.id_stage.ID_sel_to_reg_o[1:0]} {-radix %b}
+    {simulator::testbench.top.id_stage.decode.opcode[6:0]} {}
+    {simulator::testbench.top.if_stage.IF_instr_i[31:0]} {}
+    {simulator::testbench.top.check.imm_u[31:0]} {}
+    simulator::testbench.top.check.WB_regwrite {}
+    {simulator::testbench.top.check.data_write_reg[31:0]} {}
+    {simulator::testbench.top.check.WB_data_write[31:0]} {}
+} childcmds {
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {
+        set id $gpID0
+        waveform hierarchy collapse $id
+    }
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+    {}
+} {
+    set expected [ join [waveform signals -format fullpath $gpID0] ]
+    if {[string equal $name $expected] || $name == "cdivider"} {
+        if {$attrs != ""} {
+            eval waveform format $gpID0 $attrs
+        }
+        if { $childcmds != ""} {
+            eval $childcmds
+        }
+    }
+    set gpGlist0 [lrange $gpGlist0 1 end]
+    set gpID0 [lindex $gpGlist0 0]
+}
+
+set id [waveform add -signals  {
+	simulator::testbench.top.control_hazard.IF_ID_flush1
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.control_hazard.IF_ID_flush2
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.control_hazard.hazard
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.control_hazard.IF_ID_flush_o
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.control_hazard.EX_flush_o
+	} ]
+
+waveform xview limits 1176ns 1756ns
+
+#
+# Waveform Window Links
+#
+
+#
+# Source Browser windows
+#
+if {[catch {window new SrcBrowser -name "Source Browser 1" -geometry 700x525+28+58}] != ""} {
+    window geometry "Source Browser 1" 700x525+28+58
+}
+window target "Source Browser 1" on
+srcbrowser using {Source Browser 1}
+srcbrowser set \
+    -primarycursor TimeA \
+    -units ns \
+    -radix default \
+    -showstrength 0 \
+    -showcallstack 0 \
+    -displayvalues 0
+
+srcbrowser show -scope testbench -file /home/usr3/project/CPU_5stage_pipeline/tb/testbench.sv -line 1
+
+srcbrowser sidebar visibility partial
+
+#
+# Assertion Browser windows
+#
+if {[catch {window new AssertionBrowser -name "Assertion Browser 1" -geometry 790x570+73+103}] != ""} {
+    window geometry "Assertion Browser 1" 790x570+73+103
+}
+window target "Assertion Browser 1" on
+assertbrowser using {Assertion Browser 1}
+
+#
+# Console windows
+#
+console set -windowname Console
+window geometry Console 730x250+261+564
+
+#
+# Layout selection
+#

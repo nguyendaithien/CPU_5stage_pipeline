@@ -1,0 +1,270 @@
+*** Message Type: info ***
+When: T7 Th10 05 17:45:01 +07 2024
+SimVision started.
+Version: TOOL:  simvision       23.09-s001
+User: usr3
+Host: edabk.server1
+Platform: Linux/x86_64/3.10.0-1160.119.1.el7.x86_64
+Started: T7 Th10 05 17:45:01 +07 2024
+Command: /home/edabk/Cadence/XCELIUM2309/tools.lnx86/simvision/bin/simvision.exe -connect dc:edabk.server1:45476 -nocopyright
+Work Directory: /home/usr3/project/CPU_5stage_pipeline/run
+ 
+*** Message Type: info ***
+When: T7 Th10 05 17:45:02 +07 2024
+Create browser window: "Design Browser 1"
+ 
+*** Message Type: info ***
+When: T7 Th10 05 17:45:14 +07 2024
+Create console window: "Console"
+ 
+*** Message Type: info ***
+When: T7 Th10 05 17:45:20 +07 2024
+Connect to Simulator
+      Design: worklib.testbench:sv
+   Languages: verilog assertion
+   Simulator: XM-Sim
+     Version: TOOL:     xmsim   23.09-s001
+        User: usr3
+        Host: edabk.server1
+Time Started: T7 Th10 05 17:45:00 +07 2024
+  Process ID: 12729
+   Directory: /home/usr3/project/CPU_5stage_pipeline/run
+     Command: xrun -sv -f list_file.f -access +rwc -gui
+
+ 
+*** Message Type: info ***
+When: T7 Th10 05 17:45:22 +07 2024
+Create utility window: "Properties"
+ 
+*** Message Type: info ***
+When: T7 Th10 05 17:45:31 +07 2024
+Create assertbrowser window: "Assertion Browser 1"
+ 
+*** Message Type: info ***
+When: T7 Th10 05 17:46:35 +07 2024
+Create waveform window: "Waveform 1"
+ 
+*** Message Type: info ***
+When: T7 Th10 05 17:59:43 +07 2024
+Delete assertbrowser window: "Assertion Browser 1"
+ 
+*** Message Type: error ***
+When: T7 Th10 05 17:59:43 +07 2024
+unable to grab mouse pointer
+    while executing
+"_grab_pointer $source $_dodragdrop_default_action"
+    (procedure "xdnd::_dodragdrop" line 56)
+    invoked from within
+"xdnd::_dodragdrop $source $actions $types $data $button"
+    ("x11" arm line 2)
+    invoked from within
+"switch $_windowingsystem {
+      x11 {
+        set action [xdnd::_dodragdrop $source $actions $types $data $button]
+      }
+      win32 -
+      window..."
+    (procedure "tkdnd::_init_drag" line 35)
+    invoked from within
+"tkdnd::_init_drag 0 $window  "press" 0 0"
+    ("drag" arm line 11)
+    invoked from within
+"switch $method {
+    bindtarget {
+      switch [llength $args] {
+        0 {return [tkdnd::compat::bindtarget0 $window]}
+        1 {return [tkdnd::com..."
+    (procedure "::dnd" line 4)
+    invoked from within
+"::dnd drag .assertionBrowser0.work.user.assertframe.assertion.sf.manager.table -actions copy"
+    ("eval" body line 1)
+    invoked from within
+"# Compiled -- no source code available
+error "called a copy of a compiled script""
+    (procedure "cwidgets::dnd" line 1)
+    invoked from within
+"cwidgets::dnd drag $win -actions {copy}"
+    (object "::.assertionBrowser0.work.user.assertframe.assertion" method "::AssertTable::_draganddropcallback" body line 29)
+    invoked from within
+"::.assertionBrowser0.work.user.assertframe.assertion _draganddropcallback .assertionBrowser0.work.user.assertframe.assertion.sf.manager.table 83 102"
+    (in namespace inscope "::AssertTable" script line 1)
+    invoked from within
+"namespace inscope ::AssertTable {::.assertionBrowser0.work.user.assertframe.assertion _draganddropcallback .assertionBrowser0.work.user.assertframe.as..."
+    (command bound to event)
+ 
+*** Message Type: error ***
+When: T7 Th10 05 17:59:43 +07 2024
+another drag operation in progress
+    while executing
+"error "another drag operation in progress""
+    (procedure "xdnd::_dodragdrop" line 7)
+    invoked from within
+"xdnd::_dodragdrop $source $actions $types $data $button"
+    ("x11" arm line 2)
+    invoked from within
+"switch $_windowingsystem {
+      x11 {
+        set action [xdnd::_dodragdrop $source $actions $types $data $button]
+      }
+      win32 -
+      window..."
+    (procedure "tkdnd::_init_drag" line 35)
+    invoked from within
+"tkdnd::_init_drag 0 $window  "press" 0 0"
+    ("drag" arm line 11)
+    invoked from within
+"switch $method {
+    bindtarget {
+      switch [llength $args] {
+        0 {return [tkdnd::compat::bindtarget0 $window]}
+        1 {return [tkdnd::com..."
+    (procedure "::dnd" line 4)
+    invoked from within
+"::dnd drag .assertionBrowser0.work.user.assertframe.assertion.sf.manager.table -actions copy"
+    ("eval" body line 1)
+    invoked from within
+"# Compiled -- no source code available
+error "called a copy of a compiled script""
+    (procedure "cwidgets::dnd" line 1)
+    invoked from within
+"cwidgets::dnd drag $win -actions {copy}"
+    (object "::.assertionBrowser0.work.user.assertframe.assertion" method "::AssertTable::_draganddropcallback" body line 29)
+    invoked from within
+"::.assertionBrowser0.work.user.assertframe.assertion _draganddropcallback .assertionBrowser0.work.user.assertframe.assertion.sf.manager.table 86 113"
+    (in namespace inscope "::AssertTable" script line 1)
+    invoked from within
+"namespace inscope ::AssertTable {::.assertionBrowser0.work.user.assertframe.assertion _draganddropcallback .assertionBrowser0.work.user.assertframe.as..."
+    (command bound to event)
+ 
+*** Message Type: error ***
+When: T7 Th10 05 17:59:43 +07 2024
+another drag operation in progress
+    while executing
+"error "another drag operation in progress""
+    (procedure "xdnd::_dodragdrop" line 7)
+    invoked from within
+"xdnd::_dodragdrop $source $actions $types $data $button"
+    ("x11" arm line 2)
+    invoked from within
+"switch $_windowingsystem {
+      x11 {
+        set action [xdnd::_dodragdrop $source $actions $types $data $button]
+      }
+      win32 -
+      window..."
+    (procedure "tkdnd::_init_drag" line 35)
+    invoked from within
+"tkdnd::_init_drag 0 $window  "press" 0 0"
+    ("drag" arm line 11)
+    invoked from within
+"switch $method {
+    bindtarget {
+      switch [llength $args] {
+        0 {return [tkdnd::compat::bindtarget0 $window]}
+        1 {return [tkdnd::com..."
+    (procedure "::dnd" line 4)
+    invoked from within
+"::dnd drag .assertionBrowser0.work.user.assertframe.assertion.sf.manager.table -actions copy"
+    ("eval" body line 1)
+    invoked from within
+"# Compiled -- no source code available
+error "called a copy of a compiled script""
+    (procedure "cwidgets::dnd" line 1)
+    invoked from within
+"cwidgets::dnd drag $win -actions {copy}"
+    (object "::.assertionBrowser0.work.user.assertframe.assertion" method "::AssertTable::_draganddropcallback" body line 29)
+    invoked from within
+"::.assertionBrowser0.work.user.assertframe.assertion _draganddropcallback .assertionBrowser0.work.user.assertframe.assertion.sf.manager.table 85 107"
+    (in namespace inscope "::AssertTable" script line 1)
+    invoked from within
+"namespace inscope ::AssertTable {::.assertionBrowser0.work.user.assertframe.assertion _draganddropcallback .assertionBrowser0.work.user.assertframe.as..."
+    (command bound to event)
+ 
+*** Message Type: error ***
+When: T7 Th10 05 17:59:43 +07 2024
+another drag operation in progress
+    while executing
+"error "another drag operation in progress""
+    (procedure "xdnd::_dodragdrop" line 7)
+    invoked from within
+"xdnd::_dodragdrop $source $actions $types $data $button"
+    ("x11" arm line 2)
+    invoked from within
+"switch $_windowingsystem {
+      x11 {
+        set action [xdnd::_dodragdrop $source $actions $types $data $button]
+      }
+      win32 -
+      window..."
+    (procedure "tkdnd::_init_drag" line 35)
+    invoked from within
+"tkdnd::_init_drag 0 $window  "press" 0 0"
+    ("drag" arm line 11)
+    invoked from within
+"switch $method {
+    bindtarget {
+      switch [llength $args] {
+        0 {return [tkdnd::compat::bindtarget0 $window]}
+        1 {return [tkdnd::com..."
+    (procedure "::dnd" line 4)
+    invoked from within
+"::dnd drag .assertionBrowser0.work.user.assertframe.assertion.sf.manager.table -actions copy"
+    ("eval" body line 1)
+    invoked from within
+"# Compiled -- no source code available
+error "called a copy of a compiled script""
+    (procedure "cwidgets::dnd" line 1)
+    invoked from within
+"cwidgets::dnd drag $win -actions {copy}"
+    (object "::.assertionBrowser0.work.user.assertframe.assertion" method "::AssertTable::_draganddropcallback" body line 29)
+    invoked from within
+"::.assertionBrowser0.work.user.assertframe.assertion _draganddropcallback .assertionBrowser0.work.user.assertframe.assertion.sf.manager.table 85 52"
+    (in namespace inscope "::AssertTable" script line 1)
+    invoked from within
+"namespace inscope ::AssertTable {::.assertionBrowser0.work.user.assertframe.assertion _draganddropcallback .assertionBrowser0.work.user.assertframe.as..."
+    (command bound to event)
+ 
+*** Message Type: error ***
+When: T7 Th10 05 17:59:43 +07 2024
+another drag operation in progress
+    while executing
+"error "another drag operation in progress""
+    (procedure "xdnd::_dodragdrop" line 7)
+    invoked from within
+"xdnd::_dodragdrop $source $actions $types $data $button"
+    ("x11" arm line 2)
+    invoked from within
+"switch $_windowingsystem {
+      x11 {
+        set action [xdnd::_dodragdrop $source $actions $types $data $button]
+      }
+      win32 -
+      window..."
+    (procedure "tkdnd::_init_drag" line 35)
+    invoked from within
+"tkdnd::_init_drag 0 $window  "press" 0 0"
+    ("drag" arm line 11)
+    invoked from within
+"switch $method {
+    bindtarget {
+      switch [llength $args] {
+        0 {return [tkdnd::compat::bindtarget0 $window]}
+        1 {return [tkdnd::com..."
+    (procedure "::dnd" line 4)
+    invoked from within
+"::dnd drag .assertionBrowser0.work.user.assertframe.assertion.sf.manager.table -actions copy"
+    ("eval" body line 1)
+    invoked from within
+"# Compiled -- no source code available
+error "called a copy of a compiled script""
+    (procedure "cwidgets::dnd" line 1)
+    invoked from within
+"cwidgets::dnd drag $win -actions {copy}"
+    (object "::.assertionBrowser0.work.user.assertframe.assertion" method "::AssertTable::_draganddropcallback" body line 29)
+    invoked from within
+"::.assertionBrowser0.work.user.assertframe.assertion _draganddropcallback .assertionBrowser0.work.user.assertframe.assertion.sf.manager.table 92 90"
+    (in namespace inscope "::AssertTable" script line 1)
+    invoked from within
+"namespace inscope ::AssertTable {::.assertionBrowser0.work.user.assertframe.assertion _draganddropcallback .assertionBrowser0.work.user.assertframe.as..."
+    (command bound to event)
+ 

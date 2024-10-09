@@ -41,58 +41,50 @@ module MEM_stage #( parameter DATA_WIDTH = 32) (
     reg [1:0 ] byte_addr   ;
     reg [3:0 ] mem_op      ;
 
+   always @(*) begin
+     MEM_RD_mem_o     = MEM_RD_mem_i                      ;
+     MEM_WR_mem_o     = MEM_WR_mem_i                      ;
+     load_err_o       = 1'b0                              ;
+     store_err_o      = 1'b0                              ;
+     last_add_o       = DMEM_add_o                        ;
+     DMEM_rst_o       = ~rst_n                            ;
+     DMEM_byte_mark_o = (MEM_WR_mem_i) ? byte_mark : 4'b0 ;
+     DMEM_add_o       = {MEM_alu_result_i[31:2], 2'b0}    ;
+     mem_op           = MEM_mem_op_i                      ;
+     byte_addr        = MEM_alu_result_i[1:0]             ;
+   end
+
+
+
    always@(posedge clk or negedge rst_n) begin
      if(~rst_n) begin
        MEM_sel_to_reg_o      <= 2'd0     ;
        MEM_alu_result_o      <= 32'd0    ;
        MEM_regwrite_o        <= 1'd0     ;
        MEM_rd_add_o          <= 5'd0     ;
-       MEM_RD_mem_o          <= 1'd0     ;
-       MEM_WR_mem_o          <= 1'd0     ;
        MEM_pc_o              <= 32'd0    ;
        MEM_imm_o             <= 32'd0    ;
-       byte_mark             <= 4'd0     ;
        MEM_rf_wdata_sel_o    <= RF_WD_EX ;
-       load_err_o            <= 1'b0     ;
-       store_err_o           <= 1'b0     ;
-       last_add_o            <= 32'd0    ;
      end else begin
        MEM_sel_to_reg_o      <= MEM_sel_to_reg_i  ;
        MEM_alu_result_o      <= MEM_alu_result_i  ;
        MEM_regwrite_o        <= MEM_regwrite_i    ;
        MEM_rd_add_o          <= MEM_rd_add_i      ;
-       MEM_RD_mem_o          <= MEM_RD_mem_i      ;
-       MEM_WR_mem_o          <= MEM_WR_mem_i      ;
        MEM_pc_o              <= MEM_pc_i          ;
        MEM_imm_o             <= MEM_imm_i         ;
        MEM_rf_wdata_sel_o    <= MEM_rf_wdata_sel_i;
-       last_add_o            <= DMEM_add_o        ;
        end
      end
 
 
     always@* begin
-     //   DMEM_add_o       = {MEM_alu_result_i[31:2], 2'b0}    ;
-        DMEM_rst_o       = ~rst_n                            ;
-        DMEM_byte_mark_o = (MEM_WR_mem_i) ? byte_mark : 4'b0 ;
-    end
-		always @(posedge clk or negedge rst_n) begin 
-			if(~rst_n) begin
-				DMEM_add_o <= 32'd0;
-			end
-			else begin
-        DMEM_add_o      <= {MEM_alu_result_i[31:2], 2'b0}    ;
-			end
-		end
-    
-    always@* begin
-        if(forward)
+      if(forward)
         data_write = MEM_alu_result_o ;
-        else
+      else
         data_write = MEM_rs2_data_i   ;
     end
 
-    always@* begin
+    always @(*) begin
         DMEM_data_write_o   = 32'b0 ;
         byte_mark           = 4'd0  ;
 
@@ -145,22 +137,6 @@ module MEM_stage #( parameter DATA_WIDTH = 32) (
     //*********************************    
     //        DATA MEM LOADS
     //*********************************
-
-    // loads have a one clock latency 
-    // need to flop: 1) memory operation and 2) byte address
-
-    // flop mem_op and MEM_alu_result_i 
-    always@(posedge clk) begin
-        if(rst_n == 1'b0) begin
-            mem_op    <= 4'd0;
-            byte_addr <= 2'd0;
-        end else begin
-            mem_op    <= MEM_mem_op_i; 
-            byte_addr <= MEM_alu_result_i[1:0];
-        end         
-    end
-
-    // combinatorial logic to 'snipe' the bits we want
     always@* begin
         case(mem_op)
             `MEM_LB: begin

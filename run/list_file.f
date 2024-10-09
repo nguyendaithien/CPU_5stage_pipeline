@@ -19,3 +19,6 @@
 /home/usr3/project/CPU_5stage_pipeline/rtl/COMPRESSED_DECODER.sv
 /home/usr3/project/CPU_5stage_pipeline/rtl/csr.sv
 /home/usr3/project/CPU_5stage_pipeline/tb/test_case.sv
+/home/usr3/project/CPU_5stage_pipeline/tb/check_FSM.sv
+/home/usr3/project/CPU_5stage_pipeline/tb/check_hazard.sv
+

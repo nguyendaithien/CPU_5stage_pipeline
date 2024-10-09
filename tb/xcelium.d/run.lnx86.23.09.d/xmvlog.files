@@ -2,6 +2,4 @@
 // File created by:  xrun
 // Do not modify this file
 //
-/home/usr3/project/RISC_V/tb/DMEM.v
-/home/usr3/project/RISC_V/tb/defi.vh
-/home/usr3/project/RISC_V/tb/testbench.v
+/home/usr3/project/CPU_5stage_pipeline/tb/random_gen.sv

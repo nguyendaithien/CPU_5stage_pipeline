@@ -112,6 +112,7 @@ module decoder #( parameter DATA_WIDTH = 32) (
        data_type_o    = 2'b00      ;
        rf_wdata_sel_o = RF_WD_EX;  
 
+       
 
        case(opcode)
          `OPCODE_OP: begin
@@ -196,17 +197,16 @@ module decoder #( parameter DATA_WIDTH = 32) (
 			end
 
        `OPCODE_LUI: begin
-           reg_write_o  = (instr_i[11:7] == 0) ? 0:1   ;
-           alu_sel1_o   = 2'b11                        ;
-           alu_sel2_o   = 2'b11                        ;
-           imm_o        = IMM_U                        ;
-           alu_op_o     = `ALU_ADD                     ;
-           rs1_add_o    = 5'd0                         ;
-           rs2_add_o    = 5'd0                         ;
-           sel_to_reg_o = 2'b11                        ;
+           reg_write_o    = (instr_i[11:7] == 0) ? 0:1   ;
+           alu_sel1_o     = 2'b11                        ;
+           alu_sel2_o     = 2'b11                        ;
+           imm_o          = IMM_U                        ;
+           alu_op_o       = `ALU_ADD                     ;
+           rs1_add_o      = 5'd0                         ;
+           rs2_add_o      = 5'd0                         ;
+           sel_to_reg_o   = 2'b11                        ;
            rf_wdata_sel_o = RF_WD_EX;  
        end
-       
        
        `OPCODE_AUIPC: begin
            reg_write_o  = (instr_i[11:7] == 0) ? 0:1   ;
@@ -345,4 +345,6 @@ module decoder #( parameter DATA_WIDTH = 32) (
              csr_access_o = 1'b0;
              end
            end
+
+
 endmodule

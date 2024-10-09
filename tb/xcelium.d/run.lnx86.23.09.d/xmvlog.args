@@ -5,13 +5,8 @@
 -XLMODE
 ./xcelium.d/run.lnx86.23.09.d
 -RUNMODE
-DMEM.v
-defi.vh
-testbench.v
--ERRORMAX
-0
--WORK
-log
+-sv
+random_gen.sv
 -CDSLIB
 ./xcelium.d/run.lnx86.23.09.d/cdsrun.lib
 -HDLVAR
@@ -22,4 +17,3 @@ log
 -XLLIBSTORE
 ./xcelium.d/run.lnx86.23.09.d/xllibs
 -ALLOWUNBOUND
--hastop

@@ -107,6 +107,54 @@ instr_rdata_i          ,
 instr_err_i            ,
 instr_fetch_err_plus2_i,
 mem_resp_intg_err_i );
+
+ bind CPU_EDABK_TOP check_hazard hazard_check (
+clk                    ,
+rst_n                  ,
+boot_add               ,
+Instr_in               ,
+D_in                   ,
+irq_software_i         ,
+irq_timer_i            ,
+irq_external_i         ,
+irq_fast_i             ,
+debug_req_i            ,
+irq_nm_i               ,
+data_gnt_i             ,
+data_rvalid_i          ,
+data_rdata_i           ,
+data_err_i             ,
+instr_gnt_i            ,
+instr_rvalid_i         ,
+instr_rdata_i          ,
+instr_err_i            ,
+instr_fetch_err_plus2_i,
+mem_resp_intg_err_i );
+
+ bind CPU_EDABK_TOP check_FSM check_fsm (
+clk                    ,
+rst_n                  ,
+boot_add               ,
+Instr_in               ,
+D_in                   ,
+irq_software_i         ,
+irq_timer_i            ,
+irq_external_i         ,
+irq_fast_i             ,
+debug_req_i            ,
+irq_nm_i               ,
+data_gnt_i             ,
+data_rvalid_i          ,
+data_rdata_i           ,
+data_err_i             ,
+instr_gnt_i            ,
+instr_rvalid_i         ,
+instr_rdata_i          ,
+instr_err_i            ,
+instr_fetch_err_plus2_i,
+mem_resp_intg_err_i );
+
+
    
  wire [31:0] reg_file_2;
  assign reg_file_2 = top.id_stage.reg_file.reg_file[2];
@@ -142,7 +190,7 @@ mem_resp_intg_err_i );
  assign X_1 = top.id_stage.reg_file.reg_file[1];
  assign X_10 = top.id_stage.reg_file.reg_file[10];
  assign X_5 = top.id_stage.reg_file.reg_file[5];
- assign X_4 = top.id_stage.reg_file.reg_file[4];
+ assign X_4 = top.id_stage.reg_file.reg_file[3];
  assign X_6 = top.id_stage.reg_file.reg_file[6];
  assign X_7 = top.id_stage.reg_file.reg_file[7];
  assign X_8 = top.id_stage.reg_file.reg_file[8];
@@ -159,20 +207,6 @@ mem_resp_intg_err_i );
  assign X_20 = top.id_stage.reg_file.reg_file[20];
  assign X_21 = top.id_stage.reg_file.reg_file[21];
  assign X_22 = top.id_stage.reg_file.reg_file[22];
- always @(instr) begin
- 	if((instr[6:0] == 7'b1100011) & (instr[14:12] == 3'b001)) begin
-	  $display("this is branch instruction %h", instr  );
-	  $display("this is branch instruction IMM =  %d", top.id_stage.imm );
-
-  end else 
- 	if((instr[6:0] == 7'b0010011) & (instr[14:12] == 3'b000)) begin
-	  $display("this is  ADDI  instruction %h", instr  );
-#5
-	  $display("this is ADDI instruction IMM =  %d", top.id_stage.imm );
- end
- end
-
-		
 
  initial begin
  	$dumpfile("cpu.VCD");
@@ -190,7 +224,7 @@ mem_resp_intg_err_i );
    end
  end
 
-  reg [31:0] IMEM [255:0 ];
+  reg [31:0] IMEM [499:0 ];
   reg [31:0] DMEM [255:0];
 	reg [31:0] REG_FILE [31:0];
 
@@ -234,19 +268,19 @@ integer j;
 
 `ifdef MEM
 initial begin
-  #800 // Đợi một thời gian ngắn để đảm bảo rằng các giá trị đã được khởi tạo
+  #800 
   $display("Values in dmem:");
   for (j = 0; j < 256; j = j + 1) begin
     $display("mem[%0d] = %h", j, ram.mem[j]);
   end
 end
 initial begin
-  #10; // Đợi một thời gian ngắn để đảm bảo rằng các giá trị đã được khởi tạo
+  #10 
   $display("Values in reg_file:");
   for (j = 0; j < 32; j = j + 1) begin
     $display("reg_file[%0d] = %h", j, top.id_stage.reg_file.reg_file[j]);
   end
-  #500; // Đợi một thời gian ngắn để đảm bảo rằng các giá trị đã được khởi tạo
+  #500 
   $display("Values in reg_file:");
   for (j = 0; j < 32; j = j + 1) begin
     $display("reg_file[%0d] = %h", j, top.id_stage.reg_file.reg_file[j]);
@@ -255,7 +289,7 @@ end
 `endif
 
   initial begin
-    $readmemh("../init/test_1.dat", IMEM);
+    $readmemh("../tb/random/instr_set_1.dat", IMEM);
   end
   initial begin
     $readmemh("../init/dmem.dat", DMEM);
@@ -286,34 +320,43 @@ end
      instr_err_i    = 1'b0; 
      boot_add       = 32'd0;
      mem_resp_intg_err_i = 1'b0;
-
-   #20 
-   Instr_in = 32'd0;
-   #5 
-
-   rst_n = 1;
+     Instr_in = 32'd0;
    #10 
-    $display(" MEM_1  %h" , MEM_1);
-    $display(" A_MEM_1  %h" , A_IMEM );
-    $display("instr  %h" , Instr_in);
-    $display("mem  %h" , ram.mem[2] );
-    $display("mem  %h" , ram.mem[3] );
-    $display("mem  %h" , ram.mem[4] );
-    $display("mem  %h" , ram.mem[5] );
-    $display("mem  %h" , ram.mem[6] );
+     rst_n = 1;
+   #800 
+    irq_software_i = 1'b0; 
+    irq_timer_i    = 1'b0; 
+    irq_external_i = 1'b0; 
+    irq_fast_i     = 1'b0; 
+    irq_nm_i       = 1'b0; 
+    debug_req_i    = 1'b0; 
+    data_gnt_i     = 1'b1; 
+    data_rvalid_i  = 1'b1; 
+    data_rdata_i   = 1'b1; 
+    data_err_i     = 1'b0; 
+    instr_gnt_i    = 1'b0; 
+    instr_rvalid_i = 1'b1; 
+    instr_rdata_i  = 1'b0; 
+    instr_err_i    = 1'b0; 
+    boot_add       = 32'd0;
+    mem_resp_intg_err_i = 1'b0;
+   #10 
+    debug_req_i    = 1'b0; 
+   #50 
+    irq_software_i = 1'b0; 
+    irq_timer_i    = 1'b0; 
+     irq_external_i = 1'b0; 
+   #10 
+    irq_software_i = 1'b0; 
+    irq_timer_i    = 1'b0; 
+     irq_external_i = 1'b0; 
+    
+
 
  end
  initial begin
    #10000  $finish;
  end
 
-  always @(testbench.top.check.is_add_instr) begin
-    if(testbench.top.check.is_add_instr) begin
-      $display (" ISSSSSS ADD INSTRUCTION");
-    end
-    else begin 
-      $display (" NOT ISSSSSS ADDDD INSTRUCTION");
-    end
-  end
 
 endmodule

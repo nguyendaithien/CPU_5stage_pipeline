@@ -23,15 +23,15 @@ module test_case(
 );
 import pkg_1::*;
 
-logic  [31:0] IMEM_data   ; assign IMEM_data_i    = top.if_stage.IMEM_data_i ;
-logic  [4:0]  ID_rs1_addr ; assign ID_rs1_addr    = top.id_stage.rs1_add     ;
-logic  [4:0]  ID_rs2_addr ; assign ID_rs2_addr    = top.id_stage.rs1_add     ;
-logic  [4:0]  ID_rsd_addr ; assign ID_rs3_addr    = top.id_stage.rs1_add     ;
-logic  [31:0]  ID_rs1_data ; assign ID_rs1_data    = top.ID_rs1_data          ;
-logic  [31:0]  ID_rs2_data ; assign ID_rs2_data    = top.ID_rs1_data          ;
-logic  MEM_RD;assign MEM_RD = top.MEM_RD_mem;  
-logic  MEM_WR;assign MEM_WR = top.MEM_WR_mem;
-logic  WB_regwrire; assign WB_regwrite = top.WB_regwrite;
+logic  [31:0] IMEM_data    ; assign IMEM_data_i    = top.if_stage.IMEM_data_i ;
+logic  [4:0]  ID_rs1_addr  ; assign ID_rs1_addr    = top.id_stage.rs1_add     ;
+logic  [4:0]  ID_rs2_addr  ; assign ID_rs2_addr    = top.id_stage.rs1_add     ;
+logic  [4:0]  ID_rsd_addr  ; assign ID_rs3_addr    = top.id_stage.rs1_add     ;
+logic  [31:0]  ID_rs1_data ; assign ID_rs1_data   = top.ID_rs1_data          ;
+logic  [31:0]  ID_rs2_data ; assign ID_rs2_data   = top.ID_rs1_data          ;
+logic  MEM_RD;assign MEM_RD = top.EX_RD;  
+logic  MEM_WR;assign MEM_WR = top.EX_WR;
+logic  WB_regwrire; assign WB_regwrite = top.MEM_regwrite;
 logic [31:0] data_write_reg; assign data_write_reg = top.id_stage.data_write_reg; 
 logic [31:0] op_a_alu;assign op_a_alu = top.ex_stage.op_a_alu;  
 logic [31:0] op_b_alu;assign op_b_alu = top.ex_stage.op_b_alu;
@@ -82,7 +82,7 @@ logic [31:0] alu_result; assign alu_result = top.ex_stage.alu_result;
   logic        EX_WR              ; assign EX_WR                 =   top.EX_WR                        ;                          
   logic [3:0 ] EX_mem_op          ; assign EX_mem_op             =   top.EX_mem_op                    ;                          
   logic [31:0] EX_alu_result      ; assign EX_alu_result         =   top.EX_alu_result                ;                          
-  logic        EX_zero            ; assign EX_zero               =   top.EX_zero                      ;                          
+  logic        EX_zero_o          ; assign EX_zero_o               =   top.EX_zero                      ;                          
   logic [31:0] EX_imm             ; assign EX_imm                =   top.EX_imm                       ;                          
   logic [31:0] EX_pc_dest         ; assign EX_pc_dest            =   top.EX_pc_dest                   ;                          
   logic [31:0] EX_rs2_data        ; assign EX_rs2_data           =   top.EX_rs2_data                  ;                          
@@ -106,18 +106,23 @@ logic [31:0] alu_result; assign alu_result = top.ex_stage.alu_result;
   logic        forward_dmem       ; assign forward_dmem          =   top.forward_dmem                 ;                          
   logic [31:0] WB_data_write      ; assign WB_data_write         =   top.WB_data_write_reg            ;
 
+  logic [31:0] data_write_mem;  assign data_write_mem = top.mem_stage.data_write;
+  logic [31:0] mem_rs1_data;    assign mem_rs1_data = top.mem_stage.MEM_rs2_data_i;
+
 // hazard control
   logic stall       ; assign stall       = top.stall       ;                                           
   logic IF_ID_flush ; assign IF_ID_flush = top.IF_ID_flush ;                                           
   logic EX_flush    ; assign EX_flush    = top.EX_flush    ;                                           
-  
+  logic EX_zero     ; assign EX_zero     = top.ex_stage.zero   ;                                           
+  logic hazard      ; assign hazard      = top.hazard;
+  logic no_hazard ; assign no_hazard = (~hazard) & (~EX_flush) & (~IF_ID_flush) & (~stall);
 
- // decode instr
+// decode instr
  logic [31:0] IF_instr ;assign IF_instr = top.if_stage.IF_instr_i;      
  logic [2:0]  funct_3    ;assign funct_3    =IF_instr[14:12] ;   
  logic [6:0]  opcode    ;assign opcode      =IF_instr[6:0]  ;   
 
- logic is_add_instr  ; assign is_add_instr  = (opcode == OPCODE_OP) && (funct_3 == `FUNCT3_ADD_SUB) && (IF_instr[30] == 1'b0) ;
+ logic is_add_instr  ; assign is_add_instr  = (opcode == OPCODE_OP) & (funct_3 == `FUNCT3_ADD_SUB) & (IF_instr[30] == 1'b0) ;
  logic is_sub_instr  ; assign is_sub_instr  = (opcode == OPCODE_OP) & (funct_3 == `FUNCT3_ADD_SUB) & (IF_instr[30] == 1'b0) ;
  logic is_sll_instr  ; assign is_sll_instr  = (opcode == OPCODE_OP) & (funct_3 == `FUNCT3_SLL)                              ;
  logic is_slt_instr  ; assign is_slt_instr  = (opcode == OPCODE_OP) & (funct_3 == `FUNCT3_SLT)                              ;
@@ -138,10 +143,17 @@ logic [31:0] alu_result; assign alu_result = top.ex_stage.alu_result;
  logic is_ori_instr   ; assign is_ori_instr   = (opcode == OPCODE_OP_IMM) & (funct_3 == `FUNCT3_ORI)                                           ;
  logic is_andi_instr  ; assign is_andi_instr  = (opcode == OPCODE_OP_IMM) & (funct_3 == `FUNCT3_ANDI)                                          ;
 
- logic is_lui_instr    ; assign is_lui_instr   = (opcode == OPCODE_LUI)  ;
+ logic is_lui_instr    ; assign is_lui_instr   = (opcode == OPCODE_LUI)? 1'd1 : 1'd0  ;
  logic is_auipc_instr  ; assign is_auipc_instr = (opcode == OPCODE_AUIPC)  ;
  logic is_jalr_instr   ; assign is_jalr_instr  = (opcode == OPCODE_JALR)  ;
  logic is_jal_instr    ; assign is_jal_instr   = (opcode == OPCODE_JAL)  ;
+
+ logic is_beg_instr    ; assign  is_beg_instr   = (opcode == OPCODE_BRANCH) & (funct_3 == `FUNCT3_BGE ) ;
+ logic is_bne_instr    ; assign  is_bne_instr   = (opcode == OPCODE_BRANCH) & (funct_3 == `FUNCT3_BNE ) ;
+ logic is_blt_instr    ; assign  is_blt_instr   = (opcode == OPCODE_BRANCH) & (funct_3 == `FUNCT3_BLT ) ;
+ logic is_bge_instr    ; assign  is_bge_instr   = (opcode == OPCODE_BRANCH) & (funct_3 == `FUNCT3_BGE ) ;
+ logic is_bltu_instr   ; assign  is_bltu_instr  = (opcode == OPCODE_BRANCH) & (funct_3 == `FUNCT3_BLTU) ;
+ logic is_bgeu_instr   ; assign  is_bgeu_instr  = (opcode == OPCODE_BRANCH) & (funct_3 == `FUNCT3_BGEU) ;
 
  logic is_lw_instr  ; assign is_lw_instr  = (opcode == OPCODE_LOAD) & (funct_3 == `MEM_LW)  ;
  logic is_lb_instr  ; assign is_lb_instr  = (opcode == OPCODE_LOAD) & (funct_3 == `MEM_LB)  ;
@@ -164,42 +176,330 @@ logic [31:0] alu_result; assign alu_result = top.ex_stage.alu_result;
  logic is_csr_set_instr      ; assign is_csr_set_instr   = (opcode == OPCODE_SYSTEM) & (IF_instr[13:12] == 2'b10)  ;
  logic is_csr_clear_instr    ; assign is_csr_clear_instr = (opcode == OPCODE_SYSTEM) & (IF_instr[13:12] == 2'b11)  ;
 
+ logic  [31:0]   imm_i ;   assign imm_i = top.ID_imm_i_type;  
+ logic  [31:0]   imm_s ;   assign imm_s = top.ID_imm_s_type;
+ logic  [31:0]   imm_b ;   assign imm_b = top.ID_imm_b_type;
+ logic  [31:0]   imm_u ;   assign imm_u = top.ID_imm_u_type;
+ logic  [31:0]   imm_j ;   assign imm_j = top.ID_imm_j_type;
 
+ logic [31:0] WB_imm ; assign WB_imm = top.wb_stage.WB_imm;
+ logic [31:0] WB_pc ; assign WB_pc = top.wb_stage.pc;
+ logic [31:0] WB_alu_result ; assign WB_alu_result = top.wb_stage.WB_alu_result;
+ logic [31:0] WB_dmem_data ; assign WB_dmem_data = top.wb_stage.DMEM_data_i;
+ ctrl_fsm_e current_state; assign current_state = top.control_main.current_state;
+
+
+
+ property check_common(a,delay,b);
+   @(posedge clk) disable iff(!rst_n)
+    a |-> ##delay b; 
+ endproperty
 
   property check_add_instr;
     @(posedge clk) 
-    (is_add_instr) |-> ##2 (alu_result == (op_a_alu + op_b_alu)) & (( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_rs2_data )) |-> ##2 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == 32'($past(alu_result,3))) ) ; 
+    (is_add_instr & (current_state == PROCESSING)) |-> ##2 (no_hazard) & (alu_result == (op_a_alu + op_b_alu)) & (( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_rs2_data )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == ($past(alu_result,2))) ) ; 
   endproperty
-//  add_instr: assert property(check_add_instr) else begin
-//    $display ("check add instr fail");
-//  end
+  add_instr: assert property(check_add_instr)  begin
+    $display ("[INSTR] check add pass");
+  end
+  else begin
+    $display ("check add instr fail");
+  end
 
+  property check_sub_instr;
+    @(posedge clk) 
+    (is_sub_instr) |-> ##2 (no_hazard) &(alu_result == (op_a_alu - op_b_alu)) & (( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_rs2_data )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == 32'($past(alu_result,2))) ) ; 
+  endproperty
+  sub_instr: assert property(check_sub_instr) begin 
+    $display ("[INSTR] check sub pass");
+  end
+  else begin
+    $display ("check sub instr fail");
+  end
 
-//  property check_sub_instr;
-//    @(posedge clk) 
-//  (is_sub_instr) |-> ##2 (( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_rs2_data )) |-> ##2 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write)) ; 
-//  endproperty
-//  add_instr: assert property(check_add_instr) else begin
-//    $display ("check sub instr fail");
-//  end
+  property check_sll_instr;
+    @(posedge clk) 
+    (is_sll_instr) |-> ##2 (no_hazard) &(alu_result == (op_a_alu <<  op_b_alu[4:0])) & (( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_rs2_data )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == 32'($past(alu_result,2))) ) ; 
+  endproperty
+  sll_instr: assert property(check_sll_instr) begin
+    $display ("[INSTR] check add pass");
+  end
+  else begin
+    $display ("check sll instr fail");
+  end
 
+  property check_slt_instr;
+    @(posedge clk) 
+    (is_slt_instr) |-> ##2 (no_hazard) &(alu_result == ((op_a_alu < op_b_alu) ? 32'd1 : 32'd0 )) & (( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_rs2_data )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == 32'($past(alu_result,2))) ) ; 
+  endproperty
+  slt_instr: assert property(check_slt_instr) begin
+    $display ("[INSTR] check slt pass");
+  end
+    else begin
+    $display ("check slt instr fail");
+  end
 
+  property check_sltu_instr;
+    @(posedge clk) 
+    (is_sltu_instr) |=> (IF_ID_flush) |=> (EX_flush) & (no_hazard) &(alu_result == ((op_a_alu < op_b_alu) ? 32'd1 : 32'd0 )) & (( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_rs2_data )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == 32'($past(alu_result,2))) ) ; 
+  endproperty
+  sltu_instr: assert property(check_sltu_instr) begin
+    $display ("[INSTR] check sltu pass");
+  end
+    else begin
+    $display ("check sltu instr fail");
+  end
 
+  property check_xor_instr;
+    @(posedge clk) 
+    (is_xor_instr) |-> ##2 (no_hazard) &(alu_result == (op_a_alu ^ op_b_alu)) & (( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_rs2_data )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == 32'($past(alu_result,2))) ) ; 
+  endproperty
+  xor_instr: assert property(check_xor_instr) begin 
+    $display ("[INSTR] check xor pass");
+  end
+  else begin
+    $display ("check xor instr fail");
+  end
 
+  property check_srl_instr;
+    @(posedge clk) 
+    (is_srl_instr) |-> ##2 (no_hazard) &(alu_result == ((op_a_alu >> op_b_alu[4:0]))) & (( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_rs2_data )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == 32'($past(alu_result,2))) ) ; 
+  endproperty
+  srl_instr: assert property(check_srl_instr) begin 
+    $display ("[INSTR] check srl pass");
+  end
+  else begin
+    $display ("check srl instr fail");
+  end
 
+  property check_sra_instr;
+    @(posedge clk) 
+    (is_sra_instr) |-> ##2 (no_hazard) &(alu_result == ($signed(op_a_alu) >>> op_b_alu[4:0])) & (( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_rs2_data )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == 32'($past(alu_result,2))) ) ; 
+  endproperty
+  sra_instr: assert property(check_sra_instr) begin
+    $display ("[INSTR] check sra pass");
+  end
+    else begin
+    $display ("check sra instr fail");
+  end
 
+  property check_or_instr;
+    @(posedge clk) 
+    (is_or_instr) |-> ##2 (no_hazard) &(alu_result == (op_a_alu | op_b_alu)) & (( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_rs2_data )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == 32'($past(alu_result,2))) ) ; 
+  endproperty
+  or_instr: assert property(check_or_instr)begin 
+    $display ("[INSTR] check or pass");
+  end
+  else begin
+    $display ("check or instr fail");
+  end
 
+  property check_and_instr;
+    @(posedge clk) 
+    (is_and_instr) |-> ##2 (no_hazard) &(alu_result == (op_a_alu & op_b_alu)) & (( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_rs2_data )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == 32'($past(alu_result,2))) ) ; 
+  endproperty
+  and_instr: assert property(check_and_instr) begin
+    $display ("[INSTR] check and pass");
+  end
+    else begin
+    $display ("check and instr fail");
+  end
+ /////// I TYPE INSTRUCTION
+  property check_addi_instr;
+    @(posedge clk) 
+    (is_addi_instr) |-> ##2 (no_hazard) &(alu_result == (op_a_alu + op_b_alu)) & (( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == 32'($past(alu_result,2))) ) ; 
+  endproperty
+  addi_instr: assert property(check_addi_instr) else begin
+    $display ("check addi instr fail");
+  end
 
+  property check_ori_instr;
+    @(posedge clk) 
+    (is_ori_instr) |-> ##2 (no_hazard) &(alu_result == (op_a_alu | op_b_alu)) & (( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == 32'($past(alu_result,2))) ) ; 
+  endproperty
+  ori_instr: assert property(check_ori_instr) else begin
+    $display ("check ori instr fail");
+  end
 
+  property check_xori_instr;
+    @(posedge clk) 
+    (is_xori_instr) |-> ##2 (no_hazard) &(alu_result == (op_a_alu ^ op_b_alu)) & (( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == 32'($past(alu_result,2))) ) ; 
+  endproperty
+  xori_instr: assert property(check_xori_instr) else begin
+    $display ("check xori instr fail");
+  end
 
+  property check_slti_instr;
+    @(posedge clk) 
+    (is_slti_instr) |-> ##2 (no_hazard) &(alu_result == ((op_a_alu < op_b_alu) ? 32'd1 : 32'd0)) & (( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == 32'($past(alu_result,2))) ) ; 
+  endproperty
+  slti_instr: assert property(check_slti_instr) else begin
+    $display ("check slti instr fail");
+  end
 
+  property check_sltiu_instr;
+    @(posedge clk) 
+    (is_sltiu_instr) |-> ##2 (no_hazard) &(alu_result == ((op_a_alu < op_b_alu)? 32'd1 : 32'd0)) & (( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == 32'($past(alu_result,2))) ) ; 
+  endproperty
+  sltiu_instr: assert property(check_sltiu_instr) else begin
+    $display ("check sltiu instr fail");
+  end
 
+  property check_srai_instr;
+    @(posedge clk) 
+    (is_srai_instr) |-> ##2 (no_hazard) &(alu_result == ($signed(op_a_alu) >>> op_b_alu[4:0] )) & (( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == 32'($past(alu_result,2))) ) ; 
+  endproperty
+  srai_instr: assert property(check_srai_instr) else begin
+    $display ("check srai instr fail");
+  end
 
+  property check_srli_instr;
+    @(posedge clk) 
+    (is_srli_instr) |-> ##2 (no_hazard) &(alu_result == (op_a_alu >> op_b_alu[4:0])) & (( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == 32'($past(alu_result,2))) ) ; 
+  endproperty
+  srli_instr: assert property(check_srli_instr) else begin
+    $display ("check srli instr fail");
+  end
 
+  property check_slli_instr;
+    @(posedge clk) 
+    (is_slli_instr) |-> ##2 (no_hazard) &(alu_result == (op_a_alu << op_b_alu[4:0])) & (( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == 32'($past(alu_result,2))) ) ; 
+  endproperty
+  slli_instr: assert property(check_slli_instr) else begin
+    $display ("check slli instr fail");
+  end
+  // LUI, AUIPC
+  property check_lui_instr;
+    @(posedge clk)
+    (is_lui_instr & (!IF_ID_flush) ) |=> (!IF_ID_flush)  |=>  ((ID_imm == imm_u)) |-> ##2 ( (WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (WB_data_write == WB_imm));       
+  endproperty
+  lui_instr : assert property (check_lui_instr) else begin
+    $display ("check lui instr fail , regwrite = %b  and data_wrie (true or fail) ? %b and sel_to_reg WB %b and sel_to_reg MEM %b and sel_to_reg EX %b and sel_to_reg ID  %b and sel_to_reg decoder %b opcode %h ", WB_regwrite,   (WB_data_write == WB_imm), top.wb_stage.WB_sel_to_reg,$past(top.MEM_sel_to_reg),$past(top.EX_sel_to_reg,2), $past(top.ID_sel_to_reg,3), $past(top.id_stage.sel_to_reg,4),$past(top.id_stage.decode.opcode,4) );
+  end
 
+  property check_auipc_instr;
+    @(posedge clk)
+    (is_auipc_instr) |=> (!IF_ID_flush)  |=>  ((ID_imm == imm_u)) &  (no_hazard) & ((alu_result == (op_a_alu + op_b_alu)) & ( op_a_alu == ID_pc ) & (op_b_alu == ID_imm ) & (ID_imm == imm_u))  |-> ##2 ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (WB_data_write == WB_alu_result));       
+  endproperty
+  auipc_instr : assert property (check_auipc_instr) else begin
+    $display ("check auipc instr fail");
+  end
 
+  // LOAD , STORE INSTR
+  property check_lw_instr;
+    @(posedge clk) 
+    (is_lw_instr) |-> ##2 (no_hazard) &((alu_result == (op_a_alu + op_b_alu)) & ( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b1)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (WB_data_write == WB_dmem_data )) ; 
+  endproperty
+  lw_instr: assert property(check_lw_instr) else begin
+    $display ("check lw instr fail");
+  end
 
+  property check_lh_instr;
+    @(posedge clk) 
+    (is_lh_instr) |-> ##2 (no_hazard) &((alu_result == (op_a_alu + op_b_alu)) & ( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b1)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (WB_data_write == WB_dmem_data )) ; 
+  endproperty
+  lh_instr: assert property(check_lh_instr) else begin
+    $display ("check lh instr fail");
+  end
 
+  property check_lb_instr;
+    @(posedge clk) 
+    (is_lb_instr) |=> (!IF_ID_flush) & (!stall) |=> (EX_flush) &  (no_hazard) & ((alu_result == (op_a_alu + op_b_alu)) & ( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b1)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (WB_data_write == WB_dmem_data )) ; 
+  endproperty
+  lb_instr: assert property(check_lb_instr) begin
+    $display ("check lb instr PASSS"); end
+  else begin 
+    $display ("check lb instr FAIL");
+  end
+
+  property check_lbu_instr;
+    @(posedge clk) 
+    (is_lbu_instr) |-> ##2 (no_hazard) &((alu_result == (op_a_alu + op_b_alu)) & ( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b1)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (WB_data_write == WB_dmem_data )) ; 
+  endproperty
+  lbu_instr: assert property(check_lbu_instr) else begin
+    $display ("check lbu instr fail");
+  end
+
+  property check_lhu_instr;
+    @(posedge clk) 
+    (is_lhu_instr) |-> ##2 (no_hazard) &((alu_result == (op_a_alu + op_b_alu)) & ( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b1)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (WB_data_write == WB_dmem_data )) ; 
+  endproperty
+  lhu_instr: assert property(check_lhu_instr) else begin
+    $display ("check lhu instr fail");
+  end
+
+  property check_sb_instr;
+    @(posedge clk) 
+    (is_sb_instr) |-> ##2 (no_hazard) &((alu_result == (op_a_alu + op_b_alu)) & ( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b1 ) & (MEM_RD == 1'b0)& (data_write_mem == mem_rs1_data )) ; 
+  endproperty
+  sb_instr: assert property(check_sb_instr) else begin
+    $display ("check sb instr fail");
+  end
+
+  property check_sh_instr;
+    @(posedge clk) 
+    (is_sh_instr) |-> ##2 (no_hazard) &((alu_result == (op_a_alu + op_b_alu)) & ( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b1 ) & (MEM_RD == 1'b0) & (data_write_mem == mem_rs1_data )) ; 
+  endproperty
+  sh_instr: assert property(check_sh_instr) else begin
+    $display ("check sh instr fail");
+  end
+
+  property check_sw_instr;
+    @(posedge clk) 
+    (is_sw_instr) |-> ##2 (no_hazard) &((alu_result == (op_a_alu + op_b_alu)) & ( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b1 ) & (MEM_RD == 1'b0) & (data_write_mem == mem_rs1_data )) ; 
+  endproperty
+  sw_instr: assert property(check_sw_instr) else begin
+    $display ("check sw instr fail");
+  end
+
+  // BRANCH INSTR
+  property check_beg_instr;
+    @(posedge clk) 
+    (is_beg_instr) |-> ##2 (no_hazard) &((EX_zero == (op_a_alu ==  op_b_alu)? 1'b1 : 1'b0) & ( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_rs2_data )) |-> ##1 (( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) ; 
+  endproperty
+  beg_instr: assert property(check_beg_instr) else begin
+    $display ("check beg instr fail");
+  end
+
+  property check_bne_instr;
+    @(posedge clk) 
+    (is_bne_instr) |-> ##2 ((no_hazard) &(EX_zero == (op_a_alu !=  op_b_alu)? 1'b1 : 1'b0) & ( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_rs2_data )) |-> ##1 (( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) ; 
+  endproperty
+  bne_instr: assert property(check_bne_instr) else begin
+    $display ("check bne instr fail");
+  end
+
+  property check_blt_instr;
+    @(posedge clk) 
+    (is_blt_instr) |-> ##2 ((no_hazard) &(EX_zero == ($signed(op_a_alu) <  $signed(op_b_alu)) ? 1'b1 : 1'b0) & ( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_rs2_data )) |-> ##1 (( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) ; 
+  endproperty
+  blt_instr: assert property(check_blt_instr) else begin
+    $display ("check blt instr fail");
+  end
+
+  property check_bge_instr;
+    @(posedge clk) 
+    (is_bge_instr) |-> ##2 ((no_hazard) &(EX_zero <= (op_a_alu !=  op_b_alu)? 1'b1 : 1'b0) & ( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_rs2_data )) |-> ##1 (( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) ; 
+  endproperty
+  bge_instr: assert property(check_bge_instr) else begin
+    $display ("check bge instr fail");
+  end
+
+  property check_bltu_instr;
+    @(posedge clk) 
+    (is_bltu_instr) |-> ##2 ((no_hazard) &(EX_zero == (op_a_alu <  op_b_alu)? 1'b1 : 1'b0) & ( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_rs2_data )) |-> ##1 (( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) ; 
+  endproperty
+  bltu_instr: assert property(check_bltu_instr) else begin
+    $display ("check bltu instr fail");
+  end
+
+  property check_bgeu_instr;
+    @(posedge clk) 
+    (is_bgeu_instr) |-> ##2 ((no_hazard) &(EX_zero == (op_a_alu >=  op_b_alu)? 1'b1 : 1'b0) & ( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_rs2_data )) |-> ##1 (( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) ; 
+  endproperty
+  bgeu_instr: assert property(check_bgeu_instr) else begin
+    $display ("check bgeu instr fail");
+  end
 
 
 

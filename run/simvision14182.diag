@@ -1,0 +1,90 @@
+*** Message Type: info ***
+When: T6 Th10 04 23:34:52 +07 2024
+SimVision started.
+Version: TOOL:  simvision       23.09-s001
+User: usr3
+Host: edabk.server1
+Platform: Linux/x86_64/3.10.0-1160.119.1.el7.x86_64
+Started: T6 Th10 04 23:34:52 +07 2024
+Command: /home/edabk/Cadence/XCELIUM2309/tools.lnx86/simvision/bin/simvision.exe -connect dc:edabk.server1:58469 -nocopyright
+Work Directory: /home/usr3/project/CPU_5stage_pipeline/run
+ 
+*** Message Type: info ***
+When: T6 Th10 04 23:34:52 +07 2024
+Create browser window: "Design Browser 1"
+ 
+*** Message Type: info ***
+When: T6 Th10 04 23:35:02 +07 2024
+Create console window: "Console"
+ 
+*** Message Type: info ***
+When: T6 Th10 04 23:35:06 +07 2024
+Connect to Simulator
+      Design: worklib.testbench:sv
+   Languages: verilog assertion
+   Simulator: XM-Sim
+     Version: TOOL:     xmsim   23.09-s001
+        User: usr3
+        Host: edabk.server1
+Time Started: T6 Th10 04 23:34:38 +07 2024
+  Process ID: 14109
+   Directory: /home/usr3/project/CPU_5stage_pipeline/run
+     Command: xrun -sv -f list_file.f -access +rwc -gui
+
+ 
+*** Message Type: info ***
+When: T6 Th10 04 23:35:08 +07 2024
+Create utility window: "Properties"
+ 
+*** Message Type: info ***
+When: T6 Th10 04 23:35:15 +07 2024
+Create waveform window: "Waveform 1"
+ 
+*** Message Type: info ***
+When: T6 Th10 04 23:37:56 +07 2024
+Delete waveform window: "Waveform 1"
+ 
+*** Message Type: info ***
+When: T6 Th10 04 23:38:21 +07 2024
+Exit XM-Sim: abnormal
+      Design: worklib.testbench:sv
+   Languages: verilog assertion
+   Simulator: XM-Sim
+     Version: TOOL:     xmsim   23.09-s001
+        User: usr3
+        Host: edabk.server1
+Time Started: T6 Th10 04 23:34:38 +07 2024
+  Process ID: 14109
+   Directory: /home/usr3/project/CPU_5stage_pipeline/run
+     Command: xrun -sv -f list_file.f -access +rwc -gui
+
+ 
+*** Message Type: error ***
+When: T6 Th10 04 23:38:21 +07 2024
+XM-Sim Crashed:
+      Design: worklib.testbench:sv
+   Languages: verilog assertion
+   Simulator: XM-Sim
+     Version: TOOL:     xmsim   23.09-s001
+        User: usr3
+        Host: edabk.server1
+Time Started: T6 Th10 04 23:34:38 +07 2024
+  Process ID: 14109
+   Directory: /home/usr3/project/CPU_5stage_pipeline/run
+     Command: xrun -sv -f list_file.f -access +rwc -gui
+      Design: worklib.testbench:sv
+   Languages: verilog assertion
+   Simulator: XM-Sim
+     Version: TOOL:   xmsim   23.09-s001
+        User: usr3
+        Host: edabk.server1
+Time Started: T6 Th10 04 23:34:38 +07 2024
+  Process ID: 14109
+   Directory: /home/usr3/project/CPU_5stage_pipeline/run
+     Command: xrun -sv -f list_file.f -access +rwc -gui
+
+ 
+*** Message Type: info ***
+When: T6 Th10 04 23:38:25 +07 2024
+SimVision Exit.
+ 

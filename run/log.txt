@@ -1,5 +1,5 @@
 xrun: 23.09-s001: (c) Copyright 1995-2023 Cadence Design Systems, Inc.
-TOOL:	xrun	23.09-s001: Started on Oct 03, 2024 at 21:24:59 +07
+TOOL:	xrun	23.09-s001: Started on Oct 09, 2024 at 12:57:05 +07
 xrun
 	-sv
 	-f list_file.f
@@ -24,60 +24,197 @@ xrun
 		/home/usr3/project/CPU_5stage_pipeline/rtl/COMPRESSED_DECODER.sv
 		/home/usr3/project/CPU_5stage_pipeline/rtl/csr.sv
 		/home/usr3/project/CPU_5stage_pipeline/tb/test_case.sv
+		/home/usr3/project/CPU_5stage_pipeline/tb/check_FSM.sv
+		/home/usr3/project/CPU_5stage_pipeline/tb/check_hazard.sv
 	-access +rwc
 	-log log.txt
+Recompiling... reason: file '../tb/check_hazard.sv' is newer than expected.
+	expected: Tue Oct  8 18:27:02 2024
+	actual:   Wed Oct  9 12:57:03 2024
+file: /home/usr3/project/CPU_5stage_pipeline/tb/check_hazard.sv
+	module worklib.check_hazard:sv
+		errors: 0, warnings: 0
+		Caching library 'worklib' ....... Done
+	Elaborating the design hierarchy:
+	Top level design units:
+		pkg
+		testbench
+		Caching library 'worklib' ....... Done
+  ,.ID_imm_i_type_o      (ID_imm_i_type       )             
+                                      |
+xmelab: *W,CUVMPW (../rtl/CPU_EDABK_TOP.sv,301|38): port sizes differ in port connection(32/1) for the instance(testbench.top) .
+  ,.ID_imm_s_type_o      (ID_imm_s_type       )             
+                                      |
+xmelab: *W,CUVMPW (../rtl/CPU_EDABK_TOP.sv,302|38): port sizes differ in port connection(32/1) for the instance(testbench.top) .
+  ,.ID_imm_b_type_o      (ID_imm_b_type       )             
+                                      |
+xmelab: *W,CUVMPW (../rtl/CPU_EDABK_TOP.sv,303|38): port sizes differ in port connection(32/1) for the instance(testbench.top) .
+  ,.ID_imm_u_type_o      (ID_imm_u_type       )             
+                                      |
+xmelab: *W,CUVMPW (../rtl/CPU_EDABK_TOP.sv,304|38): port sizes differ in port connection(32/1) for the instance(testbench.top) .
+  ,.ID_imm_j_type_o      (ID_imm_j_type       )             
+                                      |
+xmelab: *W,CUVMPW (../rtl/CPU_EDABK_TOP.sv,305|38): port sizes differ in port connection(32/1) for the instance(testbench.top) .
+    $readmemh("../tb/random/instr_set_1.dat", IMEM);
+                                                 |
+xmelab: *W,MEMODR (../tb/testbench.sv,292|49): $readmem default memory order incompatible with IEEE1364.
+    $readmemh("../init/dmem.dat", DMEM);
+                                     |
+xmelab: *W,MEMODR (../tb/testbench.sv,295|37): $readmem default memory order incompatible with IEEE1364.
+    $readmemh("../init/reg_file_1.dat", REG_FILE);
+                                               |
+xmelab: *W,MEMODR (../tb/testbench.sv,298|47): $readmem default memory order incompatible with IEEE1364.
+ ctrl_fsm_e current_state; assign current_state = top.control_main.current_state;
+                                                                               |
+xmelab: *W,ENUMERR (../tb/test_case.sv,189|79): This assignment is a violation of SystemVerilog strong typing rules for enumeration datatypes.
+ ctrl_fsm_e current_state; assign current_state = top.control_main.current_state;
+                                                                               |
+xmelab: *W,ENUMERR (../tb/check_hazard.sv,163|79): This assignment is a violation of SystemVerilog strong typing rules for enumeration datatypes.
+ctrl_fsm_e current_state;assign  current_state = top.control_main.current_state ; 
+                                                                              |
+xmelab: *W,ENUMERR (../tb/check_FSM.sv,26|78): This assignment is a violation of SystemVerilog strong typing rules for enumeration datatypes.
+ctrl_fsm_e next_state   ;assign  next_state    = top.control_main.next_state    ;
+                                                                           |
+xmelab: *W,ENUMERR (../tb/check_FSM.sv,27|75): This assignment is a violation of SystemVerilog strong typing rules for enumeration datatypes.
+	Building instance overlay tables: .................... Done
+	Generating native compiled code:
+		worklib.check_hazard:sv <0x3393ea9c>
+			streams: 169, words: 64732
+	Building instance specific data structures.
+    ,.instr_is_compressed_i   (IF_instr_is_compressed)       
+                                                    |
+xmelab: *W,CSINFI (../rtl/CPU_EDABK_TOP.sv,467|52): implicit wire has no fanin (testbench.top.IF_instr_is_compressed).
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		                Instances  Unique
+		Modules:               30      20
+		Verilog packages:       2       2
+		Registers:           1407    1378
+		Scalar wires:         560       -
+		Vectored wires:       456       -
+		Named events:          73      73
+		Always blocks:        340     331
+		Initial blocks:       112     112
+		Cont. assignments:    347     405
+		Pseudo assignments:   367       -
+		Assertions:            52      52
+		Process Clocks:        78       6
+	Writing initial simulation snapshot: worklib.testbench:sv
 Loading snapshot worklib.testbench:sv .................... Done
 xcelium> source /home/edabk/Cadence/XCELIUM2309/tools/xcelium/files/xmsimrc
 xcelium> run
- ISSSSSS ADD INSTRUCTION
- NOT ISSSSSS ADDDD INSTRUCTION
-this is  ADDI  instruction 00010413
-this is ADDI instruction IMM =           0
- MEM_1  08522223
- A_MEM_1  00000004
-instr  08522223
-mem  0000000c
-mem  0000000e
-mem  00000008
-mem  00000004
-mem  0000000c
- ISSSSSS ADD INSTRUCTION
- NOT ISSSSSS ADDDD INSTRUCTION
- ISSSSSS ADD INSTRUCTION
- NOT ISSSSSS ADDDD INSTRUCTION
-this is  ADDI  instruction 02028313
-this is ADDI instruction IMM =          32
- ISSSSSS ADD INSTRUCTION
- NOT ISSSSSS ADDDD INSTRUCTION
- ISSSSSS ADD INSTRUCTION
- NOT ISSSSSS ADDDD INSTRUCTION
-this is branch instruction 00631663
-this is branch instruction IMM =          12
- ISSSSSS ADD INSTRUCTION
- NOT ISSSSSS ADDDD INSTRUCTION
- ISSSSSS ADD INSTRUCTION
- NOT ISSSSSS ADDDD INSTRUCTION
- ISSSSSS ADD INSTRUCTION
- NOT ISSSSSS ADDDD INSTRUCTION
- ISSSSSS ADD INSTRUCTION
- NOT ISSSSSS ADDDD INSTRUCTION
- ISSSSSS ADD INSTRUCTION
- NOT ISSSSSS ADDDD INSTRUCTION
-this is  ADDI  instruction 02028313
-this is ADDI instruction IMM =          32
- ISSSSSS ADD INSTRUCTION
- NOT ISSSSSS ADDDD INSTRUCTION
- ISSSSSS ADD INSTRUCTION
- NOT ISSSSSS ADDDD INSTRUCTION
-this is branch instruction 00631663
-this is branch instruction IMM =          12
- ISSSSSS ADD INSTRUCTION
- NOT ISSSSSS ADDDD INSTRUCTION
- ISSSSSS ADD INSTRUCTION
- NOT ISSSSSS ADDDD INSTRUCTION
- ISSSSSS ADD INSTRUCTION
- NOT ISSSSSS ADDDD INSTRUCTION
+[HAZARD] pass HAZARD imm 2
+[INSTR] check srl pass
+[INSTR] check srl pass
+[INSTR] check sra pass
+[INSTR] check and pass
+[HAZARD] pass HAZARD 1
+[INSTR] check add pass
+[INSTR] check slt pass
+[INSTR] check sra pass
+[HAZARD] pass HAZARD imm rs1
+[INSTR] check or pass
+[INSTR] check or pass
+[HAZARD] pass HAZARD 1
+[INSTR] check and pass
+[HAZARD] pass HAZARD 1
+[INSTR] check or pass
+[HAZARD] pass HAZARD imm rs1
+[INSTR] check and pass
+[INSTR] check and pass
+[HAZARD] pass HAZARD imm 2
+[INSTR] check xor pass
+[INSTR] check or pass
+[INSTR] check add pass
+[HAZARD] pass HAZARD 2
+[HAZARD] pass HAZARD 3
+[HAZARD] pass HAZARD 4
+[INSTR] check or pass
+[INSTR] check slt pass
+[HAZARD] pass HAZARD imm 2
+[INSTR] check slt pass
+[HAZARD] pass HAZARD imm 2
+[HAZARD] pass HAZARD 1
+[INSTR] check or pass
+[HAZARD] pass HAZARD imm rs1
+[HAZARD] pass HAZARD imm 2
+[INSTR] check and pass
+[INSTR] check add pass
+    (is_op_instr & (current_state == PROCESSING) & (!IF_ID_flush ))  |=> (!IF_ID_flush) |=> (!EX_flush)  & (( op_a_alu == EX_alu_result ) & (op_b_alu == ID_rs2_data )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == ($past(alu_result,2))) ) ; 
+                                                                                                                                                                                                                                                                                             |
+xmsim: *E,ASRTST (../tb/check_hazard.sv,170): (time 2810 NS) Assertion testbench.top.hazard_check.add_instr_hazard_EX_rs1 has failed (5 cycles, starting 2770 NS)
+check hazard 1 fail
+[HAZARD] pass HAZARD load rs1
+[HAZARD] pass HAZARD load 2
+[HAZARD] pass HAZARD imm rs1
+[HAZARD] pass HAZARD 1
+[INSTR] check add pass
+[HAZARD] pass HAZARD imm rs1
+[HAZARD] pass HAZARD imm 2
+[HAZARD] pass HAZARD load rs1
+[HAZARD] pass HAZARD load 2
+[INSTR] check xor pass
+[INSTR] check xor pass
+[HAZARD] pass HAZARD 1
+[INSTR] check add pass
+[HAZARD] pass HAZARD 1
+[INSTR] check add pass
+[HAZARD] pass HAZARD 1
+[INSTR] check slt pass
+[HAZARD] pass HAZARD imm rs1
+[HAZARD] pass HAZARD imm 2
+[HAZARD] pass HAZARD imm rs1
+[HAZARD] pass HAZARD imm 2
+[HAZARD] pass HAZARD imm rs1
+[HAZARD] pass HAZARD imm 2
+[HAZARD] pass HAZARD 1
+[HAZARD] pass HAZARD 1
+[HAZARD] pass HAZARD 3
+[HAZARD] pass HAZARD 4
+[INSTR] check and pass
+[INSTR] check or pass
+[HAZARD] pass HAZARD imm rs1
+[HAZARD] pass HAZARD imm rs1
+[HAZARD] pass HAZARD imm 2
+[INSTR] check slt pass
+[INSTR] check or pass
+[HAZARD] pass HAZARD imm 2
+[HAZARD] pass HAZARD imm 2
+[HAZARD] pass HAZARD imm 2
+[HAZARD] pass HAZARD 1
+[HAZARD] pass HAZARD imm 2
+[HAZARD] pass HAZARD imm 2
+[INSTR] check and pass
+[HAZARD] pass HAZARD imm rs1
+[HAZARD] pass HAZARD imm 2
+[HAZARD] pass HAZARD imm 2
+[HAZARD] pass HAZARD 3
+[HAZARD] pass HAZARD 4
+[HAZARD] pass HAZARD load rs1
+[HAZARD] pass HAZARD load 2
+[INSTR] check slt pass
+[HAZARD] pass HAZARD imm rs1
+[HAZARD] pass HAZARD imm 2
+[INSTR] check and pass
+[INSTR] check add pass
+[INSTR] check sub pass
+[HAZARD] pass HAZARD imm rs1
+[INSTR] check xor pass
+[INSTR] check or pass
+[HAZARD] pass HAZARD imm rs1
+[HAZARD] pass HAZARD imm 2
+[HAZARD] pass HAZARD load rs1
+[HAZARD] pass HAZARD load 2
+[INSTR] check slt pass
+[HAZARD] pass HAZARD load rs1
+[HAZARD] pass HAZARD load 2
+[INSTR] check slt pass
+[INSTR] check xor pass
+[INSTR] check add pass
+[INSTR] check and pass
+[INSTR] check add pass
+[INSTR] check xor pass
 Simulation complete via $finish(1) at time 10 US + 0
-../tb/testbench.sv:307    #10000  $finish;
+../tb/testbench.sv:358    #10000  $finish;
 xcelium> exit
-TOOL:	xrun	23.09-s001: Exiting on Oct 03, 2024 at 21:25:00 +07  (total: 00:00:01)
+TOOL:	xrun	23.09-s001: Exiting on Oct 09, 2024 at 12:57:07 +07  (total: 00:00:02)

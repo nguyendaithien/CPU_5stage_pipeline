@@ -1,0 +1,250 @@
+
+#
+# Preferences
+#
+preferences set toolbar-Standard-WatchWindow {
+  usual
+  shown 0
+}
+preferences set plugin-enable-svdatabrowser-new 1
+preferences set toolbar-Windows-WatchWindow {
+  usual
+  shown 0
+}
+preferences set plugin-enable-groupscope 0
+preferences set plugin-enable-interleaveandcompare 0
+preferences set plugin-enable-waveformfrequencyplot 0
+preferences set toolbar-SimControl-WatchWindow {
+  usual
+  shown 0
+}
+preferences set toolbar-TimeSearch-WatchWindow {
+  usual
+  shown 0
+}
+#
+# Groups
+#
+catch {group new -name {add_instr contributors} -overlay 0}
+group using {add_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.add_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.is_add_instr \
+    simulator::testbench.top.check.check_add_1 \
+    simulator::testbench.top.check.check_add_2 \
+    simulator::testbench.top.check.check_add_3 \
+    simulator::testbench.top.id_stage.data_write_reg[31:0] \
+    simulator::testbench.top.control_main.current_state[3:0] \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.no_hazard \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.WB_regwrite \
+    simulator::testbench.top.check.ID_rs2_data[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.MEM_RD
+
+#
+# Mnemonic Maps
+#
+mmap new  -reuse -name {Boolean as Logic} -radix %b -contents {{%c=FALSE -edgepriority 1 -shape low}
+{%c=TRUE -edgepriority 1 -shape high}}
+mmap new  -reuse -name {Example Map} -radix %x -contents {{%b=11???? -bgcolor orange -label REG:%x -linecolor yellow -shape bus}
+{%x=1F -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=2C -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=* -label %x -linecolor gray -shape bus}}
+
+#
+# Design Browser windows
+#
+if {[catch {window new WatchList -name "Design Browser 1" -geometry 1360x665+-1+27}] != ""} {
+    window geometry "Design Browser 1" 1360x665+-1+27
+}
+window target "Design Browser 1" on
+browser using {Design Browser 1}
+browser set -scope  simulator::testbench.top.wb_stage 
+browser set \
+    -signalsort name
+browser yview see  simulator::testbench.top.wb_stage 
+browser timecontrol set -lock 0
+
+#
+# Waveform windows
+#
+if {[catch {window new WaveWindow -name "Waveform 1" -geometry 1360x665+-1+27}] != ""} {
+    window geometry "Waveform 1" 1360x665+-1+27
+}
+window target "Waveform 1" on
+waveform using {Waveform 1}
+waveform sidebar visibility partial
+waveform set \
+    -primarycursor TimeA \
+    -signalnames name \
+    -signalwidth 228 \
+    -units ns \
+    -valuewidth 75
+waveform baseline set -time 0
+
+set id [waveform add -signals  {
+	simulator::testbench.top.if_stage.clk
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.if_stage.DATA_WIDTH
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.IF_exc_sel_i[1:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.IF_instr_compressed_o[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.if_stage.IF_instr_fetch_err_o
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.IF_instr_i[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.IF_instr_o[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.IF_pc_o[31:0]}
+	} ]
+waveform format $id -radix %d
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.IF_pc_sel_mux_i[2:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.IMEM_add_o[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.IMEM_data_i[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.Instr[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.boot_addr_i[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.csr_depc_i[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.csr_mepc_i[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.csr_mtvec_i[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.exc_add[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.if_stage.flush
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.if_stage.illegal_instr
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.if_stage.illegal_instr_o
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.if_stage.is_compressed
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.if_stage.is_compressed_o
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.pc_dest[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.pc_next[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.if_stage.pc_sel
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.if_stage.pc_set_i
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.if_stage.rst_n
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.if_stage.stall
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.control_hazard.hazard
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.control_hazard.EX_flush_o
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.control_hazard.IF_ID_flush_o
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.control_hazard.stall_o
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.check.add_instr
+	} ]
+waveform hierarchy expand $id
+set id2 [lindex [waveform hierarchy content $id] 0]
+waveform hierarchy collapse $id2
+set id [waveform add -signals  {
+	{simulator::testbench.top.check.data_write_reg[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.id_stage.ID_rf_wdata_sel_i
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.check.WB_data_write[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.ex_stage.alu_result[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.wb_stage.WB_sel_to_reg_i[1:0]}
+	} ]
+waveform format $id -radix %b
+set id [waveform add -signals  {
+	{simulator::testbench.top.wb_stage.WB_alu_result[31:1]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.id_stage.WB_data_i[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.wb_stage.WB_data_write_reg_o[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.check.alu_result[31:0]}
+	} ]
+
+set groupId0 [waveform add -groups {{add_instr contributors}}]
+
+
+waveform xview limits 0 250ns
+
+#
+# Waveform Window Links
+#
+
+#
+# Assertion Browser windows
+#
+if {[catch {window new AssertionBrowser -name "Assertion Browser 1" -geometry 790x570+73+103}] != ""} {
+    window geometry "Assertion Browser 1" 790x570+73+103
+}
+window target "Assertion Browser 1" on
+assertbrowser using {Assertion Browser 1}
+
+#
+# Console windows
+#
+console set -windowname Console
+window geometry Console 730x250+261+564
+
+#
+# Layout selection
+#

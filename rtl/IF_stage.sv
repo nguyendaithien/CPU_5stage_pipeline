@@ -36,6 +36,7 @@ module IF_stage #( parameter DATA_WIDTH = 32) (
 
   assign illegal_instr_o = illegal_instr;
   assign is_compressed_o = is_compressed;
+  assign Instr = IF_instr_i;
 
   always @(posedge clk) begin
     if(!rst_n) begin
@@ -80,7 +81,7 @@ module IF_stage #( parameter DATA_WIDTH = 32) (
 
       
 	 always @(posedge clk or posedge flush) begin
-	 	 if(flush) begin
+	 	 if(flush | ~pc_set_i) begin
        IF_instr_o <= 32'd0;
 		 end
 		 else begin
@@ -105,7 +106,7 @@ module IF_stage #( parameter DATA_WIDTH = 32) (
      ,. rst_ni           (rst_n                )
      ,. valid_i          (1'b1                 )
      ,. instr_i          (IF_instr_i           )
-     ,. instr_o          (Instr                )
+     ,. instr_o          (                )
      ,. is_compressed_o  (is_compressed        )
      ,. illegal_instr_o  (illegal_instr        )
      ,.instr_compressed_o(IF_instr_compressed_o)

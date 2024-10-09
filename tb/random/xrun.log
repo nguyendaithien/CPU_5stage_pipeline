@@ -1,0 +1,14 @@
+xrun: 23.09-s001: (c) Copyright 1995-2023 Cadence Design Systems, Inc.
+TOOL:	xrun	23.09-s001: Started on Oct 09, 2024 at 11:03:03 +07
+xrun
+	-sv
+	cover_point.sv
+file: cover_point.sv
+coverpoint mode {
+         |
+xmvlog: *E,MPANDC (cover_point.sv,1|9): expecting the keyword 'module', 'macromodule', 'primitive', 'connectmodule','connect', 'discipline' or 'nature' [A.1].
+xmvlog: *W,NOTOPL: no top-level unit found, must have recursive instances.
+	Total errors/warnings found outside modules and primitives:
+		errors: 1, warnings: 1
+xrun: *E,VLGERR: An error occurred during parsing.  Review the log file for errors with the code *E and fix those identified problems to proceed.  Exiting with code (status 1).
+TOOL:	xrun	23.09-s001: Exiting on Oct 09, 2024 at 11:03:03 +07  (total: 00:00:00)

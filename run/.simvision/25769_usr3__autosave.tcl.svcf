@@ -1,0 +1,880 @@
+
+#
+# Preferences
+#
+preferences set toolbar-Standard-WatchWindow {
+  usual
+  shown 0
+}
+preferences set plugin-enable-svdatabrowser-new 1
+preferences set toolbar-Windows-WatchWindow {
+  usual
+  shown 0
+}
+preferences set plugin-enable-groupscope 0
+preferences set plugin-enable-interleaveandcompare 0
+preferences set plugin-enable-waveformfrequencyplot 0
+preferences set toolbar-SimControl-WatchWindow {
+  usual
+  shown 0
+}
+preferences set toolbar-TimeSearch-WatchWindow {
+  usual
+  shown 0
+}
+#
+# Groups
+#
+catch {group new -name {check_add_1 contributors} -overlay 0}
+catch {group new -name {check_add_2 contributors} -overlay 0}
+catch {group new -name {check_add_3 contributors} -overlay 0}
+catch {group new -name {add_instr contributors} -overlay 0}
+catch {group new -name {sub_instr contributors} -overlay 0}
+catch {group new -name {sll_instr contributors} -overlay 0}
+catch {group new -name {slt_instr contributors} -overlay 0}
+catch {group new -name {sltu_instr contributors} -overlay 0}
+catch {group new -name {xor_instr contributors} -overlay 0}
+catch {group new -name {srl_instr contributors} -overlay 0}
+catch {group new -name {sra_instr contributors} -overlay 0}
+catch {group new -name {or_instr contributors} -overlay 0}
+catch {group new -name {and_instr contributors} -overlay 0}
+catch {group new -name {addi_instr contributors} -overlay 0}
+catch {group new -name {ori_instr contributors} -overlay 0}
+catch {group new -name {xori_instr contributors} -overlay 0}
+catch {group new -name {slti_instr contributors} -overlay 0}
+catch {group new -name {sltiu_instr contributors} -overlay 0}
+catch {group new -name {srai_instr contributors} -overlay 0}
+catch {group new -name {srli_instr contributors} -overlay 0}
+catch {group new -name {slli_instr contributors} -overlay 0}
+catch {group new -name {lui_instr contributors} -overlay 0}
+catch {group new -name {auipc_instr contributors} -overlay 0}
+catch {group new -name {lw_instr contributors} -overlay 0}
+catch {group new -name {lh_instr contributors} -overlay 0}
+catch {group new -name {lb_instr contributors} -overlay 0}
+catch {group new -name {lbu_instr contributors} -overlay 0}
+catch {group new -name {lhu_instr contributors} -overlay 0}
+catch {group new -name {sb_instr contributors} -overlay 0}
+catch {group new -name {sh_instr contributors} -overlay 0}
+catch {group new -name {sw_instr contributors} -overlay 0}
+catch {group new -name {beg_instr contributors} -overlay 0}
+catch {group new -name {bne_instr contributors} -overlay 0}
+catch {group new -name {blt_instr contributors} -overlay 0}
+catch {group new -name {bge_instr contributors} -overlay 0}
+catch {group new -name {bltu_instr contributors} -overlay 0}
+catch {group new -name {bgeu_instr contributors} -overlay 0}
+group using {check_add_1 contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.check_add_1 contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.ID_rs2_data[31:0] \
+    simulator::testbench.top.check.rst_n \
+    simulator::testbench.top.check.is_add_instr \
+    simulator::testbench.top.check.no_hazard \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0]
+group using {check_add_2 contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.check_add_2 contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.MEM_RD \
+    simulator::testbench.top.check.rst_n \
+    simulator::testbench.top.check.is_add_instr \
+    simulator::testbench.top.check.no_hazard \
+    simulator::testbench.top.check.MEM_WR
+group using {check_add_3 contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.check_add_3 contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.rst_n \
+    simulator::testbench.top.check.is_add_instr \
+    simulator::testbench.top.check.no_hazard \
+    simulator::testbench.top.check.WB_regwrite \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.WB_data_write[31:0]
+group using {add_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.add_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.is_add_instr \
+    simulator::testbench.top.check.current_state[3:0] \
+    simulator::testbench.top.check.no_hazard \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.WB_data_write[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.WB_regwrite \
+    simulator::testbench.top.check.ID_rs2_data[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.MEM_RD
+group using {sub_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.sub_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.is_sub_instr \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.WB_data_write[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.WB_regwrite \
+    simulator::testbench.top.check.ID_rs2_data[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.MEM_RD
+group using {sll_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.sll_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.is_sll_instr \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[4] \
+    simulator::testbench.top.check.op_b_alu[3] \
+    simulator::testbench.top.check.op_b_alu[2] \
+    simulator::testbench.top.check.op_b_alu[1] \
+    simulator::testbench.top.check.op_b_alu[0] \
+    simulator::testbench.top.check.WB_data_write[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.ID_rs2_data[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.MEM_RD \
+    simulator::testbench.top.check.WB_regwrite
+group using {slt_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.slt_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.is_slt_instr \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.WB_data_write[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.WB_regwrite \
+    simulator::testbench.top.check.ID_rs2_data[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.MEM_RD
+group using {sltu_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.sltu_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.is_sltu_instr \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.WB_data_write[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.WB_regwrite \
+    simulator::testbench.top.check.ID_rs2_data[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.MEM_RD
+group using {xor_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.xor_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.is_xor_instr \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.WB_data_write[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.WB_regwrite \
+    simulator::testbench.top.check.ID_rs2_data[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.MEM_RD
+group using {srl_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.srl_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.is_srl_instr \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[4] \
+    simulator::testbench.top.check.op_b_alu[3] \
+    simulator::testbench.top.check.op_b_alu[2] \
+    simulator::testbench.top.check.op_b_alu[1] \
+    simulator::testbench.top.check.op_b_alu[0] \
+    simulator::testbench.top.check.WB_data_write[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.ID_rs2_data[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.MEM_RD \
+    simulator::testbench.top.check.WB_regwrite
+group using {sra_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.sra_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.is_sra_instr \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[4] \
+    simulator::testbench.top.check.op_b_alu[3] \
+    simulator::testbench.top.check.op_b_alu[2] \
+    simulator::testbench.top.check.op_b_alu[1] \
+    simulator::testbench.top.check.op_b_alu[0] \
+    simulator::testbench.top.check.WB_data_write[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.ID_rs2_data[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.MEM_RD \
+    simulator::testbench.top.check.WB_regwrite
+group using {or_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.or_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.is_or_instr \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.WB_data_write[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.WB_regwrite \
+    simulator::testbench.top.check.ID_rs2_data[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.MEM_RD
+group using {and_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.and_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.is_and_instr \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.WB_data_write[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.WB_regwrite \
+    simulator::testbench.top.check.ID_rs2_data[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.MEM_RD
+group using {addi_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.addi_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.is_addi_instr \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.WB_data_write[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.WB_regwrite \
+    simulator::testbench.top.check.ID_imm[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.MEM_RD
+group using {ori_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.ori_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.is_ori_instr \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.WB_data_write[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.WB_regwrite \
+    simulator::testbench.top.check.ID_imm[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.MEM_RD
+group using {xori_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.xori_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.is_xori_instr \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.WB_data_write[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.WB_regwrite \
+    simulator::testbench.top.check.ID_imm[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.MEM_RD
+group using {slti_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.slti_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.is_slti_instr \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.WB_data_write[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.WB_regwrite \
+    simulator::testbench.top.check.ID_imm[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.MEM_RD
+group using {sltiu_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.sltiu_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.is_sltiu_instr \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.WB_data_write[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.WB_regwrite \
+    simulator::testbench.top.check.ID_imm[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.MEM_RD
+group using {srai_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.srai_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.is_srai_instr \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[4] \
+    simulator::testbench.top.check.op_b_alu[3] \
+    simulator::testbench.top.check.op_b_alu[2] \
+    simulator::testbench.top.check.op_b_alu[1] \
+    simulator::testbench.top.check.op_b_alu[0] \
+    simulator::testbench.top.check.WB_data_write[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.ID_imm[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.MEM_RD \
+    simulator::testbench.top.check.WB_regwrite
+group using {srli_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.srli_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.is_srli_instr \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[4] \
+    simulator::testbench.top.check.op_b_alu[3] \
+    simulator::testbench.top.check.op_b_alu[2] \
+    simulator::testbench.top.check.op_b_alu[1] \
+    simulator::testbench.top.check.op_b_alu[0] \
+    simulator::testbench.top.check.WB_data_write[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.ID_imm[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.MEM_RD \
+    simulator::testbench.top.check.WB_regwrite
+group using {slli_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.slli_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.is_slli_instr \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[4] \
+    simulator::testbench.top.check.op_b_alu[3] \
+    simulator::testbench.top.check.op_b_alu[2] \
+    simulator::testbench.top.check.op_b_alu[1] \
+    simulator::testbench.top.check.op_b_alu[0] \
+    simulator::testbench.top.check.WB_data_write[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.ID_imm[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.MEM_RD \
+    simulator::testbench.top.check.WB_regwrite
+group using {lui_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.lui_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.WB_imm[31:0] \
+    simulator::testbench.top.check.is_lui_instr \
+    simulator::testbench.top.check.ID_imm[31:0] \
+    simulator::testbench.top.check.imm_u[31:0] \
+    simulator::testbench.top.check.WB_regwrite \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.WB_data_write[31:0]
+group using {auipc_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.auipc_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.WB_imm[31:0] \
+    simulator::testbench.top.check.is_auipc_instr \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.WB_data_write[31:0] \
+    simulator::testbench.top.check.ID_pc[31:0] \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.ID_imm[31:0] \
+    simulator::testbench.top.check.WB_regwrite \
+    simulator::testbench.top.check.imm_u[31:0]
+group using {lw_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.lw_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.WB_dmem_data[31:0] \
+    simulator::testbench.top.check.is_lw_instr \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.WB_data_write[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.ID_imm[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.MEM_RD \
+    simulator::testbench.top.check.WB_regwrite
+group using {lh_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.lh_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.WB_dmem_data[31:0] \
+    simulator::testbench.top.check.is_lh_instr \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.WB_data_write[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.ID_imm[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.MEM_RD \
+    simulator::testbench.top.check.WB_regwrite
+group using {lb_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.lb_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.WB_dmem_data[31:0] \
+    simulator::testbench.top.check.is_lb_instr \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.WB_data_write[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.ID_imm[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.MEM_RD \
+    simulator::testbench.top.check.WB_regwrite
+group using {lbu_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.lbu_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.WB_dmem_data[31:0] \
+    simulator::testbench.top.check.is_lbu_instr \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.WB_data_write[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.ID_imm[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.MEM_RD \
+    simulator::testbench.top.check.WB_regwrite
+group using {lhu_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.lhu_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.WB_dmem_data[31:0] \
+    simulator::testbench.top.check.is_lhu_instr \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.WB_data_write[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.data_write_reg[31:0] \
+    simulator::testbench.top.check.ID_imm[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.MEM_RD \
+    simulator::testbench.top.check.WB_regwrite
+group using {sb_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.sb_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.mem_rs1_data[31:0] \
+    simulator::testbench.top.check.is_sb_instr \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.data_write_mem[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.MEM_RD \
+    simulator::testbench.top.check.ID_imm[31:0] \
+    simulator::testbench.top.check.MEM_WR
+group using {sh_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.sh_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.mem_rs1_data[31:0] \
+    simulator::testbench.top.check.is_sh_instr \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.data_write_mem[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.MEM_RD \
+    simulator::testbench.top.check.ID_imm[31:0] \
+    simulator::testbench.top.check.MEM_WR
+group using {sw_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.sw_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.mem_rs1_data[31:0] \
+    simulator::testbench.top.check.is_sw_instr \
+    simulator::testbench.top.check.alu_result[31:0] \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.data_write_mem[31:0] \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.MEM_RD \
+    simulator::testbench.top.check.ID_imm[31:0] \
+    simulator::testbench.top.check.MEM_WR
+group using {beg_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.beg_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.MEM_RD \
+    simulator::testbench.top.check.is_beg_instr \
+    simulator::testbench.top.check.EX_zero \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.ID_rs2_data[31:0]
+group using {bne_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.bne_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.MEM_RD \
+    simulator::testbench.top.check.is_bne_instr \
+    simulator::testbench.top.check.EX_zero \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.ID_rs2_data[31:0]
+group using {blt_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.blt_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.MEM_RD \
+    simulator::testbench.top.check.is_blt_instr \
+    simulator::testbench.top.check.EX_zero \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.ID_rs2_data[31:0]
+group using {bge_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.bge_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.MEM_RD \
+    simulator::testbench.top.check.is_bge_instr \
+    simulator::testbench.top.check.EX_zero \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.ID_rs2_data[31:0]
+group using {bltu_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.bltu_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.MEM_RD \
+    simulator::testbench.top.check.is_bltu_instr \
+    simulator::testbench.top.check.EX_zero \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.ID_rs2_data[31:0]
+group using {bgeu_instr contributors}
+group set -overlay 0
+group set -comment {simulator::testbench.top.check.bgeu_instr contributors}
+group clear 0 end
+
+group insert \
+    simulator::testbench.top.check.clk \
+    simulator::testbench.top.check.MEM_RD \
+    simulator::testbench.top.check.is_bgeu_instr \
+    simulator::testbench.top.check.EX_zero \
+    simulator::testbench.top.check.op_a_alu[31:0] \
+    simulator::testbench.top.check.op_b_alu[31:0] \
+    simulator::testbench.top.check.MEM_WR \
+    simulator::testbench.top.check.ID_rs1_data[31:0] \
+    simulator::testbench.top.check.ID_rs2_data[31:0]
+
+#
+# Mnemonic Maps
+#
+mmap new  -reuse -name {Boolean as Logic} -radix %b -contents {{%c=FALSE -edgepriority 1 -shape low}
+{%c=TRUE -edgepriority 1 -shape high}}
+mmap new  -reuse -name {Example Map} -radix %x -contents {{%b=11???? -bgcolor orange -label REG:%x -linecolor yellow -shape bus}
+{%x=1F -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=2C -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=* -label %x -linecolor gray -shape bus}}
+
+#
+# Design Browser windows
+#
+if {[catch {window new WatchList -name "Design Browser 1" -geometry 1360x665+-1+27}] != ""} {
+    window geometry "Design Browser 1" 1360x665+-1+27
+}
+window target "Design Browser 1" on
+browser using {Design Browser 1}
+browser set -scope  simulator::testbench.top.if_stage 
+browser set \
+    -signalsort name
+browser yview see  simulator::testbench.top.if_stage 
+browser timecontrol set -lock 0
+
+#
+# Waveform windows
+#
+if {[catch {window new WaveWindow -name "Waveform 2" -geometry 1360x665+-1+27}] != ""} {
+    window geometry "Waveform 2" 1360x665+-1+27
+}
+window target "Waveform 2" on
+waveform using {Waveform 2}
+waveform sidebar visibility partial
+waveform set \
+    -primarycursor TimeA \
+    -signalnames name \
+    -signalwidth 175 \
+    -units ns \
+    -valuewidth 75
+waveform baseline set -time 0
+
+set id [waveform add -signals  {
+	simulator::testbench.top.if_stage.flush
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.if_stage.DATA_WIDTH
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.IF_exc_sel_i[1:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.IF_instr_compressed_o[15:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.if_stage.IF_instr_fetch_err_o
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.IF_instr_i[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.IF_instr_o[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.IF_pc_o[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.IF_pc_sel_mux_i[2:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.IMEM_add_o[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.IMEM_data_i[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.Instr[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.boot_addr_i[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.if_stage.clk
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.csr_depc_i[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.csr_mepc_i[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.csr_mtvec_i[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.exc_add[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.if_stage.illegal_instr
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.if_stage.illegal_instr_o
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.if_stage.is_compressed
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.if_stage.is_compressed_o
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.pc_dest[31:0]}
+	} ]
+set id [waveform add -signals  {
+	{simulator::testbench.top.if_stage.pc_next[31:0]}
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.if_stage.pc_sel
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.if_stage.pc_set_i
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.if_stage.rst_n
+	} ]
+set id [waveform add -signals  {
+	simulator::testbench.top.if_stage.stall
+	} ]
+
+waveform xview limits 2997ns 4997ns
+
+#
+# Waveform Window Links
+#
+
+#
+# Assertion Browser windows
+#
+if {[catch {window new AssertionBrowser -name "Assertion Browser 1" -geometry 1360x665+-1+27}] != ""} {
+    window geometry "Assertion Browser 1" 1360x665+-1+27
+}
+window target "Assertion Browser 1" on
+assertbrowser using {Assertion Browser 1}
+
+#
+# Console windows
+#
+console set -windowname Console
+window geometry Console 730x250+261+564
+
+#
+# Layout selection
+#
