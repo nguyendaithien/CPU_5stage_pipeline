@@ -36,7 +36,6 @@ module testbench();
 
 
  parameter boot_add_radix = 32'd0;
- top_intf intf(clk, rst_n);	
  
   CPU_EDABK_TOP #( .DATA_WIDTH(32)) top (
      .clk                      ( clk                   )     

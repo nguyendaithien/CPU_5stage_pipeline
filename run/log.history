@@ -522,3 +522,12 @@ s521(10Oct2024:21:26:43):  xrun -sv -f list_file.f -access +rwc -coverage all -c
 s522(10Oct2024:21:26:56):  xrun -sv -f list_file.f -access +rwc -coverage all -covoverwrite -covworkdir ./cor_work -covfile ./coverage.ccf -log log.txt 
 s523(10Oct2024:21:27:25):  xrun -sv -f list_file.f -access +rwc -coverage all -covoverwrite -covworkdir ./cor_work -covfile ./coverage.ccf -log log.txt 
 s524(10Oct2024:21:27:35):  xrun -sv -f list_file.f -access +rwc -coverage all -covoverwrite -covworkdir ./cor_work -covfile ./coverage.ccf -log log.txt 
+s525(10Oct2024:21:42:24):  xrun -sv -f list_file.f -access +rwc -coverage all -covoverwrite -covworkdir ./cor_work -covfile ./coverage.ccf -log log.txt 
+s526(10Oct2024:21:43:15):  xrun -sv -f list_file.f -access +rwc -coverage all -covoverwrite -covworkdir ./cor_work -covfile ./coverage.ccf -log log.txt 
+s527(10Oct2024:21:44:47):  xrun -sv -f list_file.f -access +rwc -coverage all -covoverwrite -covworkdir ./cor_work -covfile ./coverage.ccf -log log.txt 
+s528(10Oct2024:21:45:07):  xrun -sv -f list_file.f -access +rwc -coverage all -covoverwrite -covworkdir ./cor_work -covfile ./coverage.ccf -log log.txt 
+s529(10Oct2024:21:47:46):  xrun -sv -f list_file.f -access +rwc -coverage all -covoverwrite -covworkdir ./cor_work -covfile ./coverage.ccf -log log.txt 
+s530(10Oct2024:21:54:21):  xrun -sv -f list_file.f -access +rwc -coverage all -covoverwrite -covworkdir ./cor_work -covfile ./coverage.ccf -log log.txt 
+s531(10Oct2024:22:00:37):  xrun -sv -f list_file.f -access +rwc -coverage all -covoverwrite -covworkdir ./cor_work -covfile ./coverage.ccf -log log.txt 
+s532(10Oct2024:22:00:56):  xrun -sv -f list_file.f -access +rwc -coverage all -covoverwrite -covworkdir ./cor_work -covfile ./coverage.ccf -log log.txt 
+s533(10Oct2024:22:39:41):  xrun -sv -f list_file.f -access +rwc -coverage all -covoverwrite -covworkdir ./cor_work -covfile ./coverage.ccf -log log.txt 

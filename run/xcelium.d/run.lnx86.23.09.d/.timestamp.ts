@@ -6,8 +6,8 @@
 1728383547 /home/usr3/project/CPU_5stage_pipeline/tb/pkg_1.sv
 1724751852 /home/usr3/project/RISC_V/tb/DMEM.v
 1725030158 /home/usr3/project/CPU_5stage_pipeline/rtl/register_file.sv
-1728467977 /home/usr3/project/CPU_5stage_pipeline/rtl/ALU.sv
 1728569272 /home/usr3/project/CPU_5stage_pipeline/rtl/MEM_stage.sv
+1728571234 /home/usr3/project/CPU_5stage_pipeline/rtl/ALU.sv
 1727944957 /home/usr3/project/CPU_5stage_pipeline/tb/pkg.sv
 1725986313 /home/usr3/project/CPU_5stage_pipeline/rtl/WB_stage.v
 1725986313 /home/usr3/project/CPU_5stage_pipeline/rtl/MEM_stage.v
@@ -16,7 +16,7 @@
 1727882434 /home/usr3/project/CPU_5stage_pipeline/rtl/csr.sv
 1728486705 /home/usr3/project/CPU_5stage_pipeline/tb/check_hazard.sv
 1728530708 /home/usr3/project/CPU_5stage_pipeline/tb/check_FSM.sv
-1728570454 /home/usr3/project/CPU_5stage_pipeline/tb/test_case.sv
+1728572426 /home/usr3/project/CPU_5stage_pipeline/tb/test_case.sv
 1728455712 /home/usr3/project/CPU_5stage_pipeline/rtl/IF_stage.sv
 1728569109 /home/usr3/project/CPU_5stage_pipeline/rtl/ID_stage.sv
 1724749142 /home/usr3/project/RISC_V/run/defi.vh
@@ -46,7 +46,7 @@
 1724733637 /home/usr3/project/RISC_V/rtl/ALU.v
 1724751929 /home/usr3/project/RISC_V/rtl/CPU_EDABK_TOP.v
 1724754776 /home/usr3/project/RISC_V/rtl/ID_stage.v
-1728530486 /home/usr3/project/CPU_5stage_pipeline/tb/testbench.sv
+1728574771 /home/usr3/project/CPU_5stage_pipeline/tb/testbench.sv
 1724754774 /home/usr3/project/RISC_V/rtl/decoder.v
 1727948692 /home/usr3/project/CPU_5stage_pipeline/tb/testbench.v
 1725986453 /home/usr3/project/CPU_5stage_pipeline/rtl/IF_stage.v

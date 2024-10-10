@@ -23,7 +23,7 @@ end
   logic [31:0] instr_2;
   initial begin 
     instr_test = new();
-    for (int i = 0; i < 500 ; i = i+ 2) begin
+    for (int i = 0; i < 1000 ; i = i+ 2) begin
     instr_test.randomize();
       assert(instr_test.randomize())
       R_instr = {instr_test.instr.funct7,instr_test.instr.rs2, instr_test.instr.rs1,instr_test.instr.funct3, instr_test.instr.rd, instr_test.instr.opcode};
@@ -109,7 +109,7 @@ end
 
 
     //if(file) begin
-    for (int i = 0 ; i < 500 ; i++) begin 
+    for (int i = 0 ; i < 1000 ; i++) begin 
  //    $display(" Instr randim %d : %h ", i , instr_test.Instr_set[i]); 
      $fwrite(file, "%h\n", instr_test.Instr_set[i]); 
   //  end

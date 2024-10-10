@@ -225,6 +225,9 @@ end
   always @(is_sub_instr) begin
     $display( "IS SUB INSTR");
   end
+  always @(is_lbu_instr) begin
+    $display( "IS LBU INSTR");
+  end
 
   property check_sll_instr;
     @(posedge clk) 
@@ -283,7 +286,7 @@ end
 
   property check_sra_instr;
     @(posedge clk) 
-    (is_sra_instr) |-> ##2 (no_hazard) &(alu_result == ($signed(op_a_alu) >>> op_b_alu[4:0])) & (( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_rs2_data )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == 32'($past(alu_result,2))) ) ; 
+    (is_sra_instr) |=> (!IF_ID_flush)  |=> (!EX_flush) &  (alu_result == ($signed(op_a_alu) >>> op_b_alu[4:0])) & (( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_rs2_data )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == 32'($past(alu_result,2))) ) ; 
   endproperty
   sra_instr: assert property(check_sra_instr) begin
     $display ("[INSTR] check sra pass");
@@ -356,10 +359,19 @@ end
 
   property check_srai_instr;
     @(posedge clk) 
-    (is_srai_instr & (current_state == PROCESSING)) |=> (!IF_ID_flush) |=> (!EX_flush) & (no_hazard) &(alu_result == ($signed(op_a_alu) >>> op_b_alu[4:0] )) & (( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == 32'($past(alu_result,2))) ) ; 
+    (is_srai_instr & (current_state == PROCESSING)) |=> (!IF_ID_flush) |=> (!EX_flush) & (alu_result == ($signed(op_a_alu) >>> op_b_alu[4:0] )) & ( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_imm ) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == 32'($past(alu_result,2))) ) ; 
   endproperty
   srai_instr: assert property(check_srai_instr) else begin
     $display ("check srai instr fail");
+  end
+  always @(is_srai_instr) begin
+    $display( "is srai instr" );
+  end
+  always @(is_srli_instr) begin
+    $display( "is srli instr" );
+  end
+  always @(is_lbu_instr) begin
+    $display( "is lbu instr" );
   end
 
   property check_srli_instr;
@@ -423,7 +435,7 @@ end
 
   property check_lbu_instr;
     @(posedge clk) 
-    (is_lbu_instr) |=> (!IF_ID_flush)  |=> ((!EX_flush) & (alu_result == (op_a_alu + op_b_alu)) & ( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b1)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (WB_data_write == WB_dmem_data )) ; 
+    (is_lbu_instr) |=> (!IF_ID_flush)  |=> ((!EX_flush) & (alu_result == (op_a_alu + op_b_alu)) & ( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_imm )) |=>  (( MEM_WR == 1'b0 ) & (MEM_RD == 1'b1)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (WB_data_write == WB_dmem_data )) ; 
   endproperty
   lbu_instr: assert property(check_lbu_instr) else begin
     $display ("check lbu instr fail");
