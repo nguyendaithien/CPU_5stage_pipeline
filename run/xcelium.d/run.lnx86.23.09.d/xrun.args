@@ -7,5 +7,12 @@
 list_file.f
 -access
 +rwc
+-coverage
+all
+-covoverwrite
+-covworkdir
+./cor_work
+-covfile
+./coverage.ccf
 -log
 log.txt

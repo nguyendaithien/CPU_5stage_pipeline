@@ -4,3 +4,7 @@
 //
 -ACCESS
 +rwc
+-COVERAGE
+all
+-COVFILE
+./coverage.ccf

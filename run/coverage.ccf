@@ -1,0 +1,10 @@
+select_coverage -covergroup
+select_functional -imm_asrt_class_package
+select_coverage -block -expression -toggle
+set_statement_scoring
+set_assign_scoring
+set_branch_scoring
+set_expr_coverable_operators -all
+set_expr_coverable_statement -all
+set_expr_scoring -struct
+

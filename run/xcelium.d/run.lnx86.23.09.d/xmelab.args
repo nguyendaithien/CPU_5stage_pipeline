@@ -4,6 +4,10 @@
 //
 -ACCESS
 +rwc
+-COVERAGE
+all
+-COVFILE
+./coverage.ccf
 -no_analogsolver
 -MESSAGES
 -XLMODE
