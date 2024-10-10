@@ -1,5 +1,5 @@
 xrun: 23.09-s001: (c) Copyright 1995-2023 Cadence Design Systems, Inc.
-TOOL:	xrun	23.09-s001: Started on Oct 10, 2024 at 20:32:27 +07
+TOOL:	xrun	23.09-s001: Started on Oct 10, 2024 at 21:27:35 +07
 xrun
 	-sv
 	-f list_file.f
@@ -33,21 +33,146 @@ xrun
 	-covworkdir ./cor_work
 	-covfile ./coverage.ccf
 	-log log.txt
+Recompiling... reason: file '../tb/test_case.sv' is newer than expected.
+	expected: Thu Oct 10 21:11:24 2024
+	actual:   Thu Oct 10 21:27:34 2024
+file: /home/usr3/project/CPU_5stage_pipeline/tb/test_case.sv
+	module worklib.test_case:sv
+		errors: 0, warnings: 0
+		Caching library 'worklib' ....... Done
+	Elaborating the design hierarchy:
+	Top level design units:
+		pkg
+		testbench
+		Caching library 'worklib' ....... Done
+
+	Extracting FSMs for coverage:
+		worklib.compressed_decoder
+		worklib.IF_stage
+		worklib.decoder
+		worklib.register_file
+		worklib.ID_stage
+		worklib.ALU
+		worklib.EX_stage
+		worklib.MEM_stage
+		worklib.WB_stage
+		worklib.CONTROL_HAZARD
+		worklib.SLEEP_UNIT
+		worklib.controller
+			FSM extracted for state register current_state
+		worklib.csr
+		worklib.cs_registers
+		worklib.test_case
+		worklib.check_hazard
+		worklib.check_FSM
+		worklib.CPU_EDABK_TOP
+		worklib.DMEM
+		worklib.testbench
+	Total FSMs extracted = 1
+  ,.ID_imm_i_type_o      (ID_imm_i_type       )             
+                                      |
+xmelab: *W,CUVMPW (../rtl/CPU_EDABK_TOP.sv,300|38): port sizes differ in port connection(32/1) for the instance(testbench.top) .
+  ,.ID_imm_s_type_o      (ID_imm_s_type       )             
+                                      |
+xmelab: *W,CUVMPW (../rtl/CPU_EDABK_TOP.sv,301|38): port sizes differ in port connection(32/1) for the instance(testbench.top) .
+  ,.ID_imm_b_type_o      (ID_imm_b_type       )             
+                                      |
+xmelab: *W,CUVMPW (../rtl/CPU_EDABK_TOP.sv,302|38): port sizes differ in port connection(32/1) for the instance(testbench.top) .
+  ,.ID_imm_u_type_o      (ID_imm_u_type       )             
+                                      |
+xmelab: *W,CUVMPW (../rtl/CPU_EDABK_TOP.sv,303|38): port sizes differ in port connection(32/1) for the instance(testbench.top) .
+  ,.ID_imm_j_type_o      (ID_imm_j_type       )             
+                                      |
+xmelab: *W,CUVMPW (../rtl/CPU_EDABK_TOP.sv,304|38): port sizes differ in port connection(32/1) for the instance(testbench.top) .
+    $readmemh("../tb/random/instr_set_1.dat", IMEM);
+                                                 |
+xmelab: *W,MEMODR (../tb/testbench.sv,312|49): $readmem default memory order incompatible with IEEE1364.
+    $readmemh("../init/dmem.dat", DMEM);
+                                     |
+xmelab: *W,MEMODR (../tb/testbench.sv,315|37): $readmem default memory order incompatible with IEEE1364.
+    $readmemh("../init/reg_file_1.dat", REG_FILE);
+                                               |
+xmelab: *W,MEMODR (../tb/testbench.sv,318|47): $readmem default memory order incompatible with IEEE1364.
+ ctrl_fsm_e current_state   ; assign current_state = top.control_main.current_state ;
+                                                                                  |
+xmelab: *W,ENUMERR (../tb/test_case.sv,189|82): This assignment is a violation of SystemVerilog strong typing rules for enumeration datatypes.
+ ctrl_fsm_e current_state; assign current_state = top.control_main.current_state;
+                                                                               |
+xmelab: *W,ENUMERR (../tb/check_hazard.sv,163|79): This assignment is a violation of SystemVerilog strong typing rules for enumeration datatypes.
+ctrl_fsm_e current_state;assign  current_state = top.control_main.current_state ; 
+                                                                              |
+xmelab: *W,ENUMERR (../tb/check_FSM.sv,26|78): This assignment is a violation of SystemVerilog strong typing rules for enumeration datatypes.
+ctrl_fsm_e next_state   ;assign  next_state    = top.control_main.next_state    ;
+                                                                           |
+xmelab: *W,ENUMERR (../tb/check_FSM.sv,27|75): This assignment is a violation of SystemVerilog strong typing rules for enumeration datatypes.
+	Building instance overlay tables: .
+xmelab: *W,COVSEC: (../rtl/decoder.sv,130|51): SOP expression evaluates to a constant: not checked.
+xmelab: *W,COVSEC: (../rtl/decoder.sv,194|53): SOP expression evaluates to a constant: not checked.
+.....
+xmelab: *W,COVFDP: FSM description matching across instance of a module for "COVFDM" warning has been moved from elaboration to simulation dumping. To restore old matching behavior, use "set_backward_compat -COVFDM_during_elab". Also, it is recommended to use set_parameterized_module_coverage CCF command to avoid coverage loss due to FSM description difference across instances of a module.
+xmelab: *W,COVFHT: FSM hold transitions (transitions to the current state) are not extracted for any FSM in default mode.
+......
+xmelab: *W,COVEOI: Currently, by default, expression coverage is not scored for an expression containing supported operators if that expression contains an inside operator. Such an expression can be scored using the "set_expr_scoring -inside" coverage configuration file command. In future releases, the scoring of expressions containing inside operators will be enabled by default. This change may prevent merge of and refinements from older coverage databases.
+........ Done
+	Enabling instrumentation for coverage types: block expression FSM toggle functional
+xmelab: *W,COVNSO: ./coverage.ccf:7 Scoring of "event" is not supported for the set_coverable_operators -all command in the current release. However, it will be supported in a future release. To score "event" in the current release, use "-event_or" with the set_coverable_operators command, along with appropriate options of the set_coverable_statements command.
+	Generating native compiled code:
+		worklib.test_case:sv <0x0ea31ee9>
+			streams: 254, words: 232447
+xmelab: *W,COVNOEN: By default, toggle coverage is not supported for systemverilog enumerated nets and variables. To enable toggle coverage of these objects, specify the 'set_toggle_scoring -sv_enum' command in the coverage configuration file.
+	reg [31:0] reg_file [31:0];
+	                  |
+xmelab: *W,COVMDD (../rtl/register_file.sv,26|19): Toggle coverage for bit, logic, reg, wire, enum and struct multi-dimensional static arrays and vectors is not supported by default. To enable toggle coverage for enum multi-dimensional static arrays specify 'set_toggle_scoring -sv_enum enable_mda' and for other multi-dimensional static arrays, specify 'set_toggle_scoring -sv_mda [<max_bit_base2_exponent>] [-sv_mda_of_struct]' ccf command in the coverage configuration file.
+    integer i;
+            |
+xmelab: *W,COVUTA (../rtl/register_file.sv,45|12): Toggle coverage is not supported for SystemVerilog integer, real, string, dynamic array, sparse memory and reference ports. It is also not supported for VHDL multi-dimensional array and array of record. There may also be other such objects in the design.
+	Building instance specific data structures.
+    ,.instr_is_compressed_i   (IF_instr_is_compressed)       
+                                                    |
+xmelab: *W,CSINFI (../rtl/CPU_EDABK_TOP.sv,465|52): implicit wire has no fanin (testbench.top.IF_instr_is_compressed).
+	Loading native compiled code:     .................... Done
+	Design hierarchy summary:
+		                Instances  Unique
+		Modules:               30      20
+		Interfaces:             1       1
+		Verilog packages:       2       2
+		Registers:           1445    1416
+		Scalar wires:         562       -
+		Vectored wires:       455       -
+		Named events:          73      73
+		Always blocks:        343     334
+		Initial blocks:       112     112
+		Cont. assignments:    349     406
+		Pseudo assignments:   367       -
+		Assertions:            52      52
+		Process Clocks:        73       4
+	Writing initial simulation snapshot: worklib.testbench:sv
 Loading snapshot worklib.testbench:sv .................... Done
 xcelium> source /home/edabk/Cadence/XCELIUM2309/tools/xcelium/files/xmsimrc
 xcelium> run
+IS SUB INSTR
 [INSTR] check slt pass
 [INSTR] check slt pass
 [INSTR] check or pass
+check lb instr PASSS
 [INSTR] check or pass
 [INSTR] check srl pass
 [HAZARD] pass HAZARD 3
 [HAZARD] pass HAZARD 4
+IS SUB INSTR
 [INSTR] check and pass
+IS SUB INSTR
+[INSTR] check sub pass
 [INSTR] check and pass
+check lb instr PASSS
+check lb instr PASSS
+check lb instr PASSS
 [INSTR] check sra pass
+IS SUB INSTR
+IS SUB INSTR
 add to mem 00000090
 data to mem 0000000e
+[INSTR] check sub pass
 add to mem 000000cc
 data to mem 00000004
 add to mem 000000c4
@@ -63,21 +188,33 @@ add to mem 00000084
 data to mem 00000004
 add to mem 00000088
 data to mem 00040000
+check lb instr PASSS
+IS SUB INSTR
+IS SUB INSTR
 [INSTR] check and pass
+IS SUB INSTR
+IS SUB INSTR
 [HAZARD] pass HAZARD 3
 [HAZARD] pass HAZARD 4
 add to mem 00000044
 data to mem 00000000
+IS SUB INSTR
 [INSTR] check xor pass
+IS SUB INSTR
+IS SUB INSTR
+IS SUB INSTR
 add to mem 000001d8
 data to mem 00040000
     (is_lw_instr) |-> ##2 (no_hazard) &((alu_result == (op_a_alu + op_b_alu)) & ( op_a_alu == ID_rs1_data ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b1)) |=> ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (WB_data_write == WB_dmem_data )) ; 
                                                                                                                                                                                                                                                      |
-xmsim: *E,ASRTST (../tb/test_case.sv,399): (time 1130 NS) Assertion testbench.top.check.lw_instr has failed (5 cycles, starting 1090 NS)
+xmsim: *E,ASRTST (../tb/test_case.sv,402): (time 1130 NS) Assertion testbench.top.check.lw_instr has failed (5 cycles, starting 1090 NS)
 check lw instr fail
 add to mem 00000090
 data to mem 00000004
+check lb instr PASSS
+check lb instr PASSS
 [INSTR] check or pass
+[INSTR] check sltu pass
 add to mem 00000000
 data to mem 00000000
 [INSTR] check and pass
@@ -86,16 +223,21 @@ add to mem 00000084
 data to mem 00040000
 add to mem 00000040
 data to mem 00040000
+check lb instr PASSS
 add to mem 01ffff78
 data to mem 00fc0000
 [INSTR] check sra pass
 add to mem 000001bc
 data to mem 00040000
 [INSTR] check sra pass
+IS SUB INSTR
+IS SUB INSTR
+[INSTR] check sltu pass
 [INSTR] check srl pass
 [INSTR] check xor pass
 add to mem 00000104
 data to mem 00000194
+[INSTR] check sltu pass
 add to mem 00000044
 data to mem 00000004
 [INSTR] check xor pass
@@ -119,6 +261,7 @@ data to mem 00000000
 add to mem 000000cc
 data to mem 04000000
 [INSTR] check and pass
+[INSTR] check sltu pass
 add to mem 000000c8
 data to mem 00000004
 add to mem 00000044
@@ -126,6 +269,10 @@ data to mem 00000000
 [INSTR] check and pass
 add to mem 00000040
 data to mem 00000001
+IS SUB INSTR
+IS SUB INSTR
+check lb instr PASSS
+check lb instr PASSS
 add to mem 00000050
 data to mem 00000000
 add to mem 000000c4
@@ -134,8 +281,11 @@ add to mem 00000044
 data to mem 00000000
 [INSTR] check and pass
 [INSTR] check xor pass
+IS SUB INSTR
+IS SUB INSTR
 add to mem 00000040
 data to mem 00040000
+check lb instr PASSS
 add to mem 00004044
 data to mem 00080000
 add to mem 0000004c
@@ -148,12 +298,14 @@ data to mem 00080000
 [INSTR] check or pass
 add to mem 00000054
 data to mem 00000003
+[INSTR] check sltu pass
 add to mem 000000c4
 data to mem 0000036c
 add to mem 00000044
 data to mem 00040000
 [HAZARD] pass HAZARD 3
 [HAZARD] pass HAZARD 4
+check lb instr PASSS
 [INSTR] check slt pass
 add to mem 000000c4
 data to mem 00000004
@@ -167,6 +319,7 @@ data to mem 00000004
 [INSTR] check add pass
 add to mem 00000104
 data to mem 000e0000
+check lb instr PASSS
 add to mem 00000144
 data to mem 00040000
 add to mem 000000d4
@@ -175,8 +328,10 @@ add to mem 0000008c
 data to mem 00000004
 add to mem 000000c0
 data to mem xxxxxxxx
+[INSTR] check sltu pass
 add to mem 00000494
 data to mem 00000004
+check lb instr PASSS
 add to mem 000004d0
 data to mem 00004000
 add to mem 00000050
@@ -190,22 +345,32 @@ add to mem 000000c8
 data to mem 00000004
 [INSTR] check add pass
 [INSTR] check add pass
+[INSTR] check sltu pass
 add to mem 000006e8
 data to mem 067c0000
 add to mem 00000044
 data to mem 00000000
+[INSTR] check sltu pass
 [INSTR] check slt pass
+[INSTR] check sltu pass
 [INSTR] check and pass
 add to mem 00000088
 data to mem 00000004
+IS SUB INSTR
+IS SUB INSTR
+check lb instr PASSS
+[INSTR] check sltu pass
+check lb instr PASSS
 [INSTR] check xor pass
 add to mem 000006c0
 data to mem 00040000
 [INSTR] check srl pass
+[INSTR] check sltu pass
  ENDDDDD at 5020 
 add to mem 00004084
 data to mem 06f40000
 [INSTR] check xor pass
+IS SUB INSTR
 Simulation complete via $finish(1) at time 10 US + 0
 ../tb/testbench.sv:379    #10000  $finish;
 xcelium> exit
@@ -217,6 +382,6 @@ coverage setup:
   testname :  test
 
 coverage files:
-  model(design data) :  ./cor_work/scope/icc_3a863dda_086858cb.ucm (reused)
-  data               :  ./cor_work/scope/test/icc_3a863dda_086858cb.ucd
-TOOL:	xrun	23.09-s001: Exiting on Oct 10, 2024 at 20:32:29 +07  (total: 00:00:02)
+  model(design data) :  ./cor_work/scope/icc_36497b36_76b53913.ucm
+  data               :  ./cor_work/scope/test/icc_36497b36_76b53913.ucd
+TOOL:	xrun	23.09-s001: Exiting on Oct 10, 2024 at 21:27:37 +07  (total: 00:00:02)

@@ -14,13 +14,13 @@
 1724751929 /home/usr3/project/RISC_V/rtl/CPU_EDABK_TOP.v
 1728290830 /home/usr3/project/CPU_5stage_pipeline/rtl/defi.vh
 1728533005 /home/usr3/project/CPU_5stage_pipeline/rtl/decoder.sv
-1728530599 /home/usr3/project/CPU_5stage_pipeline/rtl/CPU_EDABK_TOP.sv
+1728569205 /home/usr3/project/CPU_5stage_pipeline/rtl/CPU_EDABK_TOP.sv
 1725030158 /home/usr3/project/CPU_5stage_pipeline/rtl/register_file.sv
 1728467977 /home/usr3/project/CPU_5stage_pipeline/rtl/ALU.sv
 1728455712 /home/usr3/project/CPU_5stage_pipeline/rtl/IF_stage.sv
-1728301521 /home/usr3/project/CPU_5stage_pipeline/rtl/ID_stage.sv
+1728569109 /home/usr3/project/CPU_5stage_pipeline/rtl/ID_stage.sv
 1728467112 /home/usr3/project/CPU_5stage_pipeline/rtl/EX_stage.sv
-1728459945 /home/usr3/project/CPU_5stage_pipeline/rtl/MEM_stage.sv
+1728569272 /home/usr3/project/CPU_5stage_pipeline/rtl/MEM_stage.sv
 1728381851 /home/usr3/project/CPU_5stage_pipeline/rtl/WB_stage.sv
 1728368580 /home/usr3/project/CPU_5stage_pipeline/rtl/control_hazard.sv
 1728468150 /home/usr3/project/CPU_5stage_pipeline/rtl/pkg.sv
@@ -29,7 +29,7 @@
 1728467116 /home/usr3/project/CPU_5stage_pipeline/rtl/SLEEP_UNIT.sv
 1728467980 /home/usr3/project/CPU_5stage_pipeline/rtl/COMPRESSED_DECODER.sv
 1727882434 /home/usr3/project/CPU_5stage_pipeline/rtl/csr.sv
-1728534532 /home/usr3/project/CPU_5stage_pipeline/tb/test_case.sv
+1728570454 /home/usr3/project/CPU_5stage_pipeline/tb/test_case.sv
 1728530486 /home/usr3/project/CPU_5stage_pipeline/tb/testbench.sv
 1728460327 /home/usr3/project/CPU_5stage_pipeline/tb/DMEM.sv
 1728383547 /home/usr3/project/CPU_5stage_pipeline/tb/pkg_1.sv
