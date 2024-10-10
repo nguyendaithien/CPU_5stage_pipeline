@@ -5,7 +5,6 @@ module ID_stage #( parameter DATA_WIDTH = 32) (
   input             flush                ,
   input             EX_zero_i            ,
   input      [31:0] ID_instr_i           ,
-  input      [31:0] EX_ALU_result_i      ,
   input      [31:0] WB_data_i            ,
   input             WB_regwrite_i        ,
   input      [4: 0] WB_rd_add_i          ,

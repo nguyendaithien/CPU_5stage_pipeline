@@ -36,7 +36,7 @@ module testbench();
 
 
  parameter boot_add_radix = 32'd0;
- 	
+ top_intf intf(clk, rst_n);	
  
   CPU_EDABK_TOP #( .DATA_WIDTH(32)) top (
      .clk                      ( clk                   )     
@@ -86,73 +86,74 @@ module testbench();
 );
 
  bind CPU_EDABK_TOP test_case check (
-clk                    ,
-rst_n                  ,
-boot_add               ,
-Instr_in               ,
-D_in                   ,
-irq_software_i         ,
-irq_timer_i            ,
-irq_external_i         ,
-irq_fast_i             ,
-debug_req_i            ,
-irq_nm_i               ,
-data_gnt_i             ,
-data_rvalid_i          ,
-data_rdata_i           ,
-data_err_i             ,
-instr_gnt_i            ,
-instr_rvalid_i         ,
-instr_rdata_i          ,
-instr_err_i            ,
-instr_fetch_err_plus2_i,
-mem_resp_intg_err_i );
+  clk                    ,
+  rst_n                  ,
+  boot_add               ,
+  Instr_in               ,
+  D_in                   ,
+  irq_software_i         ,
+  irq_timer_i            ,
+  irq_external_i         ,
+  irq_fast_i             ,
+  debug_req_i            ,
+  irq_nm_i               ,
+  data_gnt_i             ,
+  data_rvalid_i          ,
+  data_rdata_i           ,
+  data_err_i             ,
+  instr_gnt_i            ,
+  instr_rvalid_i         ,
+  instr_rdata_i          ,
+  instr_err_i            ,
+  instr_fetch_err_plus2_i,
+  mem_resp_intg_err_i );
 
  bind CPU_EDABK_TOP check_hazard hazard_check (
-clk                    ,
-rst_n                  ,
-boot_add               ,
-Instr_in               ,
-D_in                   ,
-irq_software_i         ,
-irq_timer_i            ,
-irq_external_i         ,
-irq_fast_i             ,
-debug_req_i            ,
-irq_nm_i               ,
-data_gnt_i             ,
-data_rvalid_i          ,
-data_rdata_i           ,
-data_err_i             ,
-instr_gnt_i            ,
-instr_rvalid_i         ,
-instr_rdata_i          ,
-instr_err_i            ,
-instr_fetch_err_plus2_i,
-mem_resp_intg_err_i );
+  clk                    ,
+  rst_n                  ,
+  boot_add               ,
+  Instr_in               ,
+  D_in                   ,
+  irq_software_i         ,
+  irq_timer_i            ,
+  irq_external_i         ,
+  irq_fast_i             ,
+  debug_req_i            ,
+  irq_nm_i               ,
+  data_gnt_i             ,
+  data_rvalid_i          ,
+  data_rdata_i           ,
+  data_err_i             ,
+  instr_gnt_i            ,
+  instr_rvalid_i         ,
+  instr_rdata_i          ,
+  instr_err_i            ,
+  instr_fetch_err_plus2_i,
+  mem_resp_intg_err_i );
 
  bind CPU_EDABK_TOP check_FSM check_fsm (
-clk                    ,
-rst_n                  ,
-boot_add               ,
-Instr_in               ,
-D_in                   ,
-irq_software_i         ,
-irq_timer_i            ,
-irq_external_i         ,
-irq_fast_i             ,
-debug_req_i            ,
-irq_nm_i               ,
-data_gnt_i             ,
-data_rvalid_i          ,
-data_rdata_i           ,
-data_err_i             ,
-instr_gnt_i            ,
-instr_rvalid_i         ,
-instr_rdata_i          ,
-instr_err_i            ,
-instr_fetch_err_plus2_i,
-mem_resp_intg_err_i );
+  clk                    ,
+  rst_n                  ,
+  boot_add               ,
+  Instr_in               ,
+  D_in                   ,
+  irq_software_i         ,
+  irq_timer_i            ,
+  irq_external_i         ,
+  irq_fast_i             ,
+  debug_req_i            ,
+  irq_nm_i               ,
+  data_gnt_i             ,
+  data_rvalid_i          ,
+  data_rdata_i           ,
+  data_err_i             ,
+  instr_gnt_i            ,
+  instr_rvalid_i         ,
+  instr_rdata_i          ,
+  instr_err_i            ,
+  instr_fetch_err_plus2_i,
+  mem_resp_intg_err_i
+);
 
 
    
@@ -229,9 +230,28 @@ mem_resp_intg_err_i );
 	reg [31:0] REG_FILE [31:0];
 
   always #5 clk = ~clk;
+  logic [9:0] instr_counter;
+  logic FIN;
   always @(A_IMEM) begin
     Instr_in = IMEM[A_IMEM >> 2];
+    instr_counter= instr_counter + 10'd1;
+    if( instr_counter == 500) begin
+      FIN = 1'd1;
+    end
   end
+
+  int file_handle;
+  always @(FIN) begin
+    file_handle = $fopen("DRAM.txt" , "w");
+    $display( " ENDDDDD at %0t " ,$time );
+    for ( int i = 0 ; i < 255 ; i++ ) begin 
+      $fwrite(file_handle , "0x%08h\n", ram.mem[i]);
+    end
+    $fclose(file_handle);
+  end
+    
+
+
 
 	// READ DATA MEMORY 
 			
@@ -302,6 +322,7 @@ end
 
  initial begin 
    #5
+     instr_counter = 10'd0;
      rst_n = 0;
      clk = 0;
      irq_software_i = 1'b0; 

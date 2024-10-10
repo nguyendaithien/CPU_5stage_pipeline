@@ -6,7 +6,9 @@
 ./xcelium.d/run.lnx86.23.09.d
 -RUNMODE
 -sv
-cover_point.sv
+pkg_rd_gen.sv
+random_gen.sv
+tb.sv
 -CDSLIB
 ./xcelium.d/run.lnx86.23.09.d/cdsrun.lib
 -HDLVAR

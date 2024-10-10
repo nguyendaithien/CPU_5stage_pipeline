@@ -16,21 +16,43 @@ import pkg_rd_gen::*;
     bit [31:0] U_instr;
     bit [31:0] J_instr;
 
-    bit [7:0] counter_r;
-    bit [7:0] counter_add;
-    bit [7:0] counter_slt;
-    bit [7:0] counter_sub;
-    bit [7:0] counter_or;
-    bit [7:0] counter_xor;
-    bit [7:0] counter_sltu;
-    bit [7:0] counter_sra;
-    bit [7:0] counter_srl;
-    bit [7:0] counter_and;
-    bit [7:0] counter_sll;
-
-    bit [9:0] counter_lb;
-    bit [9:0] counter_lh;
-    bit [9:0] counter_lw;
+    bit [7:0] counter_r     ;
+    bit [7:0] counter_add   ;
+    bit [7:0] counter_slt   ;
+    bit [7:0] counter_sub   ;
+    bit [7:0] counter_or    ;
+    bit [7:0] counter_xor   ;
+    bit [7:0] counter_sltu  ;
+    bit [7:0] counter_sra   ;
+    bit [7:0] counter_srl   ;
+    bit [7:0] counter_and   ;
+    bit [7:0] counter_sll   ;
+    bit [7:0] counter_addi  ;
+    bit [7:0] counter_slti  ;
+    bit [7:0] counter_subi  ;
+    bit [7:0] counter_ori   ;
+    bit [7:0] counter_sltui ;
+    bit [7:0] counter_xori  ;
+    bit [7:0] counter_srai  ;
+    bit [7:0] counter_srli  ;
+    bit [7:0] counter_andi  ;
+    bit [7:0] counter_slli  ;
+    bit [9:0] counter_lb    ;
+    bit [9:0] counter_lh    ;
+    bit [9:0] counter_lw    ;
+    bit [9:0] counter_sb    ;
+    bit [9:0] counter_sh    ;
+    bit [9:0] counter_sw    ;
+    bit [9:0] counter_jal   ;
+    bit [9:0] counter_jalr  ;
+    bit [9:0] counter_bge   ;
+    bit [9:0] counter_bne   ;
+    bit [9:0] counter_beq   ;
+    bit [9:0] counter_blt   ;
+    bit [9:0] counter_bltu  ;
+    bit [9:0] counter_bgeu  ;
+    bit [9:0] counter_lui   ;
+    bit [9:0] counter_auipc ;
 
 
     rand bit [3:0] random_1;
@@ -43,6 +65,12 @@ import pkg_rd_gen::*;
         counter_r = counter_r + 1;
         if((instr_i.instr.funct3 == FUNCT3_ADD_SUB ) & (instr_i.instr.funct7[6] == 0 )) begin
           counter_add = counter_add + 10'd1;
+        end
+        if((instr_i.instr.funct3 == FUNCT3_SRL_SRA ) & (instr_i.instr.funct7[6] == 1 )) begin
+          counter_sra = counter_sra + 10'd1;
+        end
+        if((instr_i.instr.funct3 == FUNCT3_SRL_SRA ) & (instr_i.instr.funct7[6] == 0 )) begin
+          counter_srl = counter_srl + 10'd1;
         end
         else if(instr_i.instr.funct3 == FUNCT3_SLT) begin
           counter_slt = counter_slt + 10'd1;
@@ -68,9 +96,102 @@ import pkg_rd_gen::*;
       end
     endfunction
 
+    function counter_I(instr_format instr_i);
+      if(instr_i.instr_i.opcode == OPCODE_OP_IMM) begin
+        counter_r = counter_r + 1;
+        if((instr_i.instr_i.funct3 == FUNCT3_ADDI )) begin
+          counter_addi = counter_addi + 10'd1;
+        end
+        if((instr_i.instr.funct3 == FUNCT3_SRAI_SRLI ) & (instr_i.instr.funct7[6] == 1 )) begin
+          counter_srai = counter_srai + 10'd1;
+        end
+        if((instr_i.instr.funct3 == FUNCT3_SRAI_SRLI ) & (instr_i.instr.funct7[6] == 0 )) begin
+          counter_srli = counter_srli + 10'd1;
+        end
+        else if(instr_i.instr_i.funct3 == FUNCT3_SLTI) begin
+          counter_slti = counter_slti + 10'd1;
+        end
+        else if(instr_i.instr_i.funct3 == FUNCT3_SLTIU) begin
+          counter_sltui = counter_sltui + 10'd1;
+        end
+        else if(instr_i.instr_i.funct3 == FUNCT3_SLLI ) begin
+          counter_slli = counter_slli + 10'd1;
+        end
+        else if(instr_i.instr_i.funct3 == FUNCT3_ANDI ) begin
+          counter_andi = counter_andi + 10'd1;
+        end
+        else if(instr_i.instr_i.funct3 == FUNCT3_ORI ) begin
+          counter_ori = counter_ori + 10'd1;
+        end
+        else if(instr_i.instr_i.funct3 == FUNCT3_XORI ) begin
+          counter_xori = counter_xori + 10'd1;
+        end
+      end
+    endfunction
+
+    function counter_JAL(instr_format instr_i);
+      if(instr_i.instr_j.opcode == OPCODE_JAL) begin 
+        counter_jal = counter_jal + 10'd1;
+      end
+    endfunction
+
+    function counter_LUI(instr_format instr_i);
+      if(instr_i.instr_u.opcode == OPCODE_LUI) begin 
+        counter_lui = counter_lui + 10'd1;
+      end
+    endfunction
+
+    function counter_AUIPC(instr_format instr_i);
+      if(instr_i.instr_u.opcode == OPCODE_AUIPC) begin 
+        counter_auipc = counter_auipc + 10'd1;
+      end
+    endfunction
+    function counter_JALR(instr_format instr_i);
+      if(instr_i.instr_j.opcode == OPCODE_JALR) begin 
+        counter_jalr = counter_jalr + 10'd1;
+      end
+    endfunction
+
+    function counter_S(instr_format instr_i);
+      if(instr_i.instr_s.opcode == OPCODE_STORE) begin 
+       if(instr_i.instr_s.funct3 == FUNCT3_SB) begin
+        counter_sb = counter_sb + 10'd1;
+      end
+       if(instr_i.instr_s.funct3 == FUNCT3_SH) begin
+        counter_sh = counter_sh + 10'd1;
+      end
+       if(instr_i.instr_s.funct3 == FUNCT3_SW) begin
+        counter_sw = counter_sw + 10'd1;
+      end
+      end
+    endfunction
+
+    function counter_B(instr_format instr_i);
+      if(instr_i.instr_b.opcode == OPCODE_BRANCH) begin 
+       if(instr_i.instr_b.funct3 == FUNCT3_BEQ) begin
+        counter_beq = counter_beq + 10'd1;
+      end
+       if(instr_i.instr_b.funct3 == FUNCT3_BNE) begin
+        counter_bne = counter_bne + 10'd1;
+      end
+       if(instr_i.instr_b.funct3 == FUNCT3_BLT) begin
+        counter_blt = counter_blt + 10'd1;
+      end
+       if(instr_i.instr_b.funct3 == FUNCT3_BGE) begin
+        counter_bge = counter_bge + 10'd1;
+      end
+       if(instr_i.instr_b.funct3 == FUNCT3_BLTU) begin
+        counter_bltu = counter_bltu + 10'd1;
+      end
+       if(instr_i.instr_b.funct3 == FUNCT3_BGEU) begin
+        counter_bgeu = counter_bgeu + 10'd1;
+      end
+      end
+    endfunction
+
+
     function counter_L(instr_format instr_i);
       if(instr_i.instr_l.opcode == OPCODE_LOAD) begin
-        $display(" HELOOOOOOOOOOOOOOOOOOOOOOO");
         if(instr_i.instr_l.funct3 == FUNCT3_LB) begin
           counter_lb = counter_lb + 10'd1;
         end
@@ -95,15 +216,40 @@ import pkg_rd_gen::*;
       counter_srl = 10'd0 ;
       counter_and = 10'd0 ;
       counter_lb = 10'd0 ;
+      counter_addi  = 10'd0  ;
+      counter_slti  = 10'd0  ;
+      counter_subi  = 10'd0  ;
+      counter_ori   = 10'd0  ;
+      counter_sltui = 10'd0  ;
+      counter_xori  = 10'd0  ;
+      counter_srai  = 10'd0  ;
+      counter_srli  = 10'd0  ;
+      counter_andi  = 10'd0  ;
+      counter_slli  = 10'd0  ;
+      counter_lh    = 10'd0  ;
+      counter_lw    = 10'd0  ;
+      counter_sb    = 10'd0  ;
+      counter_sh    = 10'd0  ;
+      counter_sw    = 10'd0  ;
+      counter_jal   = 10'd0  ;
+      counter_jalr  = 10'd0  ;
+      counter_bge   = 10'd0  ;
+      counter_bne   = 10'd0  ;
+      counter_beq   = 10'd0  ;
+      counter_blt   = 10'd0  ;
+      counter_bltu  = 10'd0  ;
+      counter_bgeu  = 10'd0  ;
+      counter_lui   = 10'd0  ;
+      counter_auipc = 10'd0  ;
     endfunction
 
-    constraint random1 { random_1 inside {0,1,2,3,4,5,6,7,8,9,10};}
-    constraint random2 { random_2 inside {0,1,2,3,4,5,6,7,8,9,10};}
-    constraint random3 { if(random_1) random_2 != random_1 ;}
-    constraint random4 { if(random_1 > 5) random_2 inside{0,1,2,3,4} ;}
+  constraint random1 { random_1 inside {0,1,2,3,4,5,6,7,8,9,10};}
+  constraint random2 { random_2 inside {0,1,2,3,4,5,6,7,8,9,10};}
+  constraint random3 { if(random_1) random_2 != random_1 ;}
+  constraint random4 { if(random_1 > 5) random_2 inside{0,1,2,3,4} ;}
  /// CONSTRAINT FOR R TYPE
 //  constraint R_funct7_ADD_SUB { if (instr.funct3 == FUNCT3_ADD_SUB) instr.funct7 inside {7'b0100000,7'b0000000 }; } 
-  constraint R_funct7_SRA_SRL { if (instr.funct3 == FUNCT3_SRL_SRA) instr.funct7 inside {7'b0100000,7'b0000000 }; } 
+//  constraint R_funct7_SRA_SRL { if (instr.funct3 == FUNCT3_SRL_SRA) instr.funct7 inside {7'b0100000,7'b0000000 }; } 
   constraint R_opcode {instr.opcode inside{OPCODE_OP};} 
 
  // CONSTRAINT FOR I TYPE

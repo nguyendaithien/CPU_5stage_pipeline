@@ -28,8 +28,8 @@ logic  [31:0] IMEM_data    ; assign IMEM_data_i    = top.if_stage.IMEM_data_i ;
 logic  [4:0]  ID_rs1_addr  ; assign ID_rs1_addr    = top.id_stage.rs1_add     ;
 logic  [4:0]  ID_rs2_addr  ; assign ID_rs2_addr    = top.id_stage.rs1_add     ;
 logic  [4:0]  ID_rsd_addr  ; assign ID_rs3_addr    = top.id_stage.rs1_add     ;
-logic  [31:0]  ID_rs1_data ; assign ID_rs1_data   = top.ID_rs1_data          ;
-logic  [31:0]  ID_rs2_data ; assign ID_rs2_data   = top.ID_rs1_data          ;
+logic  [31:0]  ID_rs1_data ; assign ID_rs1_data    = top.ID_rs1_data          ;
+logic  [31:0]  ID_rs2_data ; assign ID_rs2_data    = top.ID_rs1_data          ;
 logic  MEM_RD;assign MEM_RD = top.EX_RD;  
 logic  MEM_WR;assign MEM_WR = top.EX_WR;
 logic [31:0] data_write_reg; assign data_write_reg = top.id_stage.data_write_reg; 
@@ -75,7 +75,7 @@ logic [31:0] alu_result; assign alu_result = top.ex_stage.alu_result;
   logic        EX_WR              ; assign EX_WR                 =   top.EX_WR                        ;                          
   logic [3:0 ] EX_mem_op          ; assign EX_mem_op             =   top.EX_mem_op                    ;                          
   logic [31:0] EX_alu_result      ; assign EX_alu_result         =   top.EX_alu_result                ;                          
-  logic        EX_zero_o          ; assign EX_zero_o               =   top.EX_zero                      ;                          
+  logic        EX_zero_o          ; assign EX_zero_o             =   top.EX_zero                      ;                          
   logic [31:0] EX_imm             ; assign EX_imm                =   top.EX_imm                       ;                          
   logic [31:0] EX_pc_dest         ; assign EX_pc_dest            =   top.EX_pc_dest                   ;                          
   logic [31:0] EX_rs2_data        ; assign EX_rs2_data           =   top.EX_rs2_data                  ;                          
@@ -101,71 +101,71 @@ logic [31:0] alu_result; assign alu_result = top.ex_stage.alu_result;
   logic [31:0] mem_rs1_data;    assign mem_rs1_data = top.mem_stage.MEM_rs2_data_i;
 
 // hazard control
-  logic stall       ; assign stall       = top.stall       ;                                           
-  logic IF_ID_flush ; assign IF_ID_flush = top.IF_ID_flush ;                                           
-  logic EX_flush    ; assign EX_flush    = top.EX_flush    ;                                           
-  logic EX_zero     ; assign EX_zero     = top.ex_stage.zero   ;                                           
-  logic hazard      ; assign hazard      = top.hazard;
-  logic no_hazard ; assign no_hazard = (~hazard) & (~EX_flush) & (~IF_ID_flush) & (~stall);
+  logic stall       ; assign stall       = top.stall                                         ;
+  logic IF_ID_flush ; assign IF_ID_flush = top.IF_ID_flush                                   ;
+  logic EX_flush    ; assign EX_flush    = top.EX_flush                                      ;
+  logic EX_zero     ; assign EX_zero     = top.ex_stage.zero                                 ;
+  logic hazard      ; assign hazard      = top.hazard                                        ;
+  logic no_hazard   ; assign no_hazard = (~hazard) & (~EX_flush) & (~IF_ID_flush) & (~stall) ;
 
 // decode instr
- logic [31:0] IF_instr ;assign IF_instr = top.if_stage.IF_instr_i;      
- logic [2:0]  funct_3    ;assign funct_3    =IF_instr[14:12] ;   
- logic [6:0]  opcode    ;assign opcode      =IF_instr[6:0]  ;   
+ logic [31:0] IF_instr ; assign IF_instr = top.if_stage.IF_instr_i ;
+ logic [2:0]  funct_3  ; assign funct_3  = IF_instr[14:12]         ;
+ logic [6:0]  opcode   ; assign opcode   = IF_instr[6:0]           ;
 
- logic is_add_instr   ; assign is_add_instr  = (opcode == OPCODE_OP) & (funct_3 == `FUNCT3_ADD_SUB) & (IF_instr[30] == 1'b0)     ;
- logic is_load_instr  ; assign is_load_instr = (opcode == OPCODE_LOAD)                                                          ;
- logic is_store_instr ; assign is_store_inst = (opcode == OPCODE_STORE)                                                        ;
- logic is_imm_instr   ; assign is_imm_instr  = (opcode == OPCODE_OP_IMM)                                                         ;
- logic is_branch_instr   ; assign is_branch_instr  = (opcode == OPCODE_BRANCH)                                                         ;
- logic is_op_instr    ; assign is_op_instr   = (opcode == OPCODE_OP)                                                              ;
- logic is_sub_instr   ; assign is_sub_instr  = (opcode == OPCODE_OP) & (funct_3 == `FUNCT3_ADD_SUB) & (IF_instr[30] == 1'b0)     ;
- logic is_sll_instr   ; assign is_sll_instr  = (opcode == OPCODE_OP) & (funct_3 == `FUNCT3_SLL)                                  ;
- logic is_slt_instr   ; assign is_slt_instr  = (opcode == OPCODE_OP) & (funct_3 == `FUNCT3_SLT)                                  ;
- logic is_sltu_instr  ; assign is_sltu_instr = (opcode == OPCODE_OP) & (funct_3 == `FUNCT3_SLTU)                                 ;
- logic is_xor_instr   ; assign is_xor_instr  = (opcode == OPCODE_OP) & (funct_3 == `FUNCT3_XOR)                                  ;
- logic is_srl_instr   ; assign is_srl_instr  = (opcode == OPCODE_OP) & (funct_3 == `FUNCT3_SRL_SRA) & (IF_instr[30]     == 1'b0) ;
- logic is_sra_instr   ; assign is_sra_instr  = (opcode == OPCODE_OP) & (funct_3 == `FUNCT3_SRL_SRA) & (IF_instr[30]     == 1'b1) ;
- logic is_or_instr    ; assign is_or_instr   = (opcode == OPCODE_OP) & (funct_3 == `FUNCT3_OR)                                   ;
- logic is_and_instr   ; assign is_and_instr  = (opcode == OPCODE_OP) & (funct_3 == `FUNCT3_AND)                                  ;
+ logic is_add_instr    ; assign is_add_instr     = (opcode == OPCODE_OP) & (funct_3 == `FUNCT3_ADD_SUB) & (IF_instr[30] == 1'b0)     ;
+ logic is_load_instr   ; assign is_load_instr    = (opcode == OPCODE_LOAD)                                                           ;
+ logic is_store_instr  ; assign is_store_inst    = (opcode == OPCODE_STORE)                                                          ;
+ logic is_imm_instr    ; assign is_imm_instr     = (opcode == OPCODE_OP_IMM)                                                         ;
+ logic is_branch_instr ; assign is_branch_instr  = (opcode == OPCODE_BRANCH)                                                         ;
+ logic is_op_instr     ; assign is_op_instr      = (opcode == OPCODE_OP)                                                             ;
+ logic is_sub_instr    ; assign is_sub_instr     = (opcode == OPCODE_OP) & (funct_3 == `FUNCT3_ADD_SUB) & (IF_instr[30] == 1'b0)     ;
+ logic is_sll_instr    ; assign is_sll_instr     = (opcode == OPCODE_OP) & (funct_3 == `FUNCT3_SLL)                                  ;
+ logic is_slt_instr    ; assign is_slt_instr     = (opcode == OPCODE_OP) & (funct_3 == `FUNCT3_SLT)                                  ;
+ logic is_sltu_instr   ; assign is_sltu_instr    = (opcode == OPCODE_OP) & (funct_3 == `FUNCT3_SLTU)                                 ;
+ logic is_xor_instr    ; assign is_xor_instr     = (opcode == OPCODE_OP) & (funct_3 == `FUNCT3_XOR)                                  ;
+ logic is_srl_instr    ; assign is_srl_instr     = (opcode == OPCODE_OP) & (funct_3 == `FUNCT3_SRL_SRA) & (IF_instr[30]     == 1'b0) ;
+ logic is_sra_instr    ; assign is_sra_instr     = (opcode == OPCODE_OP) & (funct_3 == `FUNCT3_SRL_SRA) & (IF_instr[30]     == 1'b1) ;
+ logic is_or_instr     ; assign is_or_instr      = (opcode == OPCODE_OP) & (funct_3 == `FUNCT3_OR)                                   ;
+ logic is_and_instr    ; assign is_and_instr     = (opcode == OPCODE_OP) & (funct_3 == `FUNCT3_AND)                                  ;
 
- logic is_addi_instr  ; assign is_addi_instr  = (opcode == OPCODE_OP_IMM) & (funct_3 == `FUNCT3_ADDI) ;
- logic is_slli_instr  ; assign is_slli_instr  = (opcode == OPCODE_OP_IMM) & (funct_3 == `FUNCT3_SLLI )                              ;
- logic is_slti_instr  ; assign is_slti_instr  = (opcode == OPCODE_OP_IMM) & (funct_3 == `FUNCT3_SLTI )                              ;
- logic is_sltiu_instr ; assign is_sltiu_instr = (opcode == OPCODE_OP_IMM) & (funct_3 == `FUNCT3_SLTIU)                             ;
- logic is_xori_instr  ; assign is_xori_instr  = (opcode == OPCODE_OP_IMM) & (funct_3 == `FUNCT3_XORI)                              ;
+ logic is_addi_instr  ; assign is_addi_instr  = (opcode == OPCODE_OP_IMM) & (funct_3 == `FUNCT3_ADDI)                                   ;
+ logic is_slli_instr  ; assign is_slli_instr  = (opcode == OPCODE_OP_IMM) & (funct_3 == `FUNCT3_SLLI )                                  ;
+ logic is_slti_instr  ; assign is_slti_instr  = (opcode == OPCODE_OP_IMM) & (funct_3 == `FUNCT3_SLTI )                                  ;
+ logic is_sltiu_instr ; assign is_sltiu_instr = (opcode == OPCODE_OP_IMM) & (funct_3 == `FUNCT3_SLTIU)                                  ;
+ logic is_xori_instr  ; assign is_xori_instr  = (opcode == OPCODE_OP_IMM) & (funct_3 == `FUNCT3_XORI)                                   ;
  logic is_srli_instr  ; assign is_srli_instr  = (opcode == OPCODE_OP_IMM) & (funct_3 == `FUNCT3_SRAI_SRLI) & (IF_instr[30]     == 1'b0) ;
  logic is_srai_instr  ; assign is_srai_instr  = (opcode == OPCODE_OP_IMM) & (funct_3 == `FUNCT3_SRAI_SRLI) & (IF_instr[30]     == 1'b1) ;
- logic is_ori_instr   ; assign is_ori_instr   = (opcode == OPCODE_OP_IMM) & (funct_3 == `FUNCT3_ORI)                                           ;
- logic is_andi_instr  ; assign is_andi_instr  = (opcode == OPCODE_OP_IMM) & (funct_3 == `FUNCT3_ANDI)                                          ;
+ logic is_ori_instr   ; assign is_ori_instr   = (opcode == OPCODE_OP_IMM) & (funct_3 == `FUNCT3_ORI)                                    ;
+ logic is_andi_instr  ; assign is_andi_instr  = (opcode == OPCODE_OP_IMM) & (funct_3 == `FUNCT3_ANDI)                                   ;
 
- logic is_lui_instr    ; assign is_lui_instr   = (opcode == OPCODE_LUI)  ;
- logic is_auipc_instr  ; assign is_auipc_instr = (opcode == OPCODE_AUIPC)  ;
- logic is_jalr_instr   ; assign is_jalr_instr  = (opcode == OPCODE_JALR)  ;
- logic is_jal_instr    ; assign is_jal_instr   = (opcode == OPCODE_JAL)  ;
- logic  EX_regwrite ; assign  EX_regwrite  = top.EX_regwrite  ; 
- logic  MEM_regwrite; assign  MEM_regwrite = top.MEM_regwrite ;
- logic  WB_regwrire ; assign WB_regwrite   = top.MEM_regwrite ;
+ logic is_lui_instr   ; assign is_lui_instr   = (opcode == OPCODE_LUI)   ;
+ logic is_auipc_instr ; assign is_auipc_instr = (opcode == OPCODE_AUIPC) ;
+ logic is_jalr_instr  ; assign is_jalr_instr  = (opcode == OPCODE_JALR)  ;
+ logic is_jal_instr   ; assign is_jal_instr   = (opcode == OPCODE_JAL)   ;
+ logic  EX_regwrite   ; assign  EX_regwrite  = top.EX_regwrite           ;
+ logic  MEM_regwrite  ; assign  MEM_regwrite = top.MEM_regwrite          ;
+ logic  WB_regwrire   ; assign WB_regwrite   = top.MEM_regwrite          ;
 
  logic [4:0] EX_rd_add     ; assign EX_rd_add   =  top.EX_rd_add ; 
  logic [4:0] ID_rd_add     ; assign ID_rd_add   =  top.ID_rd_add ; 
  logic [4:0] ID_rs1_add    ; assign ID_rs1_add  =  top.ID_rs1_add; 
  logic [4:0] MEM_rd_add    ; assign MEM_rd_add  =  top.MEM_rd_add; 
  logic [4:0] ID_rs2_add    ; assign ID_rs2_add  =  top.ID_rs2_add; 
- logic [4:0] EX_rs1_add    ; assign EX_rs1_add  =  top.EX_rs1_add ; 
+ logic [4:0] EX_rs1_add    ; assign EX_rs1_add  =  top.EX_rs1_add; 
  logic [4:0] EX_rs2_add    ; assign EX_rs2_add  =  top.EX_rs2_add; 
- logic       hazard_EX_rs1 ; assign hazard_EX_rs1 = (EX_regwrite == 1'b1) && (EX_rd_add != 0 ) && (EX_rd_add == ID_rs1_add) ;  
- logic       hazard_WB_rs1 ; assign hazard_WB_rs1 = ((!hazard_EX_rs1) & (MEM_regwrite == 1'b1) && (MEM_rd_add != 0 ) && ~( (EX_regwrite  == 1'b1) && (EX_rd_add != 0) && (EX_rd_add == ID_rs1_add)) && (MEM_rd_add == ID_rs1_add)); 
- logic       hazard_EX_rs2 ; assign hazard_EX_rs2 = ( (EX_regwrite == 1'b1) && (EX_rd_add != 0) && (EX_rd_add  == ID_rs2_add)) ;  
- logic       hazard_WB_rs2 ; assign hazard_WB_rs2 = ((!hazard_EX_rs2) &  (MEM_regwrite == 1'b1) && (MEM_rd_add != 0) &&  ~ ( (EX_regwrite  == 1'b1) && (EX_rd_add != 0) && (EX_rd_add == ID_rs2_add)) && (MEM_rd_add == ID_rs2_add));  
- logic       mem_hazard    ; assign mem_hazard = (MEM_regwrite == 1'b1) && (EX_rs2_add == MEM_rd_add) && (MEM_rd_add != 0);
+ logic       hazard_EX_rs1 ; assign hazard_EX_rs1 = (EX_regwrite == 1'b1) && (EX_rd_add != 0 ) && (EX_rd_add == ID_rs1_add)                                                                                                          ;
+ logic       hazard_WB_rs1 ; assign hazard_WB_rs1 = ((!hazard_EX_rs1) & (MEM_regwrite == 1'b1) && (MEM_rd_add != 0 ) && ~( (EX_regwrite  == 1'b1) && (EX_rd_add != 0) && (EX_rd_add == ID_rs1_add)) && (MEM_rd_add == ID_rs1_add))   ;
+ logic       hazard_EX_rs2 ; assign hazard_EX_rs2 = ( (EX_regwrite == 1'b1) && (EX_rd_add != 0) && (EX_rd_add  == ID_rs2_add))                                                                                                       ;
+ logic       hazard_WB_rs2 ; assign hazard_WB_rs2 = ((!hazard_EX_rs2) &  (MEM_regwrite == 1'b1) && (MEM_rd_add != 0) &&  ~ ( (EX_regwrite  == 1'b1) && (EX_rd_add != 0) && (EX_rd_add == ID_rs2_add)) && (MEM_rd_add == ID_rs2_add)) ;
+ logic       mem_hazard    ; assign mem_hazard    = (MEM_regwrite == 1'b1) && (EX_rs2_add == MEM_rd_add) && (MEM_rd_add != 0)                                                                                                        ;
 
  ctrl_fsm_e current_state; assign current_state = top.control_main.current_state;
 
 
   property check_add_instr_hazard_EX_rs1;
     @(posedge clk) 
-    (is_op_instr & (current_state == PROCESSING) & (!IF_ID_flush ))  |=> (!IF_ID_flush) |=> (!EX_flush)  & (( op_a_alu == EX_alu_result ) & (op_b_alu == ID_rs2_data )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == ($past(alu_result,2))) ) ; 
+    (is_op_instr & (current_state == PROCESSING) & (!IF_ID_flush ))  |=> (!IF_ID_flush) |=> (hazard_EX_rs1) & (!EX_flush)  & (( op_a_alu == EX_alu_result ) & (op_b_alu == ID_rs2_data )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == ($past(alu_result,2))) ) ; 
   endproperty
   add_instr_hazard_EX_rs1: assert property(check_add_instr_hazard_EX_rs1) 
   begin
@@ -176,7 +176,7 @@ logic [31:0] alu_result; assign alu_result = top.ex_stage.alu_result;
 
   property check_add_instr_hazard_EX_rs2;
     @(posedge clk) 
-    (is_op_instr & (current_state == PROCESSING))  |=> (!IF_ID_flush) |=> (!EX_flush) &  (hazard_EX_rs2) & (( op_a_alu == ID_rs1_data ) & (op_b_alu == EX_alu_result )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == ($past(alu_result,2))) ) ; 
+    (is_op_instr & (current_state == PROCESSING))  |=> (!IF_ID_flush) |=> (hazard_EX_rs2) & (!EX_flush)  & (( op_a_alu == ID_rs1_data ) & (op_b_alu == EX_alu_result )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == ($past(alu_result,2))) ) ; 
   endproperty
   add_instr_hazard_EX_rs2: assert property(check_add_instr_hazard_EX_rs2) 
   begin
@@ -187,7 +187,7 @@ logic [31:0] alu_result; assign alu_result = top.ex_stage.alu_result;
 
   property check_add_instr_hazard_WB_rs1;
     @(posedge clk) 
-    (is_op_instr & (current_state == PROCESSING)) |=> (!IF_ID_flush) |=> (!EX_flush) &  (hazard_WB_rs1) |->  (( op_a_alu == WB_data_write ) & (op_b_alu == ID_rs2_data )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == ($past(alu_result,2))) ) ; 
+    (is_op_instr & (current_state == PROCESSING)) |=> (!IF_ID_flush) |=> (hazard_WB_rs1) & (!EX_flush)  |->  (( op_a_alu == WB_data_write ) & (op_b_alu == ID_rs2_data )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == ($past(alu_result,2))) ) ; 
   endproperty
   add_instr_hazard_WB_rs1: assert property(check_add_instr_hazard_WB_rs1)
   begin
@@ -198,7 +198,7 @@ logic [31:0] alu_result; assign alu_result = top.ex_stage.alu_result;
 
   property check_add_instr_hazard_WB_rs2;
     @(posedge clk) 
-    (is_op_instr & (current_state == PROCESSING)) |=> (!IF_ID_flush) |=> (!EX_flush) & (hazard_WB_rs2) |->  (( op_a_alu == ID_rs1_data ) & (op_b_alu == WB_data_write )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == ($past(alu_result,2))) ) ; 
+    (is_op_instr & (current_state == PROCESSING)) |=> (!IF_ID_flush) |=> (hazard_WB_rs2) & (!EX_flush) |->  (( op_a_alu == ID_rs1_data ) & (op_b_alu == WB_data_write )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == ($past(alu_result,2))) ) ; 
   endproperty
   add_instr_hazard_WB_rs2: assert property(check_add_instr_hazard_WB_rs1)
   begin
@@ -209,7 +209,7 @@ logic [31:0] alu_result; assign alu_result = top.ex_stage.alu_result;
 // LOAD STORE
   property check_load_instr_hazard_EX_rs1;
     @(posedge clk) 
-    (is_load_instr & (current_state == PROCESSING) & (!IF_ID_flush ))  |=> (!IF_ID_flush) |=> (!EX_flush)  & (( op_a_alu == EX_alu_result ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b1))  |-> ##1 ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == top.DMEM_data_o) ) ; 
+    (is_load_instr & (current_state == PROCESSING) & (!IF_ID_flush ))  |=> (!IF_ID_flush) |=>  (hazard_EX_rs1) & (!EX_flush)  & (( op_a_alu == EX_alu_result ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b1))  |-> ##1 ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == top.DMEM_data_o) ) ; 
   endproperty
   load_instr_hazard_EX_rs1: assert property(check_load_instr_hazard_EX_rs1) 
   begin
@@ -220,7 +220,7 @@ logic [31:0] alu_result; assign alu_result = top.ex_stage.alu_result;
 
   property check_load_instr_hazard_WB_rs1;
     @(posedge clk) 
-    (is_load_instr & (current_state == PROCESSING) & (!IF_ID_flush ))  |=> (!IF_ID_flush) |=> (!EX_flush)  & (( op_a_alu == EX_alu_result ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b1))  |-> ##1 ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == top.DMEM_data_o) ) ; 
+    (is_load_instr & (current_state == PROCESSING) & (!IF_ID_flush ))  |=> (!IF_ID_flush) |=> (hazard_WB_rs1) & (!EX_flush)  & (( op_a_alu == EX_alu_result ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b1))  |-> ##1 ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == top.DMEM_data_o) ) ; 
   endproperty
   load_instr_hazard_WB_rs1: assert property(check_load_instr_hazard_WB_rs1) 
   begin
@@ -231,7 +231,7 @@ logic [31:0] alu_result; assign alu_result = top.ex_stage.alu_result;
 
   property check_store_instr_hazard_EX_rs1;
     @(posedge clk) 
-    (is_store_instr & (current_state == PROCESSING) & (!IF_ID_flush ))  |=> (!IF_ID_flush) |=> (!EX_flush)  & (( op_a_alu == EX_alu_result ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b1 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b0)) ; 
+    (is_store_instr & (current_state == PROCESSING) & (!IF_ID_flush ))  |=> (!IF_ID_flush) |=> (hazard_EX_rs1) & (!EX_flush)  & (( op_a_alu == EX_alu_result ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b1 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b0)) ; 
   endproperty
   store_instr_hazard_EX_rs1: assert property(check_store_instr_hazard_EX_rs1) 
   begin
@@ -242,7 +242,7 @@ logic [31:0] alu_result; assign alu_result = top.ex_stage.alu_result;
 
   property check_store_instr_hazard_WB_rs1;
     @(posedge clk) 
-    (is_store_instr & (current_state == PROCESSING) & (!IF_ID_flush ))  |=> (!IF_ID_flush) |=> (!EX_flush)  & (( op_a_alu == WB_data_write ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b1 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b0)) ; 
+    (is_store_instr & (current_state == PROCESSING) & (!IF_ID_flush ))  |=> (!IF_ID_flush) |=> (hazard_WB_rs1) & (!EX_flush)  & (( op_a_alu == WB_data_write ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b1 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b0)) ; 
   endproperty
   store_instr_hazard_WB_rs1: assert property(check_store_instr_hazard_WB_rs1) 
   begin
@@ -254,7 +254,7 @@ logic [31:0] alu_result; assign alu_result = top.ex_stage.alu_result;
   // IMM ISTR
   property check_imm_instr_hazard_EX_rs1;
     @(posedge clk) 
-    (is_imm_instr & (current_state == PROCESSING) & (!IF_ID_flush ))  |=> (!IF_ID_flush) |=> (!EX_flush)  & (( op_a_alu == EX_alu_result ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == ($past(alu_result,2))) ) ; 
+    (is_imm_instr & (current_state == PROCESSING) & (!IF_ID_flush ))  |=> (!IF_ID_flush) |=> (hazard_EX_rs1) & (!EX_flush)  & (( op_a_alu == EX_alu_result ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == ($past(alu_result,2))) ) ; 
   endproperty
   imm_instr_hazard_EX_rs1: assert property(check_imm_instr_hazard_EX_rs1) 
   begin
@@ -265,7 +265,7 @@ logic [31:0] alu_result; assign alu_result = top.ex_stage.alu_result;
 
   property check_imm_instr_hazard_WB_rs1;
     @(posedge clk) 
-    (is_imm_instr & (current_state == PROCESSING) & (!IF_ID_flush ))  |=> (!IF_ID_flush) |=> (!EX_flush)  & (( op_a_alu == WB_data_write ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == ($past(alu_result,2))) ) ; 
+    (is_imm_instr & (current_state == PROCESSING) & (!IF_ID_flush ))  |=> (!IF_ID_flush) |=> (hazard_WB_rs1) & (!EX_flush)  & (( op_a_alu == WB_data_write ) & (op_b_alu == ID_imm )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b1) & (data_write_reg == WB_data_write) & (data_write_reg == ($past(alu_result,2))) ) ; 
   endproperty
   imm_instr_hazard_WB_rs1: assert property(check_imm_instr_hazard_WB_rs1) 
   begin
@@ -277,7 +277,7 @@ logic [31:0] alu_result; assign alu_result = top.ex_stage.alu_result;
   // BRANCH INSTR
   property check_branch_instr_hazard_EX_rs1;
     @(posedge clk) 
-    (is_branch_instr & (current_state == PROCESSING) & (!IF_ID_flush ))  |=> (!IF_ID_flush) |=> (!EX_flush)  & (( op_a_alu == EX_alu_result ) & (op_b_alu == ID_rs2_data )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b0) ) ; 
+    (is_branch_instr & (current_state == PROCESSING) & (!IF_ID_flush ))  |=> (!IF_ID_flush) |=> (hazard_EX_rs1) & (!EX_flush)  & (( op_a_alu == EX_alu_result ) & (op_b_alu == ID_rs2_data )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b0) ) ; 
   endproperty
   branch_instr_hazard_EX_rs1: assert property(check_branch_instr_hazard_EX_rs1) 
   begin
@@ -288,7 +288,7 @@ logic [31:0] alu_result; assign alu_result = top.ex_stage.alu_result;
 
   property check_branch_instr_hazard_EX_rs2;
     @(posedge clk) 
-    (is_branch_instr & (current_state == PROCESSING))  |=> (!IF_ID_flush) |=> (!EX_flush) &  (hazard_EX_rs2) & (( op_a_alu == ID_rs1_data ) & (op_b_alu == EX_alu_result )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b0) ) ; 
+    (is_branch_instr & (current_state == PROCESSING))  |=> (!IF_ID_flush) |=> (hazard_EX_rs2) &  (!EX_flush) &  (hazard_EX_rs2) & (( op_a_alu == ID_rs1_data ) & (op_b_alu == EX_alu_result )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b0) ) ; 
   endproperty
   branch_instr_hazard_EX_rs2: assert property(check_branch_instr_hazard_EX_rs2) 
   begin
@@ -299,7 +299,7 @@ logic [31:0] alu_result; assign alu_result = top.ex_stage.alu_result;
 
   property check_branch_instr_hazard_WB_rs1;
     @(posedge clk) 
-    (is_branch_instr & (current_state == PROCESSING)) |=> (!IF_ID_flush) |=> (!EX_flush) &  (hazard_WB_rs1) |->  (( op_a_alu == WB_data_write ) & (op_b_alu == ID_rs2_data )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b0)) ; 
+    (is_branch_instr & (current_state == PROCESSING)) |=> (!IF_ID_flush) |=> (hazard_WB_rs1) &  (!EX_flush) &  (hazard_WB_rs1) |->  (( op_a_alu == WB_data_write ) & (op_b_alu == ID_rs2_data )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b0)) ; 
   endproperty
   branch_instr_hazard_WB_rs1: assert property(check_branch_instr_hazard_WB_rs1)
   begin
@@ -310,7 +310,7 @@ logic [31:0] alu_result; assign alu_result = top.ex_stage.alu_result;
 
   property check_branch_instr_hazard_WB_rs2;
     @(posedge clk) 
-    (is_branch_instr & (current_state == PROCESSING)) |=> (!IF_ID_flush) |=> (!EX_flush) & (hazard_WB_rs2) |->  (( op_a_alu == ID_rs1_data ) & (op_b_alu == WB_data_write )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b0)  ) ; 
+    (is_branch_instr & (current_state == PROCESSING)) |=> (!IF_ID_flush) |=>  (!EX_flush) & (hazard_WB_rs2) |->  (( op_a_alu == ID_rs1_data ) & (op_b_alu == WB_data_write )) |-> ##1 ( ( MEM_WR == 1'b0 ) & (MEM_RD == 1'b0))  |-> ##1 ((WB_regwrite == 1'b0)  ) ; 
   endproperty
   branch_instr_hazard_WB_rs2: assert property(check_branch_instr_hazard_WB_rs1)
   begin

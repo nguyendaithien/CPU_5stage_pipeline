@@ -3,7 +3,6 @@ module MEM_stage #( parameter DATA_WIDTH = 32) (
     input             clk               ,
     input             rst_n             ,
     input      [31:0] DMEM_data_i       ,
-    input      [31:0] WB_data_i         ,
     input      [3:0 ] MEM_mem_op_i      ,
     input      [31:0] MEM_alu_result_i  ,
     input      [31:0] MEM_rs2_data_i    ,

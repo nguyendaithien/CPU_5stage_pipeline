@@ -1,38 +1,38 @@
 `include "defi.vh"
 module CPU_EDABK_TOP #( parameter DATA_WIDTH = 32) (
-  input               clk            ,
-  input               rst_n          ,
-  input        [31:0] boot_add       ,
-  input        [31:0] Instr_in       ,
-  input        [31:0] D_in           ,
-  input  logic        irq_software_i ,
-  input  logic        irq_timer_i    ,
-  input  logic        irq_external_i ,
-  input  logic [14:0] irq_fast_i     ,
-  input  logic        debug_req_i    ,      
-  input  logic        irq_nm_i       ,      
-  input  logic        data_gnt_i     ,      
-  input  logic        data_rvalid_i  ,      
-  input  logic        data_rdata_i   ,      
-  input  logic        data_err_i     ,      
-  input  logic        instr_gnt_i    ,      
-  input  logic        instr_rvalid_i ,      
-  input  logic        instr_rdata_i  ,      
-  input  logic        instr_err_i    ,      
-  input  logic        instr_fetch_err_plus2_i,
-  input  logic        mem_resp_intg_err_i    ,
-  output logic [31:0] A_DMEM         ,
-  output logic        instr_req      ,
-  output logic   data_req_o          ,
-  output logic [31:0] A_IMEM         ,
-  output logic [31:0] D_out          ,
-  output logic        RD            ,
-  output logic        WR            ,
-  output logic   irq_pending_o       ,
-  output logic   crash_dump_o        ,
-  output logic [3:0 ] byte_mark      ,
-  output logic        DMEM_rst       ,  
-  output logic        core_busy_o       
+  input               clk                     ,
+  input               rst_n                   ,
+  input        [31:0] boot_add                ,
+  input        [31:0] Instr_in                ,
+  input        [31:0] D_in                    ,
+  input  logic        irq_software_i          ,
+  input  logic        irq_timer_i             ,
+  input  logic        irq_external_i          ,
+  input  logic [14:0] irq_fast_i              ,
+  input  logic        debug_req_i             ,
+  input  logic        irq_nm_i                ,
+  input  logic        data_gnt_i              ,
+  input  logic        data_rvalid_i           ,
+  input  logic        data_rdata_i            ,
+  input  logic        data_err_i              ,
+  input  logic        instr_gnt_i             ,
+  input  logic        instr_rvalid_i          ,
+  input  logic        instr_rdata_i           ,
+  input  logic        instr_err_i             ,
+  input  logic        instr_fetch_err_plus2_i ,
+  input  logic        mem_resp_intg_err_i     ,
+  output logic [31:0] A_DMEM                  ,
+  output logic        instr_req               ,
+  output logic        data_req_o              ,
+  output logic [31:0] A_IMEM                  ,
+  output logic [31:0] D_out                   ,
+  output logic        RD                      ,
+  output logic        WR                      ,
+  output logic        irq_pending_o           ,
+  output logic        crash_dump_o            ,
+  output logic [3:0 ] byte_mark               ,
+  output logic        DMEM_rst                ,
+  output logic        core_busy_o
  );
  import pkg::*;
 
@@ -267,7 +267,6 @@ logic [31:0] ID_imm_j_type   ;
 	,.EX_zero_i            (EX_zero             )
 	,.EX_branch_i          (EX_branch           )
 	,.EX_jump_i            (EX_jump             )
-  ,.EX_ALU_result_i      (EX_alu_result       )
   ,.EX_rd_add_i          (EX_rd_add           )
   ,.WB_data_i            (WB_data_write_reg   )
   ,.WB_regwrite_i        (WB_regwrite         )
@@ -362,7 +361,6 @@ logic [31:0] ID_imm_j_type   ;
    MEM_stage #( .DATA_WIDTH(32)) mem_stage (
      .clk               (clk               )
     ,.rst_n             (rst_n             )
-    ,.WB_data_i         (WB_data_write_reg )
     ,.MEM_rf_wdata_sel_i(EX_rf_wdata_sel   )
     ,.MEM_rf_wdata_sel_o(MEM_rf_wdata_sel  )
     ,.forward           (forward_dmem      )
