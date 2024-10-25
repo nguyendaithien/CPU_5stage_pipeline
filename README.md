@@ -9,5 +9,5 @@ Description: This project implements and optimizes the IBEX core with a 5-stage 
 
 -Verification Method: Constrained-random verification + Assertion + Expected value comparison .
 
--Synthesis: Synthesizing to a netlist and measuring power consumption.
+-Synthesis: Synthesizing to netlist and measuring power consumption.
 
