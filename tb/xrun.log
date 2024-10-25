@@ -1,9 +1,0 @@
-xrun: 23.09-s001: (c) Copyright 1995-2023 Cadence Design Systems, Inc.
-TOOL:	xrun	23.09-s001: Started on Oct 10, 2024 at 11:04:28 +07
-xrun
-	-sv
-	pkg_rd_gen.sv
-	random_gen.sv
-	tb.sv
-xrun: *E,FILEMIS: Cannot find the provided file tb.sv.
-TOOL:	xrun	23.09-s001: Exiting on Oct 10, 2024 at 11:04:29 +07  (total: 00:00:01)

@@ -1,8 +1,0 @@
-define XMSIMRC	( /home/edabk/Cadence/XCELIUM2309/tools/xcelium/files/xmsimrc, ~/.xmsimrc )
-define AMSRC	( /home/edabk/Cadence/XCELIUM2309/tools/xcelium/files/amsrc, ~/.amsrc )
-include ./hdlrun.var
-define SNAPSHOT worklib.CPU_EDABK_TOP:sv
-DEFINE RUNMODEDEFAULT 1
-DEFINE LIB_MAP ( + => worklib )
-define ELAB_SNAPSHOT
-define SNAPSHOT worklib.CPU_EDABK_TOP:sv
