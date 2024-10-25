@@ -2,6 +2,11 @@
 Digital design contest at EDABK Lab 
 <span style="font-size: 120 px;">**Overview:**</span>
 
-Description: This project implements image encryption and decryption using Convolutional Neural Networks (CNN) with specific features for efficient processing. The encryption and decryption operations leverage line buffers for temporary data storage during convolution calculations, and employ sequential convolution operations to reduce hardware resource utilization. The system is designed to handle images of varying sizes and is optimized for FPGA deployment with the See3Cam camera.
+Description: This project implements and optimization IBEX core including 5 stage pipeline.
 
 <span style="font-size: 120 px;">**Features**</span>
+- Design Metrics: Using Architecture of pipeline 5 stages, the architecture pipeline 5 stage : Instruction fetch, Instruction decode, Instruction Execute, Instruction Memory and Instruction Writeback
+
+-Verification Mothod: Create Constraint random verification environment to create stilulus for DUT and create testcase for design.
+
+-Synthesis to nestlist and measure the power consumption.
