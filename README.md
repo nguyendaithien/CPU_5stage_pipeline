@@ -16,7 +16,7 @@ Description: This project implements and optimizes the IBEX core with a 5-stage 
 
 ![github2](https://github.com/user-attachments/assets/cca8d703-f45d-44c4-bafb-9533e0a033e7)
 
-<span style="font-size: 120 px;">**Vrification Environment:**</span>
+<span style="font-size: 120 px;">**Verification Environment:**</span>
 
 ![github1](https://github.com/user-attachments/assets/3b6e3688-43a3-472e-a07f-fe402143d447)
 
