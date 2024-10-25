@@ -1,5 +1,5 @@
 # CPU_5stage_pipeline
-Digital design contest at EDABK Lab 
+Digital design contest at EDABK Lab   
 <span style="font-size: 120 px;">**Overview:**</span>
 
 Description: This project implements and optimizes the IBEX core with a 5-stage pipeline.
