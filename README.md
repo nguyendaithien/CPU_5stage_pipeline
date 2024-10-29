@@ -11,9 +11,10 @@ Description: This project implements and optimizes the IBEX core with a 5-stage 
 
 -Synthesis: Synthesizing to netlist and measuring power consumption.
 
-<span style="font-size: 120 px;">**Tools and management:**</span>
+<span style="font-size: 20px;">**Tools and management:**</span>
 
-![tool](https://github.com/user-attachments/assets/624d8bb1-5def-4ba0-9940-87c740d11205)
+<img src="https://github.com/user-attachments/assets/624d8bb1-5def-4ba0-9940-87c740d11205" alt="tool" width="400"/>
+
 
 <span style="font-size: 120 px;">**Architecture:**</span>
 
