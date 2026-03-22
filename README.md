@@ -3,7 +3,11 @@ Digital design contest at EDABK Lab
 <span style="font-size: 120 px;">**Overview:**</span>
 
 Description: This project implements and optimizes the IBEX core with a 5-stage pipeline.
-
+# Simulation
+```sh
+cd ./run
+make all
+```
 <span style="font-size: 120 px;">**Features**</span>  
 -Design Metrics: The pipeline architecture includes 5 stages: Instruction Fetch, Instruction Decode, Instruction Execute, Instruction Memory, and Instruction Writeback.
 
